@@ -1,0 +1,234 @@
+import type {
+  MissionParams,
+  LoadoutResult,
+  Stratagem,
+  Modifier,
+  FactionId,
+  ScoredItem,
+} from '@/types'
+import { catalogService } from '@/services/catalog'
+
+// ---- Layer 1: Hard Constraints ----
+
+function applyHardConstraints(stratagems: Stratagem[], modifiers: Modifier[]): Stratagem[] {
+  const hard = modifiers.filter(m => m.constraintType === 'hard')
+  return stratagems.filter(s => {
+    for (const mod of hard) {
+      if (mod.effectTags.includes('no_eagles') && s.subType === 'eagle') return false
+    }
+    return true
+  })
+}
+
+// ---- Layer 2: Weighted Scoring ----
+
+const FACTION_WEIGHTS: Record<FactionId, Record<string, number>> = {
+  terminids: {
+    'crowd-control': 2.0,
+    'area-denial': 1.8,
+    'anti-swarm': 2.0,
+    'anti-armor': 1.2,
+    explosive: 1.5,
+  },
+  automatons: {
+    'anti-armor': 2.0,
+    'anti-tank': 2.0,
+    explosive: 1.5,
+    precision: 1.3,
+    'crowd-control': 0.8,
+  },
+  illuminate: {
+    'anti-shield': 1.8,
+    energy: 1.5,
+    'anti-armor': 1.3,
+    'crowd-control': 1.3,
+  },
+}
+
+function scoreItem(tags: string[], params: MissionParams, modifiers: Modifier[]): number {
+  let score = 1.0
+  const fw = FACTION_WEIGHTS[params.faction] ?? {}
+  for (const tag of tags) score *= fw[tag] ?? 1.0
+
+  if (params.difficulty >= 7) {
+    if (tags.includes('anti-armor') || tags.includes('anti-tank')) score *= 1.3
+    if (tags.includes('resupply') || tags.includes('support')) score *= 1.2
+  }
+
+  for (const mod of modifiers.filter(m => m.constraintType === 'soft')) {
+    for (const et of mod.effectTags) {
+      if (tags.includes(`boost_${et}`)) score *= 1.3
+      if (tags.includes(`penalty_${et}`)) score *= 0.6
+    }
+  }
+
+  return score
+}
+
+function scoreAll<T extends { tags: string[] }>(
+  items: T[],
+  params: MissionParams,
+  modifiers: Modifier[],
+): ScoredItem<T>[] {
+  return items
+    .map(item => ({ item, score: scoreItem(item.tags, params, modifiers) }))
+    .sort((a, b) => b.score - a.score)
+}
+
+// ---- Layer 3: Controlled Randomness ----
+
+function weightedRandom<T>(scored: ScoredItem<T>[], topN: number): T | null {
+  const pool = scored.slice(0, Math.min(topN, scored.length))
+  if (pool.length === 0) return null
+
+  const total = pool.reduce((s, x) => s + x.score, 0)
+  if (total === 0) return pool[Math.floor(Math.random() * pool.length)]!.item
+
+  let rand = Math.random() * total
+  for (const { item, score } of pool) {
+    rand -= score
+    if (rand <= 0) return item
+  }
+  return pool[pool.length - 1]!.item
+}
+
+// ---- Role Coverage Boost ----
+
+function boostForCoverage(
+  scored: ScoredItem<Stratagem>[],
+  selected: Stratagem[],
+): ScoredItem<Stratagem>[] {
+  const hasAntiArmor = selected.some(s => s.tags.some(t => t === 'anti-armor' || t === 'anti-tank'))
+  const hasCrowdControl = selected.some(s => s.tags.some(t => t === 'crowd-control' || t === 'area-denial'))
+
+  return scored.map(s => {
+    let multiplier = 1.0
+    if (!hasAntiArmor && s.item.tags.some(t => t === 'anti-armor' || t === 'anti-tank')) multiplier *= 2.0
+    if (!hasCrowdControl && s.item.tags.some(t => t === 'crowd-control' || t === 'area-denial')) multiplier *= 1.5
+    return { ...s, score: s.score * multiplier }
+  })
+}
+
+// ---- Public API ----
+
+const TOP_N = 5
+
+function resolveModifiers(params: MissionParams): Modifier[] {
+  const all = catalogService.getModifiers()
+  return all.filter(m => params.modifiers.includes(m.id))
+}
+
+export function generateRecommendation(params: MissionParams): LoadoutResult {
+  const modifiers = resolveModifiers(params)
+
+  const primaryWeapon = weightedRandom(scoreAll(catalogService.getWeapons('primary'), params, modifiers), TOP_N)
+  const secondaryWeapon = weightedRandom(scoreAll(catalogService.getWeapons('secondary'), params, modifiers), TOP_N)
+  const grenade = weightedRandom(scoreAll(catalogService.getWeapons('grenade'), params, modifiers), TOP_N)
+  const armor = weightedRandom(scoreAll(catalogService.getArmor(), params, modifiers), TOP_N)
+  const booster = weightedRandom(scoreAll(catalogService.getBoosters(), params, modifiers), TOP_N)
+
+  const eligible = applyHardConstraints(catalogService.getStratagems(), modifiers)
+  const selected: Stratagem[] = []
+
+  for (let i = 0; i < 4; i++) {
+    const hasWeapon = selected.some(s => s.subType === 'support_weapon')
+    const hasBackpack = selected.some(s => s.subType === 'backpack')
+    const hasPackedWeapon = selected.some(s => s.tags.includes('needs-backpack'))
+
+    const scored = boostForCoverage(scoreAll(eligible, params, modifiers), selected)
+
+    const available = scored.filter(s => {
+      if (selected.includes(s.item)) return false
+      if (hasWeapon && s.item.subType === 'support_weapon') return false
+      if (hasPackedWeapon && s.item.subType === 'backpack') return false
+      if (hasBackpack && s.item.tags.includes('needs-backpack')) return false
+      return true
+    })
+    const pick = weightedRandom(available, TOP_N)
+    if (pick) selected.push(pick)
+  }
+
+  return {
+    primaryWeapon,
+    secondaryWeapon,
+    grenade,
+    stratagems: [selected[0] ?? null, selected[1] ?? null, selected[2] ?? null, selected[3] ?? null],
+    armor,
+    booster,
+  }
+}
+
+function shuffle<T>(arr: T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5)
+}
+
+export function generateConstrained(): LoadoutResult {
+  const stratagems = shuffle(catalogService.getStratagems())
+  const selected: Stratagem[] = []
+  const usedSubTypes = new Set<string>()
+
+  for (const s of stratagems) {
+    if (selected.length >= 4) break
+    if (!usedSubTypes.has(s.subType)) {
+      selected.push(s)
+      usedSubTypes.add(s.subType)
+    }
+  }
+  for (const s of stratagems) {
+    if (selected.length >= 4) break
+    if (!selected.includes(s)) selected.push(s)
+  }
+
+  return {
+    primaryWeapon: shuffle(catalogService.getWeapons('primary'))[0] ?? null,
+    secondaryWeapon: shuffle(catalogService.getWeapons('secondary'))[0] ?? null,
+    grenade: shuffle(catalogService.getWeapons('grenade'))[0] ?? null,
+    stratagems: [selected[0] ?? null, selected[1] ?? null, selected[2] ?? null, selected[3] ?? null],
+    armor: shuffle(catalogService.getArmor())[0] ?? null,
+    booster: shuffle(catalogService.getBoosters())[0] ?? null,
+  }
+}
+
+export function generateFullRandom(): LoadoutResult {
+  const stratagems = shuffle(catalogService.getStratagems())
+  return {
+    primaryWeapon: shuffle(catalogService.getWeapons('primary'))[0] ?? null,
+    secondaryWeapon: shuffle(catalogService.getWeapons('secondary'))[0] ?? null,
+    grenade: shuffle(catalogService.getWeapons('grenade'))[0] ?? null,
+    stratagems: [stratagems[0] ?? null, stratagems[1] ?? null, stratagems[2] ?? null, stratagems[3] ?? null],
+    armor: shuffle(catalogService.getArmor())[0] ?? null,
+    booster: shuffle(catalogService.getBoosters())[0] ?? null,
+  }
+}
+
+export function getAlternatives(
+  slot: 'primary' | 'secondary' | 'grenade' | 'stratagem' | 'armor' | 'booster',
+  excludeIds: string[],
+  params: MissionParams,
+  count = 3,
+): (import('@/types').Weapon | Stratagem | import('@/types').Armor | import('@/types').Booster)[] {
+  const modifiers = resolveModifiers(params)
+
+  if (slot === 'primary' || slot === 'secondary' || slot === 'grenade') {
+    return scoreAll(catalogService.getWeapons(slot), params, modifiers)
+      .filter(s => !excludeIds.includes(s.item.id))
+      .slice(0, count)
+      .map(s => s.item)
+  }
+  if (slot === 'stratagem') {
+    return scoreAll(applyHardConstraints(catalogService.getStratagems(), modifiers), params, modifiers)
+      .filter(s => !excludeIds.includes(s.item.id))
+      .slice(0, count)
+      .map(s => s.item)
+  }
+  if (slot === 'armor') {
+    return scoreAll(catalogService.getArmor(), params, modifiers)
+      .filter(s => !excludeIds.includes(s.item.id))
+      .slice(0, count)
+      .map(s => s.item)
+  }
+  return scoreAll(catalogService.getBoosters(), params, modifiers)
+    .filter(s => !excludeIds.includes(s.item.id))
+    .slice(0, count)
+    .map(s => s.item)
+}

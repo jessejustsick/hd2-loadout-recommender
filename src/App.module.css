@@ -1,0 +1,14 @@
+.app {
+  min-height: 100dvh;
+}
+
+.main {
+  padding-bottom: var(--nav-height);
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding-bottom: 0;
+    padding-left: var(--nav-width);
+  }
+}

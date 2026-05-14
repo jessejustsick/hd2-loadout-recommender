@@ -1,0 +1,4972 @@
+{
+  "factions": [
+    {
+      "id": "terminids",
+      "name": "Terminids",
+      "icon": "terminids",
+      "enemyProfile": {
+        "primaryThreat": "swarm",
+        "armorPenetration": "mixed",
+        "notes": "High-volume organic enemies. Crowd control and area denial are effective. Chargers and Bile Titans require anti-armor solutions."
+      }
+    },
+    {
+      "id": "automatons",
+      "name": "Automatons",
+      "icon": "automatons",
+      "enemyProfile": {
+        "primaryThreat": "ranged",
+        "armorPenetration": "high",
+        "notes": "Mechanical enemies with heavy armor. Anti-armor weapons essential. Eagles and Orbitals highly effective. Tanks and Hulks require dedicated anti-tank solutions."
+      }
+    },
+    {
+      "id": "illuminate",
+      "name": "Illuminate",
+      "icon": "illuminate",
+      "enemyProfile": {
+        "primaryThreat": "mixed",
+        "armorPenetration": "mixed",
+        "notes": "Shielded infantry and heavy units. Shield-bypass and energy weapons effective. Elevated and tripod units require precision or explosive solutions."
+      }
+    }
+  ],
+  "weapons": [
+    {
+      "id": "ar-2-coyote",
+      "name": "AR-2 Coyote",
+      "category": "primary",
+      "tags": [
+        "versatile",
+        "crowd-control",
+        "area-denial"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ar-23-liberator",
+      "name": "AR-23 Liberator",
+      "category": "primary",
+      "tags": [
+        "versatile",
+        "crowd-control"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ar-23a-liberator-carbine",
+      "name": "AR-23A Liberator Carbine",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "mobility"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ar-23c-liberator-concussive",
+      "name": "AR-23C Liberator Concussive",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "stun",
+        "anti-swarm"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ar-23p-liberator-penetrator",
+      "name": "AR-23P Liberator Penetrator",
+      "category": "primary",
+      "tags": [
+        "anti-armor",
+        "versatile"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ar-32-pacifier",
+      "name": "AR-32 Pacifier",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "stun"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ar-59-suppressor",
+      "name": "AR-59 Suppressor",
+      "category": "primary",
+      "tags": [
+        "versatile",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ar-61-tenderizer",
+      "name": "AR-61 Tenderizer",
+      "category": "primary",
+      "tags": [
+        "versatile",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ar-gl-21-one-two",
+      "name": "AR/GL-21 One-Two",
+      "category": "primary",
+      "tags": [
+        "explosive",
+        "versatile",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "arc-12-blitzer",
+      "name": "ARC-12 Blitzer",
+      "category": "primary",
+      "tags": [
+        "energy",
+        "anti-shield",
+        "stun",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "br-14-adjudicator",
+      "name": "BR-14 Adjudicator",
+      "category": "primary",
+      "tags": [
+        "anti-armor",
+        "precision"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cb-9-exploding-crossbow",
+      "name": "CB-9 Exploding Crossbow",
+      "category": "primary",
+      "tags": [
+        "explosive",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "dbs-2-double-freedom",
+      "name": "DBS-2 Double Freedom",
+      "category": "primary",
+      "tags": [
+        "anti-armor",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "flam-66-torcher",
+      "name": "FLAM-66 Torcher",
+      "category": "primary",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "jar-5-dominator",
+      "name": "JAR-5 Dominator",
+      "category": "primary",
+      "tags": [
+        "anti-armor",
+        "explosive"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "las-5-scythe",
+      "name": "LAS-5 Scythe",
+      "category": "primary",
+      "tags": [
+        "energy",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "las-13-trident",
+      "name": "LAS-13 Trident",
+      "category": "primary",
+      "tags": [
+        "energy",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "las-16-sickle",
+      "name": "LAS-16 Sickle",
+      "category": "primary",
+      "tags": [
+        "energy",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "las-17-double-edge-sickle",
+      "name": "LAS-17 Double-Edge Sickle",
+      "category": "primary",
+      "tags": [
+        "energy",
+        "anti-armor",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "m7s-smg",
+      "name": "M7S SMG",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "mobility"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "m90a-shotgun",
+      "name": "M90A Shotgun",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ma5c-assault-rifle",
+      "name": "MA5C Assault Rifle",
+      "category": "primary",
+      "tags": [
+        "anti-armor",
+        "versatile"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "mp-98-knight",
+      "name": "MP-98 Knight",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "mobility"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "plas-1-scorcher",
+      "name": "PLAS-1 Scorcher",
+      "category": "primary",
+      "tags": [
+        "energy",
+        "explosive",
+        "anti-shield"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "plas-101-purifier",
+      "name": "PLAS-101 Purifier",
+      "category": "primary",
+      "tags": [
+        "energy",
+        "explosive",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "plas-39-accelerator-rifle",
+      "name": "PLAS-39 Accelerator Rifle",
+      "category": "primary",
+      "tags": [
+        "energy",
+        "explosive",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "r-2-amendment",
+      "name": "R-2 Amendment",
+      "category": "primary",
+      "tags": [
+        "precision",
+        "versatile"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "r-2124-constitution",
+      "name": "R-2124 Constitution",
+      "category": "primary",
+      "tags": [
+        "precision",
+        "anti-armor"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "r-36-eruptor",
+      "name": "R-36 Eruptor",
+      "category": "primary",
+      "tags": [
+        "explosive",
+        "anti-armor",
+        "precision"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "r-6-deadeye",
+      "name": "R-6 Deadeye",
+      "category": "primary",
+      "tags": [
+        "precision",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "r-63-diligence",
+      "name": "R-63 Diligence",
+      "category": "primary",
+      "tags": [
+        "precision"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "r-63cs-diligence-counter-sniper",
+      "name": "R-63CS Diligence Counter Sniper",
+      "category": "primary",
+      "tags": [
+        "precision",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "r-72-censor",
+      "name": "R-72 Censor",
+      "category": "primary",
+      "tags": [
+        "precision",
+        "versatile"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sg-20-halt",
+      "name": "SG-20 Halt",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "stun",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sg-225-breaker",
+      "name": "SG-225 Breaker",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sg-225ie-breaker-incendiary",
+      "name": "SG-225IE Breaker Incendiary",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "area-denial"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sg-225sp-breaker-spray-pray",
+      "name": "SG-225SP Breaker Spray&Pray",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sg-451-cookout",
+      "name": "SG-451 Cookout",
+      "category": "primary",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sg-8-punisher",
+      "name": "SG-8 Punisher",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sg-8p-punisher-plasma",
+      "name": "SG-8P Punisher Plasma",
+      "category": "primary",
+      "tags": [
+        "explosive",
+        "area-denial",
+        "energy"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sg-8s-slugger",
+      "name": "SG-8S Slugger",
+      "category": "primary",
+      "tags": [
+        "precision",
+        "anti-armor",
+        "stun"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sg-97-sweeper",
+      "name": "SG-97 Sweeper",
+      "category": "primary",
+      "tags": [
+        "anti-armor",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "smg-203-gallant",
+      "name": "SMG-203 Gallant",
+      "category": "primary",
+      "tags": [
+        "anti-armor",
+        "crowd-control",
+        "mobility"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "smg-32-reprimand",
+      "name": "SMG-32 Reprimand",
+      "category": "primary",
+      "tags": [
+        "anti-armor",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "smg-37-defender",
+      "name": "SMG-37 Defender",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "mobility"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "smg-72-pummeler",
+      "name": "SMG-72 Pummeler",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "stun",
+        "mobility"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "smg-flam-34-stoker",
+      "name": "SMG/FLAM-34 Stoker",
+      "category": "primary",
+      "tags": [
+        "area-denial",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sta-11-smg",
+      "name": "StA-11 SMG",
+      "category": "primary",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "mobility"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sta-52-assault-rifle",
+      "name": "StA-52 Assault Rifle",
+      "category": "primary",
+      "tags": [
+        "versatile",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "vg-70-variable",
+      "name": "VG-70 Variable",
+      "category": "primary",
+      "tags": [
+        "versatile",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cqc-19-stun-lance",
+      "name": "CQC-19 Stun Lance",
+      "category": "secondary",
+      "tags": [
+        "melee",
+        "stun"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cqc-2-saber",
+      "name": "CQC-2 Saber",
+      "category": "secondary",
+      "tags": [
+        "melee"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cqc-30-stun-baton",
+      "name": "CQC-30 Stun Baton",
+      "category": "secondary",
+      "tags": [
+        "melee",
+        "stun"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cqc-42-machete",
+      "name": "CQC-42 Machete",
+      "category": "secondary",
+      "tags": [
+        "melee",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cqc-5-combat-hatchet",
+      "name": "CQC-5 Combat Hatchet",
+      "category": "secondary",
+      "tags": [
+        "melee"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "gp-20-ultimatum",
+      "name": "GP-20 Ultimatum",
+      "category": "secondary",
+      "tags": [
+        "explosive",
+        "anti-tank"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "gp-31-grenade-pistol",
+      "name": "GP-31 Grenade Pistol",
+      "category": "secondary",
+      "tags": [
+        "explosive",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "las-58-talon",
+      "name": "LAS-58 Talon",
+      "category": "secondary",
+      "tags": [
+        "energy",
+        "anti-armor",
+        "precision"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "las-7-dagger",
+      "name": "LAS-7 Dagger",
+      "category": "secondary",
+      "tags": [
+        "energy",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "m6c-socom",
+      "name": "M6C/SOCOM Pistol",
+      "category": "secondary",
+      "tags": [
+        "versatile",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "p-11-stim-pistol",
+      "name": "P-11 Stim Pistol",
+      "category": "secondary",
+      "tags": [
+        "utility",
+        "support"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "p-113-verdict",
+      "name": "P-113 Verdict",
+      "category": "secondary",
+      "tags": [
+        "anti-armor",
+        "precision"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "p-19-redeemer",
+      "name": "P-19 Redeemer",
+      "category": "secondary",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "p-2-peacemaker",
+      "name": "P-2 Peacemaker",
+      "category": "secondary",
+      "tags": [
+        "versatile"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "p-33-missile-pistol",
+      "name": "P-33 Missile Pistol",
+      "category": "secondary",
+      "tags": [
+        "anti-tank",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "p-35-re-educator",
+      "name": "P-35 Re-Educator",
+      "category": "secondary",
+      "tags": [
+        "utility",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "p-4-senator",
+      "name": "P-4 Senator",
+      "category": "secondary",
+      "tags": [
+        "anti-armor",
+        "precision"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "p-69-veto",
+      "name": "P-69 Veto",
+      "category": "secondary",
+      "tags": [
+        "anti-armor",
+        "precision"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "p-72-crisper",
+      "name": "P-72 Crisper",
+      "category": "secondary",
+      "tags": [
+        "area-denial",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "p-92-warrant",
+      "name": "P-92 Warrant",
+      "category": "secondary",
+      "tags": [
+        "anti-armor",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "plas-15-loyalist",
+      "name": "PLAS-15 Loyalist",
+      "category": "secondary",
+      "tags": [
+        "energy",
+        "explosive",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sg-22-bushwhacker",
+      "name": "SG-22 Bushwhacker",
+      "category": "secondary",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-10-incendiary",
+      "name": "G-10 Incendiary",
+      "category": "grenade",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-109-urchin",
+      "name": "G-109 Urchin",
+      "category": "grenade",
+      "tags": [
+        "crowd-control",
+        "stun"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-12-high-explosive",
+      "name": "G-12 High Explosive",
+      "category": "grenade",
+      "tags": [
+        "explosive",
+        "anti-armor"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-123-thermite",
+      "name": "G-123 Thermite",
+      "category": "grenade",
+      "tags": [
+        "anti-armor",
+        "anti-tank",
+        "area-denial"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-13-incendiary-impact",
+      "name": "G-13 Incendiary Impact",
+      "category": "grenade",
+      "tags": [
+        "explosive",
+        "area-denial",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-16-impact",
+      "name": "G-16 Impact",
+      "category": "grenade",
+      "tags": [
+        "explosive",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-23-stun",
+      "name": "G-23 Stun",
+      "category": "grenade",
+      "tags": [
+        "crowd-control",
+        "stun"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-31-arc",
+      "name": "G-31 Arc",
+      "category": "grenade",
+      "tags": [
+        "energy",
+        "stun",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-3-smoke",
+      "name": "G-3 Smoke",
+      "category": "grenade",
+      "tags": [
+        "utility",
+        "smoke"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-48-giga-grenade",
+      "name": "G-48 Giga Grenade",
+      "category": "grenade",
+      "tags": [
+        "explosive",
+        "anti-armor",
+        "anti-tank"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-4-gas",
+      "name": "G-4 Gas",
+      "category": "grenade",
+      "tags": [
+        "crowd-control",
+        "area-denial",
+        "utility"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-50-seeker",
+      "name": "G-50 Seeker",
+      "category": "grenade",
+      "tags": [
+        "explosive",
+        "anti-armor"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-6-frag",
+      "name": "G-6 Frag",
+      "category": "grenade",
+      "tags": [
+        "explosive",
+        "crowd-control"
+      ],
+      "source": "base",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-89-smokescreen",
+      "name": "G-89 Smokescreen",
+      "category": "grenade",
+      "tags": [
+        "utility",
+        "smoke"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-142-pyrotech",
+      "name": "G-142 Pyrotech",
+      "category": "grenade",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "explosive"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "g-sh-39-shield",
+      "name": "G/SH-39 Shield",
+      "category": "grenade",
+      "tags": [
+        "defensive",
+        "utility"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "k-2-throwing-knife",
+      "name": "K-2 Throwing Knife",
+      "category": "grenade",
+      "tags": [
+        "precision",
+        "utility"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ted-63-dynamite",
+      "name": "TED-63 Dynamite",
+      "category": "grenade",
+      "tags": [
+        "explosive",
+        "anti-armor",
+        "area-denial"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "tm-1-lure-mine",
+      "name": "TM-1 Lure Mine",
+      "category": "grenade",
+      "tags": [
+        "crowd-control",
+        "area-denial"
+      ],
+      "source": "warbond",
+      "iconRef": "",
+      "lastUpdated": "2026-05-12"
+    }
+  ],
+  "stratagems": [
+    {
+      "id": "eagle-airstrike",
+      "name": "Eagle Airstrike",
+      "category": "offensive",
+      "subType": "eagle",
+      "tags": [
+        "anti-armor",
+        "explosive",
+        "area-denial"
+      ],
+      "cooldownTier": "short",
+      "callInType": "multi_use",
+      "iconRef": "Eagle Airstrike",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "eagle-500kg-bomb",
+      "name": "Eagle 500KG Bomb",
+      "category": "offensive",
+      "subType": "eagle",
+      "tags": [
+        "anti-armor",
+        "anti-tank",
+        "explosive"
+      ],
+      "cooldownTier": "long",
+      "callInType": "multi_use",
+      "iconRef": "Eagle 500KG Bomb",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "eagle-cluster-bomb",
+      "name": "Eagle Cluster Bomb",
+      "category": "offensive",
+      "subType": "eagle",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm",
+        "explosive"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "multi_use",
+      "iconRef": "Eagle Cluster Bomb",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "eagle-napalm-airstrike",
+      "name": "Eagle Napalm Airstrike",
+      "category": "offensive",
+      "subType": "eagle",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "short",
+      "callInType": "multi_use",
+      "iconRef": "Eagle Napalm Airstrike",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "eagle-strafing-run",
+      "name": "Eagle Strafing Run",
+      "category": "offensive",
+      "subType": "eagle",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "short",
+      "callInType": "multi_use",
+      "iconRef": "Eagle Strafing Run",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "eagle-110mm-rocket-pods",
+      "name": "Eagle 110MM Rocket Pods",
+      "category": "offensive",
+      "subType": "eagle",
+      "tags": [
+        "anti-armor",
+        "anti-tank",
+        "explosive"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "multi_use",
+      "iconRef": "Eagle 110MM Rocket Pods",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "orbital-380mm-he-barrage",
+      "name": "Orbital 380MM HE Barrage",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "area-denial",
+        "anti-armor",
+        "explosive"
+      ],
+      "cooldownTier": "long",
+      "callInType": "single_use",
+      "iconRef": "Orbital 380MM HE Barrage",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "orbital-120mm-he-barrage",
+      "name": "Orbital 120MM HE Barrage",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "area-denial",
+        "anti-armor",
+        "explosive",
+        "crowd-control"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "single_use",
+      "iconRef": "Orbital 120MM HE Barrage",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "orbital-laser",
+      "name": "Orbital Laser",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "anti-armor",
+        "anti-tank",
+        "precision",
+        "energy"
+      ],
+      "cooldownTier": "long",
+      "callInType": "single_use",
+      "iconRef": "Orbital Laser",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "orbital-railcannon-strike",
+      "name": "Orbital Railcannon Strike",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "anti-tank",
+        "precision"
+      ],
+      "cooldownTier": "long",
+      "callInType": "single_use",
+      "iconRef": "Orbital Railcannon Strike",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "orbital-precision-strike",
+      "name": "Orbital Precision Strike",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "anti-armor",
+        "explosive",
+        "precision"
+      ],
+      "cooldownTier": "short",
+      "callInType": "single_use",
+      "iconRef": "Orbital Precision Strike",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "orbital-gatling-barrage",
+      "name": "Orbital Gatling Barrage",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "single_use",
+      "iconRef": "Orbital Gatling Barrage",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "orbital-walking-barrage",
+      "name": "Orbital Walking Barrage",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "area-denial",
+        "anti-armor",
+        "explosive"
+      ],
+      "cooldownTier": "long",
+      "callInType": "single_use",
+      "iconRef": "Orbital Walking Barrage",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "orbital-napalm-barrage",
+      "name": "Orbital Napalm Barrage",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "single_use",
+      "iconRef": "Orbital Napalm Barrage",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "orbital-airburst-strike",
+      "name": "Orbital Airburst Strike",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "area-denial"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "single_use",
+      "iconRef": "Orbital Airburst Strike",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "machine-gun",
+      "name": "Machine Gun",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Machine Gun",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "heavy-machine-gun",
+      "name": "Heavy Machine Gun",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "crowd-control",
+        "anti-armor",
+        "anti-swarm"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Heavy Machine Gun",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "anti-materiel-rifle",
+      "name": "Anti-Materiel Rifle",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-armor",
+        "precision"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Anti-Materiel Rifle",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "autocannon",
+      "name": "Autocannon",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-armor",
+        "anti-tank",
+        "crowd-control",
+        "needs-backpack"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Autocannon",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "railgun",
+      "name": "Railgun",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-tank",
+        "precision",
+        "anti-armor"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Railgun",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "quasar-cannon",
+      "name": "Quasar Cannon",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-tank",
+        "precision",
+        "energy"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Quasar Cannon",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "spear",
+      "name": "Spear",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-tank",
+        "precision",
+        "needs-backpack"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Spear",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "expendable-anti-tank",
+      "name": "Expendable Anti-Tank",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-tank",
+        "explosive"
+      ],
+      "cooldownTier": "short",
+      "callInType": "multi_use",
+      "iconRef": "Expendable Anti-Tank",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "recoilless-rifle",
+      "name": "Recoilless Rifle",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-tank",
+        "explosive",
+        "needs-backpack"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Recoilless Rifle",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "stalwart",
+      "name": "Stalwart",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "mobility"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Stalwart",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "grenade-launcher",
+      "name": "Grenade Launcher",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "explosive",
+        "anti-armor",
+        "area-denial"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Grenade Launcher",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "flamethrower",
+      "name": "Flamethrower",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Flamethrower",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "arc-thrower",
+      "name": "Arc Thrower",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "energy",
+        "anti-shield"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Arc Thrower",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "laser-cannon",
+      "name": "Laser Cannon",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-armor",
+        "precision",
+        "energy"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Laser Cannon",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "airburst-rocket-launcher",
+      "name": "Airburst Rocket Launcher",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm",
+        "explosive",
+        "needs-backpack"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Airburst Rocket Launcher",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "hmg-emplacement",
+      "name": "HMG Emplacement",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "anti-armor"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "HMG Emplacement",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "machine-gun-sentry",
+      "name": "Machine Gun Sentry",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Machine Gun Sentry",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "mortar-sentry",
+      "name": "Mortar Sentry",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm",
+        "explosive"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Mortar Sentry",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "autocannon-sentry",
+      "name": "Autocannon Sentry",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "anti-armor",
+        "crowd-control"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Autocannon Sentry",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "rocket-sentry",
+      "name": "Rocket Sentry",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "anti-tank",
+        "anti-armor"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Rocket Sentry",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "gatling-sentry",
+      "name": "Gatling Sentry",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Gatling Sentry",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "shield-generator-pack",
+      "name": "Shield Generator Pack",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "defensive",
+        "survivability"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Shield Generator Pack",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "shield-generator-relay",
+      "name": "Shield Generator Relay",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "defensive",
+        "survivability",
+        "support"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Shield Generator Relay",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "guard-dog-rover",
+      "name": "Guard Dog Rover",
+      "category": "support",
+      "subType": "backpack",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "support"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Guard Dog Rover",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "guard-dog",
+      "name": "Guard Dog",
+      "category": "support",
+      "subType": "backpack",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "resupply"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Guard Dog",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "supply-pack",
+      "name": "Supply Pack",
+      "category": "support",
+      "subType": "backpack",
+      "tags": [
+        "resupply",
+        "support"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Supply Pack",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "resupply",
+      "name": "Resupply",
+      "category": "support",
+      "subType": "other",
+      "tags": [
+        "resupply",
+        "support"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "single_use",
+      "iconRef": "Resupply",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "jump-pack",
+      "name": "Jump Pack",
+      "category": "support",
+      "subType": "backpack",
+      "tags": [
+        "mobility",
+        "support"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Jump Pack",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "ballistic-shield-backpack",
+      "name": "Ballistic Shield Backpack",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "defensive",
+        "survivability"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Ballistic Shield Backpack",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "anti-personnel-minefield",
+      "name": "Anti-Personnel Minefield",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "area-denial",
+        "anti-swarm",
+        "crowd-control"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Anti-Personnel Minefield",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "commando",
+      "name": "Commando",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-tank",
+        "anti-armor",
+        "explosive"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Commando",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "patriot-exosuit",
+      "name": "Patriot Exosuit",
+      "category": "support",
+      "subType": "other",
+      "tags": [
+        "anti-armor",
+        "anti-tank",
+        "crowd-control"
+      ],
+      "cooldownTier": "long",
+      "callInType": "single_use",
+      "iconRef": "Patriot Exosuit",
+      "source": "base",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "emancipator-exosuit",
+      "name": "Emancipator Exosuit",
+      "category": "support",
+      "subType": "other",
+      "tags": [
+        "anti-armor",
+        "crowd-control"
+      ],
+      "cooldownTier": "long",
+      "callInType": "single_use",
+      "iconRef": "Emancipator Exosuit",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "speargun",
+      "name": "Speargun",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-tank",
+        "precision"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Speargun",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "tesla-tower",
+      "name": "Tesla Tower",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "energy"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Tesla Tower",
+      "source": "warbond",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "id": "ems-mortar-sentry",
+      "name": "EMS Mortar Sentry",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "crowd-control",
+        "stun",
+        "area-denial"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "EMS Mortar Sentry",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "eagle-smoke-strike",
+      "name": "Eagle Smoke Strike",
+      "category": "support",
+      "subType": "eagle",
+      "tags": [
+        "smoke",
+        "utility"
+      ],
+      "cooldownTier": "short",
+      "callInType": "multi_use",
+      "iconRef": "Eagle Smoke Strike",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "orbital-gas-strike",
+      "name": "Orbital Gas Strike",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "crowd-control",
+        "area-denial",
+        "utility"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "single_use",
+      "iconRef": "Orbital Gas Strike",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "orbital-smoke-strike",
+      "name": "Orbital Smoke Strike",
+      "category": "support",
+      "subType": "orbital",
+      "tags": [
+        "smoke",
+        "utility"
+      ],
+      "cooldownTier": "short",
+      "callInType": "single_use",
+      "iconRef": "Orbital Smoke Strike",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "orbital-ems-strike",
+      "name": "Orbital EMS Strike",
+      "category": "offensive",
+      "subType": "orbital",
+      "tags": [
+        "crowd-control",
+        "stun",
+        "area-denial"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "single_use",
+      "iconRef": "Orbital EMS Strike",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sta-x3-wasp-launcher",
+      "name": "StA-X3 W.A.S.P. Launcher",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-tank",
+        "anti-armor",
+        "needs-backpack"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "StA-X3 W.A.S.P. Launcher",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cqc-20-breaching-hammer",
+      "name": "CQC-20 Breaching Hammer",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "melee",
+        "anti-armor"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "CQC-20",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "plas-45-epoch",
+      "name": "PLAS-45 Epoch",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "energy",
+        "explosive",
+        "anti-armor"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Epoch",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "mgx-42-bullet-storm",
+      "name": "MGX-42 Bullet Storm",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "anti-armor"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Bullet Storm",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "s-11-speargun",
+      "name": "S-11 Speargun",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "anti-tank",
+        "precision"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Speargun",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cqc-9-defoliation-tool",
+      "name": "CQC-9 Defoliation Tool",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Defoliation Tool",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "tx-41-sterilizer",
+      "name": "TX-41 Sterilizer",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "area-denial",
+        "crowd-control"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Sterilizer",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "eat-700-expendable-napalm",
+      "name": "EAT-700 Expendable Napalm",
+      "category": "offensive",
+      "subType": "other",
+      "tags": [
+        "area-denial",
+        "anti-swarm",
+        "explosive"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "multi_use",
+      "iconRef": "Expendable Napalm",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "eat-411-leveller",
+      "name": "EAT-411 Leveller",
+      "category": "offensive",
+      "subType": "other",
+      "tags": [
+        "anti-tank",
+        "explosive"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "multi_use",
+      "iconRef": "EAT-411",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "gl-52-de-escalator",
+      "name": "GL-52 De-Escalator",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "crowd-control",
+        "stun"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "GL-52 De-Escalator",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "gl-28-belt-fed-grenade-launcher",
+      "name": "GL-28 Belt-Fed Grenade Launcher",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "explosive",
+        "anti-armor",
+        "crowd-control",
+        "needs-backpack"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "GL-28",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "b-md-c4-pack",
+      "name": "B/MD C4 Pack",
+      "category": "support",
+      "subType": "backpack",
+      "tags": [
+        "explosive",
+        "anti-armor",
+        "anti-tank"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "C4 Pack",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ms-11-solo-silo",
+      "name": "MS-11 Solo Silo",
+      "category": "offensive",
+      "subType": "other",
+      "tags": [
+        "anti-tank",
+        "explosive",
+        "precision"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Solo Silo",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "b-flam-80-cremator",
+      "name": "B/FLAM-80 Cremator",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm",
+        "needs-backpack"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Cremator",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "m-1000-maxigun",
+      "name": "M-1000 Maxigun",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "crowd-control",
+        "anti-swarm",
+        "anti-armor",
+        "needs-backpack"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "Maxigun",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cqc-1-one-true-flag",
+      "name": "CQC-1 One True Flag",
+      "category": "support",
+      "subType": "support_weapon",
+      "tags": [
+        "support",
+        "utility"
+      ],
+      "cooldownTier": "short",
+      "callInType": "persistent",
+      "iconRef": "One True Flag",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "md-i4-incendiary-mines",
+      "name": "MD-I4 Incendiary Mines",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "area-denial",
+        "anti-swarm",
+        "crowd-control"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Incendiary Mines",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "md-17-anti-tank-mines",
+      "name": "MD-17 Anti-Tank Mines",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "anti-tank",
+        "anti-armor",
+        "area-denial"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Anti-Tank Mines",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "e-gl-21-grenadier-battlement",
+      "name": "E/GL-21 Grenadier Battlement",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "explosive",
+        "anti-armor",
+        "crowd-control"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Grenadier Battlement",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "md-8-gas-mines",
+      "name": "MD-8 Gas Mines",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "crowd-control",
+        "area-denial"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Gas Mine",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "e-at-12-anti-tank-emplacement",
+      "name": "E/AT-12 Anti-Tank Emplacement",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "anti-tank",
+        "anti-armor"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Anti-Tank Emplacement",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "a-las-98-laser-sentry",
+      "name": "A/LAS-98 Laser Sentry",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "energy",
+        "anti-armor",
+        "crowd-control"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Laser Sentry",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "a-flam-40-flame-sentry",
+      "name": "A/FLAM-40 Flame Sentry",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "area-denial",
+        "anti-swarm",
+        "crowd-control"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Flame Sentry",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "a-gm-17-gas-mortar-sentry",
+      "name": "A/GM-17 Gas Mortar Sentry",
+      "category": "defensive",
+      "subType": "other",
+      "tags": [
+        "crowd-control",
+        "area-denial"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Gas Mortar Sentry",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sh-51-directional-shield",
+      "name": "SH-51 Directional Shield",
+      "category": "defensive",
+      "subType": "backpack",
+      "tags": [
+        "defensive",
+        "survivability"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Directional Shield",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ax-flam-75-hot-dog",
+      "name": "AX/FLAM-75 Hot Dog",
+      "category": "support",
+      "subType": "backpack",
+      "tags": [
+        "area-denial",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Guard Dog Hot Dog",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "b-100-portable-hellbomb",
+      "name": "B-100 Portable Hellbomb",
+      "category": "offensive",
+      "subType": "backpack",
+      "tags": [
+        "explosive",
+        "anti-armor",
+        "anti-tank"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Hellbomb Portable",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ax-arc-3-k9",
+      "name": "AX/ARC-3 K-9",
+      "category": "support",
+      "subType": "backpack",
+      "tags": [
+        "crowd-control",
+        "energy",
+        "anti-shield"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Guard Dog K-9",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "lift-860-hover-pack",
+      "name": "LIFT-860 Hover Pack",
+      "category": "support",
+      "subType": "backpack",
+      "tags": [
+        "mobility"
+      ],
+      "cooldownTier": "medium",
+      "callInType": "persistent",
+      "iconRef": "Hover Pack",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ax-tx-13-dog-breath",
+      "name": "AX/TX-13 Dog Breath",
+      "category": "support",
+      "subType": "backpack",
+      "tags": [
+        "crowd-control",
+        "area-denial"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Guard Dog Breath",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "lift-182-warp-pack",
+      "name": "LIFT-182 Warp Pack",
+      "category": "support",
+      "subType": "backpack",
+      "tags": [
+        "mobility",
+        "utility"
+      ],
+      "cooldownTier": "long",
+      "callInType": "persistent",
+      "iconRef": "Warp Pack",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "m-102-fast-recon-vehicle",
+      "name": "M-102 Fast Recon Vehicle",
+      "category": "support",
+      "subType": "other",
+      "tags": [
+        "mobility",
+        "versatile"
+      ],
+      "cooldownTier": "long",
+      "callInType": "single_use",
+      "iconRef": "Fast Recon Vehicle",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "td-220-bastion",
+      "name": "TD-220 Bastion MK XVI",
+      "category": "support",
+      "subType": "other",
+      "tags": [
+        "anti-armor",
+        "anti-tank",
+        "crowd-control"
+      ],
+      "cooldownTier": "long",
+      "callInType": "single_use",
+      "iconRef": "Bastion MK XVI",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "exo-55-breakthrough-exosuit",
+      "name": "EXO-55 Breakthrough Exosuit",
+      "category": "support",
+      "subType": "other",
+      "tags": [
+        "anti-armor",
+        "crowd-control"
+      ],
+      "cooldownTier": "long",
+      "callInType": "single_use",
+      "iconRef": "Breakthrough Exosuit",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "exo-51-lumberer-exosuit",
+      "name": "EXO-51 Lumberer Exosuit",
+      "category": "support",
+      "subType": "other",
+      "tags": [
+        "anti-armor",
+        "crowd-control",
+        "anti-swarm"
+      ],
+      "cooldownTier": "long",
+      "callInType": "single_use",
+      "iconRef": "Lumberer Exosuit",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    }
+  ],
+  "armor": [
+    {
+      "id": "sc-37-legionnaire",
+      "name": "SC-37 Legionnaire",
+      "passive": "Servo-Assisted",
+      "armorTier": "light",
+      "tags": [
+        "versatile",
+        "mobility"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sc-34-infiltrator",
+      "name": "SC-34 Infiltrator",
+      "passive": "Scout",
+      "armorTier": "light",
+      "tags": [
+        "mobility",
+        "scout"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sc-30-trailblazer-scout",
+      "name": "SC-30 Trailblazer Scout",
+      "passive": "Scout",
+      "armorTier": "light",
+      "tags": [
+        "mobility",
+        "scout"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ce-74-breaker",
+      "name": "CE-74 Breaker",
+      "passive": "Engineering Kit",
+      "armorTier": "light",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "fs-38-eradicator",
+      "name": "FS-38 Eradicator",
+      "passive": "Fortified",
+      "armorTier": "light",
+      "tags": [
+        "defensive",
+        "fortified"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "b-08-light-gunner",
+      "name": "B-08 Light Gunner",
+      "passive": "Extra Padding",
+      "armorTier": "light",
+      "tags": [
+        "survivability",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cm-21-trench-paramedic",
+      "name": "CM-21 Trench Paramedic",
+      "passive": "Med-Kit",
+      "armorTier": "light",
+      "tags": [
+        "survivability",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ce-67-titan",
+      "name": "CE-67 Titan",
+      "passive": "Engineering Kit",
+      "armorTier": "light",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ex-00-prototype-x",
+      "name": "EX-00 Prototype X",
+      "passive": "Electrical Conduit",
+      "armorTier": "light",
+      "tags": [
+        "energy",
+        "anti-shield"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ce-07-demolition-specialist",
+      "name": "CE-07 Demolition Specialist",
+      "passive": "Engineering Kit",
+      "armorTier": "light",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "fs-37-ravager",
+      "name": "FS-37 Ravager",
+      "passive": "Engineering Kit",
+      "armorTier": "light",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cw-4-arctic-ranger",
+      "name": "CW-4 Arctic Ranger",
+      "passive": "Scout",
+      "armorTier": "light",
+      "tags": [
+        "mobility",
+        "scout"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ph-9-predator",
+      "name": "PH-9 Predator",
+      "passive": "Peak Physique",
+      "armorTier": "light",
+      "tags": [
+        "melee",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "i-09-heatseeker",
+      "name": "I-09 Heatseeker",
+      "passive": "Inflammable",
+      "armorTier": "light",
+      "tags": [
+        "area-denial",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "af-50-noxious-ranger",
+      "name": "AF-50 Noxious Ranger",
+      "passive": "Advanced Filtration",
+      "armorTier": "light",
+      "tags": [
+        "utility",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "uf-16-inspector",
+      "name": "UF-16 Inspector",
+      "passive": "Unflinching",
+      "armorTier": "light",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sr-24-street-scout",
+      "name": "SR-24 Street Scout",
+      "passive": "Siege-Ready",
+      "armorTier": "light",
+      "tags": [
+        "resupply",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ac-2-obedient",
+      "name": "AC-2 Obedient",
+      "passive": "Acclimated",
+      "armorTier": "light",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ie-57-hell-bent",
+      "name": "IE-57 Hell-Bent",
+      "passive": "Integrated Explosives",
+      "armorTier": "light",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "gs-11-democracys-deputy",
+      "name": "GS-11 Democracy's Deputy",
+      "passive": "Gunslinger",
+      "armorTier": "light",
+      "tags": [
+        "versatile",
+        "mobility"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "re-1861-parade-commander",
+      "name": "RE-1861 Parade Commander",
+      "passive": "Reinforced Epaulettes",
+      "armorTier": "light",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "bp-32-jackboot",
+      "name": "BP-32 Jackboot",
+      "passive": "Ballistic Padding",
+      "armorTier": "light",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ad-11-livewire",
+      "name": "AD-11 Livewire",
+      "passive": "Adreno-Defibrillator",
+      "armorTier": "light",
+      "tags": [
+        "survivability",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ds-10-big-game-hunter",
+      "name": "DS-10 Big Game Hunter",
+      "passive": "Desert Stormer",
+      "armorTier": "light",
+      "tags": [
+        "mobility",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "rs-20-constrictor",
+      "name": "RS-20 Constrictor",
+      "passive": "Rock Solid",
+      "armorTier": "light",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "rs-100-sanctioner",
+      "name": "RS-100 Sanctioner",
+      "passive": "Reduced Signature",
+      "armorTier": "light",
+      "tags": [
+        "mobility",
+        "scout"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "rs-89-shadow-paragon",
+      "name": "RS-89 Shadow Paragon",
+      "passive": "Reduced Signature",
+      "armorTier": "light",
+      "tags": [
+        "mobility",
+        "scout"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cph-26-commandant",
+      "name": "CPH-26 Commandant",
+      "passive": "Concussive Padding, Hazmat",
+      "armorTier": "light",
+      "tags": [
+        "survivability",
+        "defensive",
+        "utility"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "o-3-free-spirit",
+      "name": "O-3 Free Spirit",
+      "passive": "Oxygenator",
+      "armorTier": "light",
+      "tags": [
+        "mobility",
+        "survivability"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "b-01-tactical",
+      "name": "B-01 Tactical",
+      "passive": "Extra Padding",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "tr-7-ambassador",
+      "name": "TR-7 Ambassador of the Brand",
+      "passive": "Extra Padding",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "tr-9-cavalier",
+      "name": "TR-9 Cavalier of Democracy",
+      "passive": "Democracy Protects",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "dp-53-savior",
+      "name": "DP-53 Savior of the Free",
+      "passive": "Democracy Protects",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "tr-117-alpha-commander",
+      "name": "TR-117 Alpha Commander",
+      "passive": "Med-Kit",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sc-15-drone-master",
+      "name": "SC-15 Drone Master",
+      "passive": "Engineering Kit",
+      "armorTier": "medium",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ce-35-trench-engineer",
+      "name": "CE-35 Trench Engineer",
+      "passive": "Engineering Kit",
+      "armorTier": "medium",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cm-09-bonesnapper",
+      "name": "CM-09 Bonesnapper",
+      "passive": "Med-Kit",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "dp-40-hero",
+      "name": "DP-40 Hero of the Federation",
+      "passive": "Democracy Protects",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sa-04-combat-technician",
+      "name": "SA-04 Combat Technician",
+      "passive": "Scout",
+      "armorTier": "medium",
+      "tags": [
+        "mobility",
+        "scout"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cm-14-physician",
+      "name": "CM-14 Physician",
+      "passive": "Med-Kit",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "dp-11-champion",
+      "name": "DP-11 Champion of the People",
+      "passive": "Democracy Protects",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sa-25-steel-trooper",
+      "name": "SA-25 Steel Trooper",
+      "passive": "Servo-Assisted",
+      "armorTier": "medium",
+      "tags": [
+        "versatile",
+        "mobility"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sa-12-servo-assisted",
+      "name": "SA-12 Servo Assisted",
+      "passive": "Servo-Assisted",
+      "armorTier": "medium",
+      "tags": [
+        "versatile",
+        "mobility"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "b-24-enforcer",
+      "name": "B-24 Enforcer",
+      "passive": "Fortified",
+      "armorTier": "medium",
+      "tags": [
+        "defensive",
+        "fortified"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ce-81-juggernaut",
+      "name": "CE-81 Juggernaut",
+      "passive": "Engineering Kit",
+      "armorTier": "medium",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "fs-34-exterminator",
+      "name": "FS-34 Exterminator",
+      "passive": "Fortified",
+      "armorTier": "medium",
+      "tags": [
+        "defensive",
+        "fortified"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ex-03-prototype-3",
+      "name": "EX-03 Prototype 3",
+      "passive": "Electrical Conduit",
+      "armorTier": "medium",
+      "tags": [
+        "energy",
+        "anti-shield"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ex-16-prototype-16",
+      "name": "EX-16 Prototype 16",
+      "passive": "Electrical Conduit",
+      "armorTier": "medium",
+      "tags": [
+        "energy",
+        "anti-shield"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ce-27-ground-breaker",
+      "name": "CE-27 Ground Breaker",
+      "passive": "Engineering Kit",
+      "armorTier": "medium",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cm-10-clinician",
+      "name": "CM-10 Clinician",
+      "passive": "Med-Kit",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cw-9-white-wolf",
+      "name": "CW-9 White Wolf",
+      "passive": "Extra Padding",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ph-56-jaguar",
+      "name": "PH-56 Jaguar",
+      "passive": "Peak Physique",
+      "armorTier": "medium",
+      "tags": [
+        "melee",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "tr-40-gold-eagle",
+      "name": "TR-40 Gold Eagle",
+      "passive": "Extra Padding",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "i-92-fire-fighter",
+      "name": "I-92 Fire Fighter",
+      "passive": "Inflammable",
+      "armorTier": "medium",
+      "tags": [
+        "area-denial",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "i-102-draconaught",
+      "name": "I-102 Draconaught",
+      "passive": "Inflammable",
+      "armorTier": "medium",
+      "tags": [
+        "area-denial",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "af-91-field-chemist",
+      "name": "AF-91 Field Chemist",
+      "passive": "Advanced Filtration",
+      "armorTier": "medium",
+      "tags": [
+        "utility",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "af-02-haz-master",
+      "name": "AF-02 Haz-Master",
+      "passive": "Advanced Filtration",
+      "armorTier": "medium",
+      "tags": [
+        "utility",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "dp-00-tactical",
+      "name": "DP-00 Tactical",
+      "passive": "Democracy Protects",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "uf-84-doubt-killer",
+      "name": "UF-84 Doubt Killer",
+      "passive": "Unflinching",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "uf-50-bloodhound",
+      "name": "UF-50 Bloodhound",
+      "passive": "Unflinching",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ac-1-dutiful",
+      "name": "AC-1 Dutiful",
+      "passive": "Acclimated",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ie-3-martyr",
+      "name": "IE-3 Martyr",
+      "passive": "Integrated Explosives",
+      "armorTier": "medium",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ie-12-righteous",
+      "name": "IE-12 Righteous",
+      "passive": "Integrated Explosives",
+      "armorTier": "medium",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "b-22-model-citizen",
+      "name": "B-22 Model Citizen",
+      "passive": "Democracy Protects",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "gs-17-frontier-marshal",
+      "name": "GS-17 Frontier Marshal",
+      "passive": "Gunslinger",
+      "armorTier": "medium",
+      "tags": [
+        "versatile",
+        "mobility"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "re-2310-honorary-guard",
+      "name": "RE-2310 Honorary Guard",
+      "passive": "Reinforced Epaulettes",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "bp-20-correct-officer",
+      "name": "BP-20 Correct Officer",
+      "passive": "Ballistic Padding",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ad-26-bleeding-edge",
+      "name": "AD-26 Bleeding Edge",
+      "passive": "Adreno-Defibrillator",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "a-9-helljumper",
+      "name": "A-9 Helljumper",
+      "passive": "Feet First",
+      "armorTier": "medium",
+      "tags": [
+        "mobility",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "a-35-recon",
+      "name": "A-35 Recon",
+      "passive": "Feet First",
+      "armorTier": "medium",
+      "tags": [
+        "mobility",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ds-191-scorpion",
+      "name": "DS-191 Scorpion",
+      "passive": "Desert Stormer",
+      "armorTier": "medium",
+      "tags": [
+        "mobility",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "rs-6-fiend-destroyer",
+      "name": "RS-6 Fiend Destroyer",
+      "passive": "Rock Solid",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "rs-67-null-cipher",
+      "name": "RS-67 Null Cipher",
+      "passive": "Reduced Signature",
+      "armorTier": "medium",
+      "tags": [
+        "mobility",
+        "scout"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sa-7-headfirst",
+      "name": "SA-7 Headfirst",
+      "passive": "Supplementary Adrenaline",
+      "armorTier": "medium",
+      "tags": [
+        "mobility",
+        "survivability"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "dp-8-mountain-scaled",
+      "name": "DP-8 Mountain-Scaled",
+      "passive": "Siege-Ready",
+      "armorTier": "medium",
+      "tags": [
+        "resupply",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cpg-48-sapper",
+      "name": "CPG-48 Sapper",
+      "passive": "Concussive Padding, Grenadier",
+      "armorTier": "medium",
+      "tags": [
+        "survivability",
+        "defensive",
+        "explosive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "o-44-bonded-pilot",
+      "name": "O-44 Bonded Pilot",
+      "passive": "Oxygenator",
+      "armorTier": "medium",
+      "tags": [
+        "mobility",
+        "survivability"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cw-22-kodiak",
+      "name": "CW-22 Kodiak",
+      "passive": "Fortified",
+      "armorTier": "heavy",
+      "tags": [
+        "defensive",
+        "fortified"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "tr-62-knight",
+      "name": "TR-62 Knight",
+      "passive": "Servo-Assisted",
+      "armorTier": "heavy",
+      "tags": [
+        "versatile",
+        "mobility"
+      ],
+      "iconRef": "",
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "fs-05-marksman",
+      "name": "FS-05 Marksman",
+      "passive": "Fortified",
+      "armorTier": "heavy",
+      "tags": [
+        "defensive",
+        "fortified"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "fs-23-battle-master",
+      "name": "FS-23 Battle Master",
+      "passive": "Fortified",
+      "armorTier": "heavy",
+      "tags": [
+        "defensive",
+        "fortified"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sa-32-dynamo",
+      "name": "SA-32 Dynamo",
+      "passive": "Servo-Assisted",
+      "armorTier": "heavy",
+      "tags": [
+        "versatile",
+        "mobility"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "b-27-fortified-commando",
+      "name": "B-27 Fortified Commando",
+      "passive": "Extra Padding",
+      "armorTier": "heavy",
+      "tags": [
+        "survivability",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "fs-61-dreadnought",
+      "name": "FS-61 Dreadnought",
+      "passive": "Servo-Assisted",
+      "armorTier": "heavy",
+      "tags": [
+        "versatile",
+        "mobility"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "fs-11-executioner",
+      "name": "FS-11 Executioner",
+      "passive": "Fortified",
+      "armorTier": "heavy",
+      "tags": [
+        "defensive",
+        "fortified"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cm-17-butcher",
+      "name": "CM-17 Butcher",
+      "passive": "Med-Kit",
+      "armorTier": "heavy",
+      "tags": [
+        "survivability",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "fs-55-devastator",
+      "name": "FS-55 Devastator",
+      "passive": "Fortified",
+      "armorTier": "heavy",
+      "tags": [
+        "defensive",
+        "fortified"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ce-64-grenadier",
+      "name": "CE-64 Grenadier",
+      "passive": "Engineering Kit",
+      "armorTier": "heavy",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cw-36-winter-warrior",
+      "name": "CW-36 Winter Warrior",
+      "passive": "Servo-Assisted",
+      "armorTier": "heavy",
+      "tags": [
+        "versatile",
+        "mobility"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ce-101-guerilla-gorilla",
+      "name": "CE-101 Guerilla Gorilla",
+      "passive": "Engineering Kit",
+      "armorTier": "heavy",
+      "tags": [
+        "explosive",
+        "engineering"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ph-202-twigsnapper",
+      "name": "PH-202 Twigsnapper",
+      "passive": "Peak Physique",
+      "armorTier": "heavy",
+      "tags": [
+        "melee",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "i-44-salamander",
+      "name": "I-44 Salamander",
+      "passive": "Inflammable",
+      "armorTier": "heavy",
+      "tags": [
+        "area-denial",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "af-52-lockdown",
+      "name": "AF-52 Lockdown",
+      "passive": "Advanced Filtration",
+      "armorTier": "heavy",
+      "tags": [
+        "utility",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sr-64-cinderblock",
+      "name": "SR-64 Cinderblock",
+      "passive": "Siege-Ready",
+      "armorTier": "heavy",
+      "tags": [
+        "resupply",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sr-18-roadblock",
+      "name": "SR-18 Roadblock",
+      "passive": "Siege-Ready",
+      "armorTier": "heavy",
+      "tags": [
+        "resupply",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "gs-66-lawmaker",
+      "name": "GS-66 Lawmaker",
+      "passive": "Gunslinger",
+      "armorTier": "heavy",
+      "tags": [
+        "versatile",
+        "mobility"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "re-824-bearer-of-the-standard",
+      "name": "RE-824 Bearer of the Standard",
+      "passive": "Reinforced Epaulettes",
+      "armorTier": "heavy",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "bp-77-grand-juror",
+      "name": "BP-77 Grand Juror",
+      "passive": "Ballistic Padding",
+      "armorTier": "heavy",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ad-49-apollonian",
+      "name": "AD-49 Apollonian",
+      "passive": "Adreno-Defibrillator",
+      "armorTier": "heavy",
+      "tags": [
+        "survivability",
+        "support"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "ds-42-federations-blade",
+      "name": "DS-42 Federation's Blade",
+      "passive": "Desert Stormer",
+      "armorTier": "heavy",
+      "tags": [
+        "mobility",
+        "versatile"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "rs-40-beast-of-prey",
+      "name": "RS-40 Beast of Prey",
+      "passive": "Rock Solid",
+      "armorTier": "heavy",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sa-8-ram",
+      "name": "SA-8 Ram",
+      "passive": "Supplementary Adrenaline",
+      "armorTier": "heavy",
+      "tags": [
+        "mobility",
+        "survivability"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "cpr-80-bulwark",
+      "name": "CPR-80 Bulwark",
+      "passive": "Concussive Padding, Reinforced",
+      "armorTier": "heavy",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "o-2-heavy-operator",
+      "name": "O-2 Heavy Operator",
+      "passive": "Oxygenator",
+      "armorTier": "heavy",
+      "tags": [
+        "mobility",
+        "survivability"
+      ],
+      "iconRef": "",
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    }
+  ],
+  "boosters": [
+    {
+      "id": "stamina-enhancement",
+      "name": "Stamina Enhancement",
+      "effect": "Increases all Helldivers' stamina capacity and recovery.",
+      "tags": [
+        "mobility",
+        "stamina"
+      ],
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "hellpod-space-optimization",
+      "name": "Hellpod Space Optimization",
+      "effect": "Helldivers come out of the Hellpod fully stocked on Ammo, Grenades and Stims.",
+      "tags": [
+        "resupply",
+        "supply"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "vitality-enhancement",
+      "name": "Vitality Enhancement",
+      "effect": "Provides minor damage reduction from all sources for all Helldivers.",
+      "tags": [
+        "survivability",
+        "defensive"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "uav-recon-booster",
+      "name": "UAV Recon Booster",
+      "effect": "Increases all Helldivers' effective radar range.",
+      "tags": [
+        "utility",
+        "mobility"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "muscle-enhancement",
+      "name": "Muscle Enhancement",
+      "effect": "Allows Helldivers to traverse difficult terrain with ease.",
+      "tags": [
+        "mobility",
+        "terrain"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "increased-reinforcement-budget",
+      "name": "Increased Reinforcement Budget",
+      "effect": "Increases the number of available reinforcements.",
+      "tags": [
+        "resupply",
+        "support"
+      ],
+      "source": "base",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "flexible-reinforcement-budget",
+      "name": "Flexible Reinforcement Budget",
+      "effect": "Reduces time until new reinforcements are granted once they've been depleted.",
+      "tags": [
+        "resupply",
+        "support"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "localization-confusion",
+      "name": "Localization Confusion",
+      "effect": "Increases the time between enemy encounters.",
+      "tags": [
+        "utility"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "expert-extraction-pilot",
+      "name": "Expert Extraction Pilot",
+      "effect": "Lowers the time it takes for the extraction shuttle to reach the extraction beacon.",
+      "tags": [
+        "mobility",
+        "utility"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "motivational-shocks",
+      "name": "Motivational Shocks",
+      "effect": "Allows faster recovery from slow-inducing attacks, excluding area effects.",
+      "tags": [
+        "mobility",
+        "survivability"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "experimental-infusion",
+      "name": "Experimental Infusion",
+      "effect": "Stims temporarily increase movement speed and damage reduction.",
+      "tags": [
+        "mobility",
+        "survivability"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "firebomb-hellpods",
+      "name": "Firebomb Hellpods",
+      "effect": "Lines all Hellpods with volatile incendiaries that detonate upon impact.",
+      "tags": [
+        "area-denial",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "dead-sprint",
+      "name": "Dead Sprint",
+      "effect": "Allows Helldivers to keep sprinting even when out of stamina, draining health instead.",
+      "tags": [
+        "mobility"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "armed-resupply-pods",
+      "name": "Armed Resupply Pods",
+      "effect": "Mounts a modified AR-23 Liberator to all resupply pods, allowing them to double as automatic turrets.",
+      "tags": [
+        "support",
+        "crowd-control"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sample-extricator",
+      "name": "Sample Extricator",
+      "effect": "Large enemies now have a chance of dropping Samples on death.",
+      "tags": [
+        "utility"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "sample-scanner",
+      "name": "Sample Scanner",
+      "effect": "Gives you a 15% chance to receive twice the Samples on sample pick up.",
+      "tags": [
+        "utility"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "stun-pods",
+      "name": "Stun Pods",
+      "effect": "Exposes Hellpod wiring upon surface contact, stunning any units in the vicinity.",
+      "tags": [
+        "crowd-control",
+        "stun"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    },
+    {
+      "id": "concealed-insertion",
+      "name": "Concealed Insertion",
+      "effect": "Equips Hellpods to deploy smokescreens on impact, obscuring Helldiver deployment.",
+      "tags": [
+        "utility"
+      ],
+      "source": "warbond",
+      "lastUpdated": "2026-05-12"
+    }
+  ],
+  "missionTypes": [
+    {
+      "id": "start-fuel-pumps",
+      "name": "Start Fuel Pumps",
+      "tags": ["multi-stage", "defend-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2],
+        "factions": ["terminids", "automatons", "illuminate"]
+      }
+    },
+    {
+      "id": "retrieve-essential-personnel",
+      "name": "Retrieve Essential Personnel",
+      "tags": ["escort", "defend-objective"],
+      "modes": ["attack", "defense"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids", "automatons", "illuminate"]
+      }
+    },
+    {
+      "id": "spread-democracy",
+      "name": "Spread Democracy",
+      "tags": ["multi-objective", "defend-objective"],
+      "modes": ["attack", "defense"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids", "automatons", "illuminate"]
+      }
+    },
+    {
+      "id": "upload-escape-pod-data",
+      "name": "Upload Escape Pod Data",
+      "tags": ["destroy-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2],
+        "factions": ["terminids", "automatons", "illuminate"]
+      }
+    },
+    {
+      "id": "terminate-illegal-broadcast",
+      "name": "Terminate Illegal Broadcast",
+      "tags": ["destroy-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2],
+        "factions": ["terminids", "automatons", "illuminate"]
+      }
+    },
+    {
+      "id": "retrieve-valuable-data",
+      "name": "Retrieve Valuable Data",
+      "tags": ["scout", "multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids", "automatons", "illuminate"]
+      }
+    },
+    {
+      "id": "emergency-evacuation",
+      "name": "Emergency Evacuation",
+      "tags": ["escort", "defend-objective", "time-pressure"],
+      "modes": ["defense"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids", "automatons", "illuminate"]
+      }
+    },
+    {
+      "id": "launch-icbm",
+      "name": "Launch ICBM",
+      "tags": ["multi-stage", "defend-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids", "automatons", "illuminate"]
+      }
+    },
+    {
+      "id": "conduct-geological-survey",
+      "name": "Conduct Geological Survey",
+      "tags": ["scout", "multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids", "automatons", "illuminate"]
+      }
+    },
+    {
+      "id": "evacuate-high-value-assets",
+      "name": "Evacuate High-Value Assets",
+      "tags": ["escort", "defend-objective"],
+      "modes": ["attack", "defense"],
+      "availability": {
+        "difficulties": [5, 6, 7, 8, 9, 10],
+        "factions": ["terminids", "automatons", "illuminate"]
+      }
+    },
+    {
+      "id": "eliminate-brood-commanders",
+      "name": "Eliminate Brood Commanders",
+      "tags": ["elimination", "anti-armor", "precision"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "restart-pumps",
+      "name": "Restart Pumps",
+      "tags": ["multi-stage", "defend-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "extract-e711",
+      "name": "Extract E-711",
+      "tags": ["multi-objective"],
+      "modes": ["attack"],
+      "requiredBiomes": ["Hive World"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "mobile-e711-extraction",
+      "name": "Conduct Mobile E-711 Extraction",
+      "tags": ["multi-objective", "fast-paced"],
+      "modes": ["attack"],
+      "requiredBiomes": ["Hive World"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "restore-air-quality",
+      "name": "Restore Air Quality",
+      "tags": ["destroy-objective", "multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "collect-gloom-infused-oil",
+      "name": "Collect Gloom-Infused Oil",
+      "tags": ["multi-objective"],
+      "modes": ["attack"],
+      "requiredModifiers": ["heavy-gloom-shroud", "light-gloom-cover"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "extract-research-probe-data",
+      "name": "Extract Research Probe Data",
+      "tags": ["scout"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "collect-meteorological-data",
+      "name": "Collect Meteorological Data",
+      "tags": ["scout", "multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "collect-gloom-spore-readings",
+      "name": "Collect Gloom Spore Readings",
+      "tags": ["scout"],
+      "modes": ["attack"],
+      "requiredModifiers": ["heavy-gloom-shroud", "light-gloom-cover"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "blitz-secure-research-site",
+      "name": "Blitz: Secure Research Site",
+      "tags": ["fast-paced", "time-pressure", "defend-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "purge-hatcheries",
+      "name": "Purge Hatcheries",
+      "tags": ["destroy-objective", "anti-swarm"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "blitz-search-and-destroy-terminid",
+      "name": "Blitz Search and Destroy",
+      "tags": ["elimination", "anti-swarm", "time-pressure", "fast-paced"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "eradicate-terminid-swarm",
+      "name": "Eradicate Terminid Swarm",
+      "tags": ["elimination", "anti-swarm", "time-pressure"],
+      "modes": ["defense"],
+      "availability": {
+        "difficulties": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "activate-oil-pumps",
+      "name": "Activate Oil Pumps",
+      "tags": ["multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [2, 3],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "chart-terminid-tunnels",
+      "name": "Chart Terminid Tunnels",
+      "tags": ["scout", "multi-objective"],
+      "modes": ["attack"],
+      "requiredBiomes": ["Hive World"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "eliminate-chargers",
+      "name": "Eliminate Chargers",
+      "tags": ["elimination", "anti-armor", "precision"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "destroy-spore-lung",
+      "name": "Destroy Spore Lung",
+      "tags": ["destroy-objective", "anti-swarm"],
+      "modes": ["attack"],
+      "requiredBiomes": ["Hive World"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "nuke-nursery",
+      "name": "Nuke Nursery",
+      "tags": ["destroy-objective", "anti-swarm"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "enable-oil-extraction",
+      "name": "Enable Oil Extraction",
+      "tags": ["multi-stage", "multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "cleanse-infested-district",
+      "name": "Cleanse Infested District",
+      "tags": ["elimination", "anti-swarm", "multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [4, 5, 6, 7, 8, 9, 10],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "eliminate-bile-titans",
+      "name": "Eliminate Bile Titans",
+      "tags": ["elimination", "anti-armor", "anti-tank", "precision"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [4, 5],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "eliminate-impaler",
+      "name": "Eliminate Impaler",
+      "tags": ["elimination", "anti-armor", "precision"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [5],
+        "factions": ["terminids"]
+      }
+    },
+    {
+      "id": "eliminate-devastators",
+      "name": "Eliminate Devastators",
+      "tags": ["elimination", "anti-armor", "precision"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "commando-secure-black-box",
+      "name": "Commando: Secure Black Box",
+      "tags": ["escort", "stealth"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "annex-mineral-sites",
+      "name": "Annex Untapped Mineral Sites",
+      "tags": ["multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "confiscate-assets",
+      "name": "Confiscate Assets",
+      "tags": ["multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "sabotage-orgo-plasma-synthesis",
+      "name": "Sabotage Orgo-Plasma Synthesis",
+      "tags": ["destroy-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "commando-extract-intel",
+      "name": "Commando: Extract Intel",
+      "tags": ["escort", "stealth"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "commando-acquire-evidence",
+      "name": "Commando: Acquire Evidence",
+      "tags": ["scout", "stealth"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "sabotage-supply-bases",
+      "name": "Sabotage Supply Bases",
+      "tags": ["destroy-objective", "multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "seize-industrial-complex",
+      "name": "Seize Industrial Complex",
+      "tags": ["multi-objective", "defend-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "eradicate-automaton-forces",
+      "name": "Eradicate Automaton Forces",
+      "tags": ["elimination", "anti-armor", "time-pressure"],
+      "modes": ["defense"],
+      "availability": {
+        "difficulties": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "destroy-transmission-network",
+      "name": "Destroy Transmission Network",
+      "tags": ["destroy-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [2, 3],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "sabotage-air-base",
+      "name": "Sabotage Air Base",
+      "tags": ["destroy-objective", "anti-armor"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "blitz-search-and-destroy-automaton",
+      "name": "Blitz Search and Destroy",
+      "tags": ["elimination", "anti-armor", "time-pressure", "fast-paced"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "rapid-acquisition",
+      "name": "Rapid Acquisition",
+      "tags": ["fast-paced", "multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "eliminate-automaton-hulks",
+      "name": "Eliminate Automaton Hulks",
+      "tags": ["elimination", "anti-armor", "anti-tank", "precision"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "eliminate-factory-strider",
+      "name": "Eliminate Automaton Factory Strider",
+      "tags": ["elimination", "anti-armor", "anti-tank", "precision"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [4, 5, 6],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "halt-cyborg-production",
+      "name": "Halt Cyborg Production",
+      "tags": ["destroy-objective", "multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "neutralize-ground-to-orbit-defenses",
+      "name": "Neutralize Ground-to-Orbit Defenses",
+      "tags": ["destroy-objective", "anti-armor"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [4, 5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "destroy-command-bunkers",
+      "name": "Destroy Command Bunkers",
+      "tags": ["destroy-objective", "anti-armor"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "blitz-destroy-bio-processors",
+      "name": "Blitz: Destroy Bio-Processors",
+      "tags": ["fast-paced", "time-pressure", "destroy-objective", "anti-armor"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [5, 6, 7, 8, 9, 10],
+        "factions": ["automatons"]
+      }
+    },
+    {
+      "id": "evacuate-colonists",
+      "name": "Evacuate Colonists",
+      "tags": ["escort", "defend-objective"],
+      "modes": ["defense"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["illuminate"]
+      }
+    },
+    {
+      "id": "retrieve-recon-craft-intel",
+      "name": "Retrieve Recon Craft Intel",
+      "tags": ["scout"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["illuminate"]
+      }
+    },
+    {
+      "id": "take-down-overship",
+      "name": "Take Down Overship",
+      "tags": ["destroy-objective", "anti-armor", "anti-tank"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["illuminate"]
+      }
+    },
+    {
+      "id": "free-colony",
+      "name": "Free Colony",
+      "tags": ["elimination", "multi-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["illuminate"]
+      }
+    },
+    {
+      "id": "destroy-harvesters",
+      "name": "Destroy Harvesters",
+      "tags": ["elimination", "anti-armor", "precision"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3],
+        "factions": ["illuminate"]
+      }
+    },
+    {
+      "id": "blitz-destroy-illuminate-warp-ships",
+      "name": "Blitz: Destroy Illuminate Warp Ships",
+      "tags": ["fast-paced", "time-pressure", "destroy-objective"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["illuminate"]
+      }
+    },
+    {
+      "id": "repel-invasion-fleet",
+      "name": "Repel Invasion Fleet",
+      "tags": ["elimination", "defend-objective", "anti-swarm"],
+      "modes": ["defense"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["illuminate"]
+      }
+    },
+    {
+      "id": "destroy-exospire",
+      "name": "Destroy Exospire",
+      "tags": ["destroy-objective", "anti-armor"],
+      "modes": ["attack"],
+      "availability": {
+        "difficulties": [3, 4, 5, 6, 7, 8, 9, 10],
+        "factions": ["illuminate"]
+      }
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "aa-defenses",
+      "name": "AA Defenses",
+      "effectTags": [
+        "no_eagles"
+      ],
+      "severity": "high",
+      "constraintType": "hard"
+    },
+    {
+      "id": "ion-storm",
+      "name": "Ion Storm",
+      "effectTags": [
+        "no_eagles"
+      ],
+      "severity": "high",
+      "constraintType": "hard"
+    },
+    {
+      "id": "pilot-shortage",
+      "name": "Pilot Shortage",
+      "effectTags": [
+        "no_eagles"
+      ],
+      "severity": "high",
+      "constraintType": "hard"
+    },
+    {
+      "id": "thick-fog",
+      "name": "Thick Fog",
+      "effectTags": [
+        "penalty_long-range",
+        "penalty_precision"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "sandstorms",
+      "name": "Sandstorms",
+      "effectTags": [
+        "penalty_long-range",
+        "penalty_precision"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "acid-storms",
+      "name": "Acid Storms",
+      "effectTags": [
+        "penalty_long-range",
+        "penalty_precision"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "heavy-gloom-shroud",
+      "name": "Heavy Gloom Shroud",
+      "effectTags": [
+        "penalty_long-range",
+        "penalty_precision"
+      ],
+      "severity": "high",
+      "constraintType": "soft"
+    },
+    {
+      "id": "light-gloom-cover",
+      "name": "Light Gloom Cover",
+      "effectTags": [
+        "penalty_precision"
+      ],
+      "severity": "low",
+      "constraintType": "soft"
+    },
+    {
+      "id": "rainstorm",
+      "name": "Rainstorm",
+      "effectTags": [
+        "penalty_energy",
+        "penalty_precision"
+      ],
+      "severity": "low",
+      "constraintType": "soft"
+    },
+    {
+      "id": "tremors",
+      "name": "Tremors",
+      "effectTags": [
+        "penalty_stationary"
+      ],
+      "severity": "low",
+      "constraintType": "soft"
+    },
+    {
+      "id": "meteor-showers",
+      "name": "Meteor Storms",
+      "effectTags": [
+        "penalty_stationary"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "volcanic-activity",
+      "name": "Volcanic Activity",
+      "effectTags": [
+        "penalty_stationary"
+      ],
+      "severity": "high",
+      "constraintType": "soft"
+    },
+    {
+      "id": "fire-tornadoes",
+      "name": "Fire Tornadoes",
+      "effectTags": [
+        "penalty_area-denial"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "civilians-in-area",
+      "name": "Civilians and SEAF in Area",
+      "effectTags": [
+        "penalty_area-denial",
+        "penalty_explosive"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "extreme-cold",
+      "name": "Extreme Cold",
+      "effectTags": [
+        "boost_fortified"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "blizzard",
+      "name": "Blizzard",
+      "effectTags": [
+        "boost_fortified",
+        "penalty_mobility"
+      ],
+      "severity": "high",
+      "constraintType": "soft"
+    },
+    {
+      "id": "extreme-heat",
+      "name": "Intense Heat",
+      "effectTags": [
+        "boost_scout",
+        "boost_mobility"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "slower-eagle-rearm",
+      "name": "Slower Eagle Rearm",
+      "effectTags": [
+        "penalty_eagle"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "orbital-fluctuations",
+      "name": "Orbital Fluctuations",
+      "effectTags": [
+        "penalty_orbital"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "medical-supply-strain",
+      "name": "Medical Supply Strain",
+      "effectTags": [
+        "penalty_support"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "atmospheric-spores",
+      "name": "Atmospheric Spores",
+      "effectTags": [
+        "penalty_precision"
+      ],
+      "severity": "low",
+      "constraintType": "soft"
+    },
+    {
+      "id": "poor-intel",
+      "name": "Poor Intel",
+      "effectTags": [
+        "penalty_precision"
+      ],
+      "severity": "low",
+      "constraintType": "soft"
+    },
+    {
+      "id": "roving-shriekers",
+      "name": "Roving Shriekers",
+      "effectTags": [
+        "boost_anti-swarm"
+      ],
+      "severity": "medium",
+      "constraintType": "soft"
+    },
+    {
+      "id": "gunship-patrols",
+      "name": "Gunship Patrols",
+      "effectTags": [
+        "boost_anti-armor",
+        "boost_precision"
+      ],
+      "severity": "high",
+      "constraintType": "soft"
+    },
+    {
+      "id": "leviathan-blockade",
+      "name": "Leviathan Blockade",
+      "effectTags": [
+        "boost_anti-armor",
+        "boost_anti-shield"
+      ],
+      "severity": "high",
+      "constraintType": "soft"
+    }
+  ]
+}

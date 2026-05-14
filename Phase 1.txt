@@ -1,0 +1,65 @@
+Alright, let me pull together the **Phase 1 summary document**, then we'll move into Phase 2.
+
+---
+
+## Phase 1: Product Definition — Summary
+
+### Problem Statement
+Helldivers 2 players face a recurring decision bottleneck at mission select: assembling a loadout optimized for a specific combination of faction, difficulty, objectives, modifiers, and environment. Current alternatives (community tier lists, YouTube guides, Reddit threads) are generic, outdated between patches, and don't account for mission-specific context. The app provides instant, situation-aware loadout recommendations that reduce decision friction and help players discover effective combinations they wouldn't have assembled on their own.
+
+### Target Users
+
+| Archetype | Description | Priority |
+|---|---|---|
+| **The Pragmatist** | 100–500 hours, mid-to-high skill. Knows the game, doesn't want to do the mental math every drop. Has go-to loadouts with known blind spots. Uses the app at the hellpod screen on their phone. | Primary |
+| **The Learner** | 20–100 hours, or returning after a break. Lacks the experience to optimize for specific scenarios. Overwhelmed by conflicting community advice. Wants a confident answer. | Secondary |
+| **The Experimenter** | 500+ hour veteran. Doesn't need help, wants inspiration. Uses the randomizer to break habits and try unexpected combinations. | Tertiary |
+| **Squad Leader** | Coordinates loadouts across a team of four to cover roles and fill gaps. | V2 |
+
+**[ASSUMPTION]** The Pragmatist is the largest addressable segment of active HD2 players. Based on community experience, not hard data.
+
+### Value Proposition
+Spend less time in the hellpod, more time in the field. Loadout recommendations that account for every mission variable, not just the meta.
+
+### Core Use Cases (V1)
+
+1. **Quick mission-specific recommendation** — Input mission parameters, receive an optimized loadout in under 60 seconds.
+2. **Understand the reasoning** — Brief rationale surfaced by default; deeper drill-down available on explicit user action.
+3. **Swap individual items** — Tap to swap a single piece of a recommendation, get an updated suggestion.
+4. **Randomize a loadout** — Generate a random loadout, optionally constrained by mission parameters.
+5. **Current with balance changes** — Recommendations reflect the latest patch and balance updates automatically.
+
+**[ASSUMPTION]** Use case 5 is a data/content problem, not a UI feature. Has significant implications for data strategy in Phase 3.
+
+### Core Design Constraint
+The primary use case is real-time, at the mission select screen, likely on a phone beside the player's PC/console. **The app must deliver value in under 60 seconds from open to recommendation.**
+
+### Scope Boundaries — NOT in V1
+
+| Deferred Item | Rationale |
+|---|---|
+| Squad-based loadout coordination | Complex multiplayer coordination; v2 feature after solo experience is proven |
+| Rate my loadout / synergy scoring | Inverts the interaction model; additive UI and logic work |
+| Meta-challenging recommendation mode | Risk of eroding trust if off-meta suggestions cause mission failures |
+| Content creator-specific features | Creators are served by core experience + screenshot-friendly output |
+| User accounts and saved loadouts | V1 is sessionless; auth and persistence add significant scope |
+| Build sharing (links, social, export) | Feature unto itself; v1 just needs visually shareable output |
+| Loadout history / favorites | Retention play, not core value delivery |
+| In-app patch notes / meta commentary | App reflects balance changes in recommendations, not as content |
+| User feedback / crowdsourced ratings | Noisy signal, requires data science investment for uncertain payoff |
+| Recommendation engine learning from user input | Requires feedback infrastructure; v1 intelligence comes from data freshness |
+
+### V2+ Candidates
+- Squad loadout coordination (role-based recommendations across a team of four)
+- Rate my loadout / synergy scoring ("how does my build stack up for this mission?")
+- User feedback loop to refine recommendations over time
+- Build sharing and social features
+
+### Design Principles
+- **Speed is the feature.** If the app isn't faster than the player's gut instinct, it fails.
+- **The app should get smarter over time.** V1 achieves this through data freshness. V2+ explores user feedback as an additional signal.
+- **Progressive disclosure.** Surface confidence, offer depth. Don't front-load complexity.
+
+---
+
+Give that a read. If it feels solid, we'll move into **Phase 2: UX & Information Architecture** — and that's where I hand you the wheel. I'll shift into reviewer and technical challenger mode while you lead the structural thinking.

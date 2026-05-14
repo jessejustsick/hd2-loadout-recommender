@@ -1,0 +1,160 @@
+.screen {
+  padding: var(--space-lg);
+  padding-bottom: var(--space-xl);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: var(--space-sm);
+}
+
+.gameLogo {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto 25px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.firstGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.groupLabel {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+}
+
+/* Skeleton loader for planet chips */
+.skeleton {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.skeletonChip {
+  height: 44px;
+  width: 100px;
+  border-radius: 20px;
+  background: var(--color-bg-tertiary);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeletonChip:nth-child(2) { width: 120px; animation-delay: 0.1s; }
+.skeletonChip:nth-child(3) { width: 90px; animation-delay: 0.2s; }
+.skeletonChip:nth-child(4) { width: 110px; animation-delay: 0.15s; }
+.skeletonChip:nth-child(5) { width: 95px; animation-delay: 0.05s; }
+.skeletonChip:nth-child(6) { width: 105px; animation-delay: 0.25s; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+/* Error state */
+.error {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.errorText {
+  font-size: 14px;
+  color: var(--color-error);
+}
+
+.errorActions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.retryBtn {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  font-size: 14px;
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  background: transparent;
+  cursor: pointer;
+  min-height: 44px;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.retryBtn:hover {
+  border-color: var(--color-text-secondary);
+}
+
+.fallbackBtn {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  font-size: 14px;
+  font-family: var(--font-family);
+  color: var(--color-text-secondary);
+  background: transparent;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+/* Fallback step extras */
+.fallbackNote {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.generateBtn {
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  border: none;
+  background-color: var(--color-accent);
+  color: var(--color-bg-primary);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-family);
+  cursor: pointer;
+  min-height: 48px;
+  align-self: flex-start;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.generateBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+/* Reset action */
+.resetBtn {
+  margin-top: var(--space-xl);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm) 0;
+  font-family: var(--font-family);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resetBtn:hover {
+  color: var(--color-text-primary);
+}

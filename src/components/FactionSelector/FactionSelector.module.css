@@ -1,0 +1,51 @@
+.control {
+  display: flex;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.segment {
+  flex: 1;
+  padding: var(--space-md) var(--space-sm);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-family);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--color-border);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+  min-height: 44px;
+}
+
+.segment:last-child {
+  border-right: none;
+}
+
+.segment:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Faction-specific selected states */
+.segment.terminids.selected {
+  background-color: rgba(224, 123, 57, 0.15);
+  color: var(--color-faction-terminid);
+  font-weight: 600;
+}
+
+.segment.automatons.selected {
+  background-color: rgba(204, 34, 34, 0.15);
+  color: var(--color-faction-automaton);
+  font-weight: 600;
+}
+
+.segment.illuminate.selected {
+  background-color: rgba(155, 114, 207, 0.15);
+  color: var(--color-faction-illuminate);
+  font-weight: 600;
+}

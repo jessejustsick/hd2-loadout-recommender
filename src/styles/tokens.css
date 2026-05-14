@@ -1,0 +1,53 @@
+:root {
+  /* Backgrounds */
+  --color-bg-primary: #0e1117;
+  --color-bg-secondary: #161b22;
+  --color-bg-tertiary: #1c2128;
+
+  /* Text */
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: rgba(230, 237, 243, 0.7);
+  --color-text-disabled: rgba(230, 237, 243, 0.35);
+
+  /* Accent — HD2 logo yellow */
+  --color-accent: #ffe900;
+  --color-accent-muted: #c9b800;
+
+  /* Borders */
+  --color-border: rgba(230, 237, 243, 0.1);
+
+  /* Semantic */
+  --color-error: #f85149;
+  --color-success: #3fb950;
+  --color-warning: #d29922;
+  --color-new-indicator: #ffe900;
+
+  /* Faction tints */
+  --color-faction-terminid: #e07b39;
+  --color-faction-automaton: #cc2222;
+  --color-faction-illuminate: #9b72cf;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Layout */
+  --nav-height: 60px;
+  --nav-width: 220px;
+
+  /* Animation */
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+}

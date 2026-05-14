@@ -1,0 +1,223 @@
+.page {
+  padding: var(--space-lg);
+  padding-bottom: calc(var(--nav-height) + var(--space-xl));
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding-bottom: var(--space-xl);
+  }
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.gameLogo {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto 25px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.count {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+/* Empty state */
+.empty {
+  padding: var(--space-xl) 0;
+  text-align: center;
+}
+
+.emptyTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.emptyCtas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.emptyCtaPrimary {
+  width: 100%;
+  max-width: 280px;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-family);
+  cursor: pointer;
+  min-height: 48px;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.emptyCtaPrimary:hover {
+  opacity: 0.9;
+}
+
+.emptyCtaSecondary {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-family);
+  min-height: 44px;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.emptyCtaSecondary:hover {
+  color: var(--color-text-primary);
+}
+
+/* Skeleton */
+.skeletonList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.skeletonCard {
+  height: 130px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* List */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Card */
+.card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.cardStale {
+  border-color: var(--color-warning);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-sm) var(--space-sm) var(--space-md);
+  gap: var(--space-sm);
+}
+
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cardContext {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardTime {
+  font-size: 12px;
+  color: var(--color-text-disabled);
+}
+
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
+}
+
+.deleteBtn:hover {
+  color: var(--color-error);
+  background: var(--color-bg-tertiary);
+}
+
+/* Stale warning */
+.staleWarning {
+  font-size: 12px;
+  color: var(--color-warning);
+  background: rgba(210, 153, 34, 0.08);
+  padding: var(--space-xs) var(--space-md);
+  border-top: 1px solid rgba(210, 153, 34, 0.15);
+  border-bottom: 1px solid rgba(210, 153, 34, 0.15);
+}
+
+/* Card body */
+.cardBody {
+  padding: var(--space-sm) var(--space-md) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.itemGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.groupLabel {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-disabled);
+}
+
+.itemList {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
