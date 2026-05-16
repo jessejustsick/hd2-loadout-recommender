@@ -4401,7 +4401,7 @@
       "id": "eradicate-terminid-swarm",
       "name": "Eradicate Terminid Swarm",
       "tags": ["elimination", "anti-swarm", "time-pressure"],
-      "modes": ["defense"],
+      "modes": ["attack", "defense"],
       "availability": {
         "difficulties": [2, 3, 4, 5, 6, 7, 8, 9, 10],
         "factions": ["terminids"]
@@ -4593,7 +4593,7 @@
       "id": "eradicate-automaton-forces",
       "name": "Eradicate Automaton Forces",
       "tags": ["elimination", "anti-armor", "time-pressure"],
-      "modes": ["defense"],
+      "modes": ["attack", "defense"],
       "availability": {
         "difficulties": [2, 3, 4, 5, 6, 7, 8, 9, 10],
         "factions": ["automatons"]
