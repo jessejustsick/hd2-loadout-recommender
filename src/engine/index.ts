@@ -5,6 +5,7 @@ import type {
   Modifier,
   FactionId,
   ScoredItem,
+  Armor,
 } from '@/types'
 import { catalogService } from '@/services/catalog'
 
@@ -45,6 +46,30 @@ const FACTION_WEIGHTS: Record<FactionId, Record<string, number>> = {
   },
 }
 
+// Armor passive → faction affinity weights
+const PASSIVE_FACTION_WEIGHTS: Record<string, Partial<Record<FactionId, number>>> = {
+  'Fortified':                        { automatons: 2.0 },
+  'Ballistic Padding':                { automatons: 1.8 },
+  'Concussive Padding, Hazmat':       { automatons: 1.5 },
+  'Concussive Padding, Grenadier':    { automatons: 1.5 },
+  'Concussive Padding, Reinforced':   { automatons: 1.5 },
+  'Inflammable':                      { automatons: 1.5, terminids: 1.3 },
+  'Advanced Filtration':              { terminids: 1.8 },
+  'Electrical Conduit':               { illuminate: 2.0 },
+  'Desert Stormer':                   { illuminate: 1.3 },
+  'Engineering Kit':                  { terminids: 1.3 },
+  'Integrated Explosives':            { terminids: 1.3 },
+  'Scout':                            { terminids: 1.2 },
+  'Reduced Signature':                { terminids: 1.2 },
+}
+
+// Which loadout damage tags call for which protective passives
+const SYNERGY_PASSIVE_MAP: Record<string, string[]> = {
+  fire: ['Inflammable'],
+  gas:  ['Advanced Filtration'],
+  arc:  ['Electrical Conduit'],
+}
+
 function scoreItem(tags: string[], params: MissionParams, modifiers: Modifier[]): number {
   let score = 1.0
   const fw = FACTION_WEIGHTS[params.faction] ?? {}
@@ -65,6 +90,28 @@ function scoreItem(tags: string[], params: MissionParams, modifiers: Modifier[])
   return score
 }
 
+function scoreArmor(
+  armor: Armor,
+  params: MissionParams,
+  modifiers: Modifier[],
+  loadoutTags: string[],
+): number {
+  let score = scoreItem(armor.tags, params, modifiers)
+
+  // Faction affinity from passive
+  const passiveWeight = PASSIVE_FACTION_WEIGHTS[armor.passive]?.[params.faction]
+  if (passiveWeight) score *= passiveWeight
+
+  // Synergy: boost armor that protects against damage types already in the loadout
+  for (const [dmgTag, passives] of Object.entries(SYNERGY_PASSIVE_MAP)) {
+    if (loadoutTags.includes(dmgTag) && passives.includes(armor.passive)) {
+      score *= 1.8
+    }
+  }
+
+  return score
+}
+
 function scoreAll<T extends { tags: string[] }>(
   items: T[],
   params: MissionParams,
@@ -72,6 +119,17 @@ function scoreAll<T extends { tags: string[] }>(
 ): ScoredItem<T>[] {
   return items
     .map(item => ({ item, score: scoreItem(item.tags, params, modifiers) }))
+    .sort((a, b) => b.score - a.score)
+}
+
+function scoreAllArmor(
+  items: Armor[],
+  params: MissionParams,
+  modifiers: Modifier[],
+  loadoutTags: string[],
+): ScoredItem<Armor>[] {
+  return items
+    .map(item => ({ item, score: scoreArmor(item, params, modifiers, loadoutTags) }))
     .sort((a, b) => b.score - a.score)
 }
 
@@ -111,7 +169,7 @@ function boostForCoverage(
 
 // ---- Public API ----
 
-const TOP_N = 5
+const TOP_N = 10
 
 function resolveModifiers(params: MissionParams): Modifier[] {
   const all = catalogService.getModifiers()
@@ -124,7 +182,6 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
   const primaryWeapon = weightedRandom(scoreAll(catalogService.getWeapons('primary'), params, modifiers), TOP_N)
   const secondaryWeapon = weightedRandom(scoreAll(catalogService.getWeapons('secondary'), params, modifiers), TOP_N)
   const grenade = weightedRandom(scoreAll(catalogService.getWeapons('grenade'), params, modifiers), TOP_N)
-  const armor = weightedRandom(scoreAll(catalogService.getArmor(), params, modifiers), TOP_N)
   const booster = weightedRandom(scoreAll(catalogService.getBoosters(), params, modifiers), TOP_N)
 
   const eligible = applyHardConstraints(catalogService.getStratagems(), modifiers)
@@ -135,6 +192,14 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
     const hasBackpack = selected.some(s => s.subType === 'backpack')
     const hasPackedWeapon = selected.some(s => s.tags.includes('needs-backpack'))
 
+    // On the last pick for Terminids, enforce at least one explosive item
+    const needsExplosive =
+      params.faction === 'terminids' &&
+      i === 3 &&
+      ![...selected, primaryWeapon, secondaryWeapon, grenade]
+        .filter(Boolean)
+        .some(item => item!.tags.includes('explosive'))
+
     const scored = boostForCoverage(scoreAll(eligible, params, modifiers), selected)
 
     const available = scored.filter(s => {
@@ -142,11 +207,18 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
       if (hasWeapon && s.item.subType === 'support_weapon') return false
       if (hasPackedWeapon && s.item.subType === 'backpack') return false
       if (hasBackpack && s.item.tags.includes('needs-backpack')) return false
+      if (needsExplosive && !s.item.tags.includes('explosive')) return false
       return true
     })
     const pick = weightedRandom(available, TOP_N)
     if (pick) selected.push(pick)
   }
+
+  // Score armor after loadout is known so synergy passives can influence selection
+  const loadoutTags = [...selected, primaryWeapon, secondaryWeapon, grenade]
+    .filter(Boolean)
+    .flatMap(item => item!.tags)
+  const armor = weightedRandom(scoreAllArmor(catalogService.getArmor(), params, modifiers, loadoutTags), TOP_N)
 
   return {
     primaryWeapon,
@@ -222,7 +294,7 @@ export function getAlternatives(
       .map(s => s.item)
   }
   if (slot === 'armor') {
-    return scoreAll(catalogService.getArmor(), params, modifiers)
+    return scoreAllArmor(catalogService.getArmor(), params, modifiers, [])
       .filter(s => !excludeIds.includes(s.item.id))
       .slice(0, count)
       .map(s => s.item)

@@ -336,7 +336,19 @@ export default function Randomizer() {
 
   const weaponSlots: SlotKey[] = ['primary', 'secondary', 'grenade']
   const stratagemSlots: SlotKey[] = ['stratagem-0', 'stratagem-1', 'stratagem-2', 'stratagem-3']
-  const gearSlots: SlotKey[] = ['armor', 'booster']
+
+  function renderRow(key: SlotKey) {
+    return (
+      <LoadoutRow
+        key={key}
+        slotKey={key}
+        item={getSlotItem(loadout, key)}
+        isOpen={openAccordions.has(key)}
+        onToggle={() => toggleAccordion(key)}
+        onSwap={() => handleOpenSwap(key)}
+      />
+    )
+  }
 
   return (
     <div className={styles.page}>
@@ -362,45 +374,23 @@ export default function Randomizer() {
       </p>
 
       <div className={styles.section}>
+        <p className={styles.sectionLabel}>Armor</p>
+        {renderRow('armor')}
+      </div>
+
+      <div className={styles.section}>
         <p className={styles.sectionLabel}>Weapons</p>
-        {weaponSlots.map(key => (
-          <LoadoutRow
-            key={key}
-            slotKey={key}
-            item={getSlotItem(loadout, key)}
-            isOpen={openAccordions.has(key)}
-            onToggle={() => toggleAccordion(key)}
-            onSwap={() => handleOpenSwap(key)}
-          />
-        ))}
+        {weaponSlots.map(renderRow)}
       </div>
 
       <div className={styles.section}>
         <p className={styles.sectionLabel}>Stratagems</p>
-        {stratagemSlots.map(key => (
-          <LoadoutRow
-            key={key}
-            slotKey={key}
-            item={getSlotItem(loadout, key)}
-            isOpen={openAccordions.has(key)}
-            onToggle={() => toggleAccordion(key)}
-            onSwap={() => handleOpenSwap(key)}
-          />
-        ))}
+        {stratagemSlots.map(renderRow)}
       </div>
 
       <div className={styles.section}>
-        <p className={styles.sectionLabel}>Gear</p>
-        {gearSlots.map(key => (
-          <LoadoutRow
-            key={key}
-            slotKey={key}
-            item={getSlotItem(loadout, key)}
-            isOpen={openAccordions.has(key)}
-            onToggle={() => toggleAccordion(key)}
-            onSwap={() => handleOpenSwap(key)}
-          />
-        ))}
+        <p className={styles.sectionLabel}>Booster</p>
+        {renderRow('booster')}
       </div>
 
       <div className={styles.actionBar}>
