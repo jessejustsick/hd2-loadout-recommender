@@ -845,7 +845,6 @@
       "name": "P-35 Re-Educator",
       "category": "secondary",
       "tags": [
-        "utility",
         "crowd-control",
         "gas"
       ],
@@ -2337,7 +2336,6 @@
       "subType": "support_weapon",
       "tags": [
         "support",
-        "utility",
         "melee"
       ],
       "cooldownTier": "short",
