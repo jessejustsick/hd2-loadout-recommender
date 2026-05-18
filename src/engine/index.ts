@@ -129,10 +129,12 @@ function scoreArmor(
   const passiveWeight = PASSIVE_FACTION_WEIGHTS[armor.passive]?.[params.faction]
   if (passiveWeight) score *= passiveWeight
 
-  // Synergy: boost armor that protects against damage types already in the loadout
+  // Synergy: boost armor that protects against damage types in the loadout,
+  // scaled by how many items carry that damage tag so dominant types win
   for (const [dmgTag, passives] of Object.entries(SYNERGY_PASSIVE_MAP)) {
-    if (loadoutTags.includes(dmgTag) && passives.includes(armor.passive)) {
-      score *= 1.8
+    const count = loadoutTags.filter(t => t === dmgTag).length
+    if (count > 0 && passives.includes(armor.passive)) {
+      score *= Math.min(1.0 + count * 0.4, 2.2) // 1 item→1.4×, 2→1.8×, 3+→2.2× (cap)
     }
   }
 
