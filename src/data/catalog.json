@@ -5014,6 +5014,42 @@
       "constraintType": "soft",
       "category": "operation",
       "factions": ["illuminate"]
+    },
+    {
+      "id": "spore-burst-strain",
+      "name": "Spore Burst Strain",
+      "effectTags": [],
+      "severity": "high",
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["terminids"]
+    },
+    {
+      "id": "rupture-strain",
+      "name": "Rupture Strain",
+      "effectTags": [],
+      "severity": "high",
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["terminids"]
+    },
+    {
+      "id": "cyborg-legion",
+      "name": "Cyborg Legion",
+      "effectTags": [],
+      "severity": "high",
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["automatons"]
+    },
+    {
+      "id": "mindless-masses",
+      "name": "Mindless Masses",
+      "effectTags": [],
+      "severity": "high",
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["illuminate"]
     }
   ]
 }

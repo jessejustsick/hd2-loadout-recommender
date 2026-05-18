@@ -78,6 +78,10 @@ const MODIFIER_TAG_WEIGHTS: Record<string, Record<string, number>> = {
   'incineration-corps':    { fire: 0.7, survivability: 1.3, 'anti-armor': 1.3 },
   'jet-brigade':           { 'anti-armor': 1.5, 'anti-tank': 1.3, precision: 1.4 },
   'appropriators':         { 'anti-shield': 1.6, energy: 1.5, 'anti-armor': 1.3 },
+  'spore-burst-strain':   { precision: 1.4, 'area-denial': 1.3, 'anti-swarm': 1.3 },
+  'rupture-strain':       { 'area-denial': 1.5, 'crowd-control': 1.4, 'anti-swarm': 1.3 },
+  'cyborg-legion':        { 'crowd-control': 1.4, explosive: 1.3, 'anti-armor': 1.2 },
+  'mindless-masses':      { 'anti-swarm': 1.7, 'crowd-control': 1.6, 'area-denial': 1.5, explosive: 1.3 },
 }
 
 // Which loadout damage tags call for which protective passives
