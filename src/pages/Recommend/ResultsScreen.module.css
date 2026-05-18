@@ -48,7 +48,7 @@
 .summary {
   font-size: 13px;
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-xs);
+  margin-bottom: var(--space-xl);
 }
 
 .gameLogo {
@@ -62,7 +62,7 @@
   font-size: 24px;
   font-weight: 700;
   color: var(--color-text-primary);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-xs);
 }
 
 /* Sections */

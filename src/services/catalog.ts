@@ -1,4 +1,4 @@
-import type { Catalog, Weapon, Stratagem, Armor, Booster, Faction, MissionType, Modifier } from '@/types'
+import type { Catalog, Weapon, Stratagem, Armor, Booster, Faction, FactionId, MissionType, Modifier } from '@/types'
 import catalogData from '@/data/catalog.json'
 
 const catalog = catalogData as Catalog
@@ -31,6 +31,13 @@ export const catalogService = {
 
   getModifiers(): Modifier[] {
     return catalog.modifiers
+  },
+
+  getOperationModifiers(faction?: FactionId): Modifier[] {
+    return catalog.modifiers.filter(m =>
+      m.category === 'operation' &&
+      (m.factions.length === 0 || !faction || m.factions.includes(faction))
+    )
   },
 
   getItemById(id: string): Weapon | Stratagem | Armor | Booster | null {

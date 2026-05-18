@@ -18,6 +18,7 @@ interface InputState {
   planet: string | null
   missionType: string | null
   modifiers: string[]
+  operationModifiers: string[]
 }
 
 type Action =
@@ -26,26 +27,29 @@ type Action =
   | { type: 'SET_PLANET'; planet: string }
   | { type: 'SET_MISSION_TYPE'; missionType: string }
   | { type: 'SET_MODIFIERS'; modifiers: string[] }
+  | { type: 'SET_OPERATION_MODIFIERS'; modifiers: string[] }
   | { type: 'RESET' }
 
 function reducer(state: InputState, action: Action): InputState {
   switch (action.type) {
     case 'SET_FACTION':
-      return { faction: action.faction, difficulty: null, planet: null, missionType: null, modifiers: [] }
+      return { faction: action.faction, difficulty: null, planet: null, missionType: null, modifiers: [], operationModifiers: [] }
     case 'SET_DIFFICULTY':
-      return { ...state, difficulty: action.difficulty, planet: null, missionType: null, modifiers: [] }
+      return { ...state, difficulty: action.difficulty, planet: null, missionType: null, modifiers: [], operationModifiers: [] }
     case 'SET_PLANET':
-      return { ...state, planet: action.planet, missionType: null, modifiers: [] }
+      return { ...state, planet: action.planet, missionType: null, modifiers: [], operationModifiers: [] }
     case 'SET_MISSION_TYPE':
       return { ...state, missionType: action.missionType }
     case 'SET_MODIFIERS':
       return { ...state, modifiers: action.modifiers }
+    case 'SET_OPERATION_MODIFIERS':
+      return { ...state, operationModifiers: action.modifiers }
     case 'RESET':
-      return { faction: null, difficulty: null, planet: null, missionType: null, modifiers: [] }
+      return { faction: null, difficulty: null, planet: null, missionType: null, modifiers: [], operationModifiers: [] }
   }
 }
 
-const INITIAL: InputState = { faction: null, difficulty: null, planet: null, missionType: null, modifiers: [] }
+const INITIAL: InputState = { faction: null, difficulty: null, planet: null, missionType: null, modifiers: [], operationModifiers: [] }
 
 // ---- Planet loading ----
 
@@ -69,9 +73,10 @@ export default function InputScreen({ initialState = INITIAL, onReset }: Props) 
   const [state, dispatch] = useReducer(reducer, initialState)
   const [planetState, setPlanetState] = useState<PlanetState>({ status: 'idle', planets: [], retries: 0 })
   const [useFallback, setUseFallback] = useState(false)
+  const [showOpModifiers, setShowOpModifiers] = useState(false)
   const [campaignMode, setCampaignMode] = useState<CampaignMode | null>(null)
 
-  const { faction, difficulty, planet, missionType, modifiers } = state
+  const { faction, difficulty, planet, missionType, modifiers, operationModifiers } = state
 
   const totalSteps = 4
   const completedSteps =
@@ -120,7 +125,7 @@ export default function InputScreen({ initialState = INITIAL, onReset }: Props) 
   // Auto-generate when all inputs complete (both live and fallback paths)
   useEffect(() => {
     if (!faction || !difficulty || !planet || !missionType) return
-    const params: MissionParams = { faction, difficulty, planet, missionType, modifiers }
+    const params: MissionParams = { faction, difficulty, planet, missionType, modifiers: [...modifiers, ...operationModifiers] }
     navigate('/recommend/results', { state: { params, inputState: state } })
   }, [missionType]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -175,6 +180,7 @@ export default function InputScreen({ initialState = INITIAL, onReset }: Props) 
     dispatch({ type: 'RESET' })
     setPlanetState({ status: 'idle', planets: [], retries: 0 })
     setUseFallback(false)
+    setShowOpModifiers(false)
     setCampaignMode(null)
     onReset?.()
   }
@@ -241,16 +247,47 @@ export default function InputScreen({ initialState = INITIAL, onReset }: Props) 
         )}
       </InputGroup>
 
-      {/* Step 4 — Active Modifiers (fallback only, optional) */}
+      {/* Step 4 — Operation Modifiers (fallback only, optional) */}
       {useFallback && (
-        <InputGroup label="Active Modifiers" visible={planet !== null}>
-          <p className={styles.fallbackNote}>Optional — select any active environmental modifiers.</p>
+        <InputGroup label="Operation Modifiers" visible={planet !== null}>
+          <p className={styles.fallbackNote}>Optional — select any active operation modifiers.</p>
           <ChipSelector
             multi
-            options={catalogService.getModifiers().map(m => ({ id: m.id, label: m.name })).sort((a, b) => a.label.localeCompare(b.label))}
-            value={modifiers}
-            onChange={ids => dispatch({ type: 'SET_MODIFIERS', modifiers: ids })}
+            options={catalogService.getOperationModifiers(faction ?? undefined).map(m => ({ id: m.id, label: m.name })).sort((a, b) => a.label.localeCompare(b.label))}
+            value={operationModifiers}
+            onChange={ids => dispatch({ type: 'SET_OPERATION_MODIFIERS', modifiers: ids })}
           />
+        </InputGroup>
+      )}
+
+      {/* Mission Conditions — detected env modifiers + optional operation modifiers (live path only) */}
+      {!useFallback && (
+        <InputGroup label="Mission Conditions" visible={planet !== null && planet !== '__manual'}>
+          {modifiers.length > 0 && (
+            <div className={styles.detectedBlock}>
+              <p className={styles.detectedLabel}>Detected on {planet}</p>
+              <div className={styles.detectedChips}>
+                {modifiers.map(id => {
+                  const mod = catalogService.getModifiers().find(m => m.id === id)
+                  return mod ? <span key={id} className={styles.detectedChip}>{mod.name}</span> : null
+                })}
+              </div>
+            </div>
+          )}
+          <button
+            className={styles.opModToggle}
+            onClick={() => setShowOpModifiers(s => !s)}
+          >
+            {showOpModifiers ? '− Hide operation modifiers' : '+ Add operation modifiers'}
+          </button>
+          {showOpModifiers && (
+            <ChipSelector
+              multi
+              options={catalogService.getOperationModifiers(faction ?? undefined).map(m => ({ id: m.id, label: m.name })).sort((a, b) => a.label.localeCompare(b.label))}
+              value={operationModifiers}
+              onChange={ids => dispatch({ type: 'SET_OPERATION_MODIFIERS', modifiers: ids })}
+            />
+          )}
         </InputGroup>
       )}
 

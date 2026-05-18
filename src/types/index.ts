@@ -64,12 +64,16 @@ export interface Faction {
   enemyProfile: Record<string, string>
 }
 
+export type ModifierCategory = 'environmental' | 'operation'
+
 export interface Modifier {
   id: string
   name: string
   effectTags: string[]
   severity: ModifierSeverity
   constraintType: ConstraintType
+  category: ModifierCategory
+  factions: FactionId[]
 }
 
 export interface Planet {

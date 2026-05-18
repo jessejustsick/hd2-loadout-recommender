@@ -63,6 +63,23 @@ const PASSIVE_FACTION_WEIGHTS: Record<string, Partial<Record<FactionId, number>>
   'Reduced Signature':                { terminids: 1.2 },
 }
 
+// Operation modifier → item tag weights
+// Note: slower-eagle-rearm and orbital-fluctuations need eagle/orbital item tags to be effective — pending
+const MODIFIER_TAG_WEIGHTS: Record<string, Record<string, number>> = {
+  'gunship-patrols':       { 'anti-armor': 1.5, 'anti-tank': 1.5, precision: 1.3 },
+  'roving-shriekers':      { 'anti-swarm': 1.5, 'crowd-control': 1.5, 'area-denial': 1.3 },
+  'leviathan-blockade':    { 'anti-shield': 1.5, energy: 1.5, 'anti-armor': 1.3 },
+  'civilians-in-area':     { 'area-denial': 0.7, explosive: 0.8 },
+  'medical-supply-strain': { support: 1.4, survivability: 1.2 },
+  'poor-intel':            { scout: 1.4 },
+  'extreme-heat':          { laser: 0.7 },
+  'extreme-cold':          { laser: 1.3 },
+  'predator-strain':       { 'anti-swarm': 1.6, 'crowd-control': 1.5, mobility: 1.3 },
+  'incineration-corps':    { fire: 0.7, survivability: 1.3, 'anti-armor': 1.3 },
+  'jet-brigade':           { 'anti-armor': 1.5, 'anti-tank': 1.3, precision: 1.4 },
+  'appropriators':         { 'anti-shield': 1.6, energy: 1.5, 'anti-armor': 1.3 },
+}
+
 // Which loadout damage tags call for which protective passives
 const SYNERGY_PASSIVE_MAP: Record<string, string[]> = {
   fire: ['Inflammable'],
@@ -85,6 +102,11 @@ function scoreItem(tags: string[], params: MissionParams, modifiers: Modifier[])
       if (tags.includes(`boost_${et}`)) score *= 1.3
       if (tags.includes(`penalty_${et}`)) score *= 0.6
     }
+  }
+
+  for (const mod of modifiers) {
+    const mw = MODIFIER_TAG_WEIGHTS[mod.id] ?? {}
+    for (const tag of tags) score *= mw[tag] ?? 1.0
   }
 
   return score

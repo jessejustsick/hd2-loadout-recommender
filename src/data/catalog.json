@@ -223,11 +223,12 @@
       "category": "primary",
       "tags": [
         "energy",
+        "laser",
         "precision"
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "las-13-trident",
@@ -235,11 +236,12 @@
       "category": "primary",
       "tags": [
         "energy",
+        "laser",
         "crowd-control"
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "las-16-sickle",
@@ -247,11 +249,12 @@
       "category": "primary",
       "tags": [
         "energy",
+        "laser",
         "precision"
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "las-17-double-edge-sickle",
@@ -259,12 +262,13 @@
       "category": "primary",
       "tags": [
         "energy",
+        "laser",
         "anti-armor",
         "fire"
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "m7s-smg",
@@ -744,12 +748,13 @@
       "category": "secondary",
       "tags": [
         "energy",
+        "laser",
         "anti-armor",
         "precision"
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "las-7-dagger",
@@ -757,11 +762,12 @@
       "category": "secondary",
       "tags": [
         "energy",
+        "laser",
         "precision"
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "m6c-socom",
@@ -4751,237 +4757,263 @@
     {
       "id": "aa-defenses",
       "name": "AA Defenses",
-      "effectTags": [
-        "no_eagles"
-      ],
+      "effectTags": ["no_eagles"],
       "severity": "high",
-      "constraintType": "hard"
+      "constraintType": "hard",
+      "category": "operation",
+      "factions": ["automatons"]
     },
     {
       "id": "ion-storm",
       "name": "Ion Storm",
-      "effectTags": [
-        "no_eagles"
-      ],
+      "effectTags": ["no_eagles"],
       "severity": "high",
-      "constraintType": "hard"
+      "constraintType": "hard",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "pilot-shortage",
       "name": "Pilot Shortage",
-      "effectTags": [
-        "no_eagles"
-      ],
+      "effectTags": ["no_eagles"],
       "severity": "high",
-      "constraintType": "hard"
+      "constraintType": "hard",
+      "category": "operation",
+      "factions": []
     },
     {
       "id": "thick-fog",
       "name": "Thick Fog",
-      "effectTags": [
-        "penalty_long-range",
-        "penalty_precision"
-      ],
+      "effectTags": ["penalty_long-range", "penalty_precision"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "sandstorms",
       "name": "Sandstorms",
-      "effectTags": [
-        "penalty_long-range",
-        "penalty_precision"
-      ],
+      "effectTags": ["penalty_long-range", "penalty_precision"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "acid-storms",
       "name": "Acid Storms",
-      "effectTags": [
-        "penalty_long-range",
-        "penalty_precision"
-      ],
+      "effectTags": ["penalty_long-range", "penalty_precision"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "heavy-gloom-shroud",
       "name": "Heavy Gloom Shroud",
-      "effectTags": [
-        "penalty_long-range",
-        "penalty_precision"
-      ],
+      "effectTags": ["penalty_long-range", "penalty_precision"],
       "severity": "high",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "light-gloom-cover",
       "name": "Light Gloom Cover",
-      "effectTags": [
-        "penalty_precision"
-      ],
+      "effectTags": ["penalty_precision"],
       "severity": "low",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "rainstorm",
       "name": "Rainstorm",
-      "effectTags": [
-        "penalty_energy",
-        "penalty_precision"
-      ],
+      "effectTags": ["penalty_energy", "penalty_precision"],
       "severity": "low",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "tremors",
       "name": "Tremors",
-      "effectTags": [
-        "penalty_stationary"
-      ],
+      "effectTags": ["penalty_stationary"],
       "severity": "low",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "meteor-showers",
       "name": "Meteor Storms",
-      "effectTags": [
-        "penalty_stationary"
-      ],
+      "effectTags": ["penalty_stationary"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "volcanic-activity",
       "name": "Volcanic Activity",
-      "effectTags": [
-        "penalty_stationary"
-      ],
+      "effectTags": ["penalty_stationary"],
       "severity": "high",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "fire-tornadoes",
       "name": "Fire Tornadoes",
-      "effectTags": [
-        "penalty_area-denial"
-      ],
+      "effectTags": ["penalty_area-denial"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "civilians-in-area",
       "name": "Civilians and SEAF in Area",
-      "effectTags": [
-        "penalty_area-denial",
-        "penalty_explosive"
-      ],
+      "effectTags": ["penalty_area-denial", "penalty_explosive"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": []
     },
     {
       "id": "extreme-cold",
       "name": "Extreme Cold",
-      "effectTags": [
-        "boost_fortified"
-      ],
+      "effectTags": ["boost_fortified"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "blizzard",
       "name": "Blizzard",
-      "effectTags": [
-        "boost_fortified",
-        "penalty_mobility"
-      ],
+      "effectTags": ["boost_fortified", "penalty_mobility"],
       "severity": "high",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "extreme-heat",
       "name": "Intense Heat",
-      "effectTags": [
-        "boost_scout",
-        "boost_mobility"
-      ],
+      "effectTags": ["boost_scout", "boost_mobility"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "slower-eagle-rearm",
       "name": "Slower Eagle Rearm",
-      "effectTags": [
-        "penalty_eagle"
-      ],
+      "effectTags": ["penalty_eagle"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": []
     },
     {
       "id": "orbital-fluctuations",
       "name": "Orbital Fluctuations",
-      "effectTags": [
-        "penalty_orbital"
-      ],
+      "effectTags": ["penalty_orbital"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": []
     },
     {
       "id": "medical-supply-strain",
       "name": "Medical Supply Strain",
-      "effectTags": [
-        "penalty_support"
-      ],
+      "effectTags": ["penalty_support"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": []
     },
     {
       "id": "atmospheric-spores",
       "name": "Atmospheric Spores",
-      "effectTags": [
-        "penalty_precision"
-      ],
+      "effectTags": ["penalty_precision"],
       "severity": "low",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "environmental",
+      "factions": []
     },
     {
       "id": "poor-intel",
       "name": "Poor Intel",
-      "effectTags": [
-        "penalty_precision"
-      ],
+      "effectTags": ["penalty_precision"],
       "severity": "low",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": []
     },
     {
       "id": "roving-shriekers",
       "name": "Roving Shriekers",
-      "effectTags": [
-        "boost_anti-swarm"
-      ],
+      "effectTags": ["boost_anti-swarm"],
       "severity": "medium",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["terminids"]
     },
     {
       "id": "gunship-patrols",
       "name": "Gunship Patrols",
-      "effectTags": [
-        "boost_anti-armor",
-        "boost_precision"
-      ],
+      "effectTags": ["boost_anti-armor", "boost_precision"],
       "severity": "high",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["automatons"]
     },
     {
       "id": "leviathan-blockade",
       "name": "Leviathan Blockade",
-      "effectTags": [
-        "boost_anti-armor",
-        "boost_anti-shield"
-      ],
+      "effectTags": ["boost_anti-armor", "boost_anti-shield"],
       "severity": "high",
-      "constraintType": "soft"
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["illuminate"]
+    },
+    {
+      "id": "predator-strain",
+      "name": "Predator Strain",
+      "effectTags": [],
+      "severity": "high",
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["terminids"]
+    },
+    {
+      "id": "incineration-corps",
+      "name": "Incineration Corps",
+      "effectTags": [],
+      "severity": "high",
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["automatons"]
+    },
+    {
+      "id": "jet-brigade",
+      "name": "Jet Brigade",
+      "effectTags": [],
+      "severity": "high",
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["automatons"]
+    },
+    {
+      "id": "appropriators",
+      "name": "Appropriators",
+      "effectTags": [],
+      "severity": "high",
+      "constraintType": "soft",
+      "category": "operation",
+      "factions": ["illuminate"]
     }
   ]
 }

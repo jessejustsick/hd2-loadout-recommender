@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate, Navigate } from 'react-router-dom'
-import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, RefreshCw } from 'lucide-react'
+import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, ArrowLeftRight } from 'lucide-react'
 import { generateRecommendation, getAlternatives } from '@/engine'
 import { loadoutService } from '@/services/loadouts'
 import type {
@@ -33,7 +33,7 @@ interface LocationState {
 const SLOT_LABELS: Record<SlotKey, string> = {
   primary: 'Primary',
   secondary: 'Secondary',
-  grenade: 'Grenade',
+  grenade: 'Throwable',
   'stratagem-0': 'Stratagem 1',
   'stratagem-1': 'Stratagem 2',
   'stratagem-2': 'Stratagem 3',
@@ -204,7 +204,7 @@ function LoadoutRow({ slotKey, item, isNew, isOpen, params, onToggle, onSwap }: 
 
         <div className={styles.rowActions}>
           <button className={styles.swapBtn} onClick={onSwap} aria-label={`Swap ${label}`}>
-            <RefreshCw size={15} />
+            <ArrowLeftRight size={15} />
           </button>
           <button
             className={`${styles.infoBtn} ${isOpen ? styles.infoBtnOpen : ''}`}
@@ -428,8 +428,8 @@ export default function ResultsScreen() {
       </div>
 
       <img src="/hd2-logo.svg" alt="Helldivers 2" className={styles.gameLogo} />
-      <p className={styles.summary}>{missionSummary}</p>
       <h1 className={styles.title}>Recommended Loadout</h1>
+      <p className={styles.summary}>{missionSummary}</p>
 
       <div className={styles.section}>
         <p className={styles.sectionLabel}>Armor</p>

@@ -141,6 +141,59 @@
   color: var(--color-text-secondary);
 }
 
+/* Mission Conditions — detected env modifier chips */
+.detectedBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.detectedLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+}
+
+.detectedChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.detectedChip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
+  border: 1.5px solid var(--color-border);
+}
+
+/* Operation modifier toggle button */
+.opModToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--color-border);
+  font-size: 14px;
+  font-family: var(--font-family);
+  color: var(--color-text-secondary);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.opModToggle:hover {
+  border-color: var(--color-text-secondary);
+  color: var(--color-text-primary);
+}
+
 /* Reset action */
 .resetBtn {
   margin-top: var(--space-xl);
