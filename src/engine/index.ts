@@ -226,13 +226,19 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
     const hasBackpack = selected.some(s => s.subType === 'backpack')
     const hasPackedWeapon = selected.some(s => s.tags.includes('needs-backpack'))
 
+    const fullLoadoutSoFar = [...selected, primaryWeapon, secondaryWeapon, grenade].filter(Boolean)
+
     // On the last pick for Terminids, enforce at least one explosive item
     const needsExplosive =
       params.faction === 'terminids' &&
       i === 3 &&
-      ![...selected, primaryWeapon, secondaryWeapon, grenade]
-        .filter(Boolean)
-        .some(item => item!.tags.includes('explosive'))
+      !fullLoadoutSoFar.some(item => item!.tags.includes('explosive'))
+
+    // At difficulty 6+, enforce at least one anti-tank item across all slots
+    const needsAntiTank =
+      params.difficulty >= 6 &&
+      i === 3 &&
+      !fullLoadoutSoFar.some(item => item!.tags.includes('anti-tank'))
 
     const scored = boostForCoverage(scoreAll(eligible, params, modifiers), selected)
 
@@ -242,6 +248,7 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
       if (hasPackedWeapon && s.item.subType === 'backpack') return false
       if (hasBackpack && s.item.tags.includes('needs-backpack')) return false
       if (needsExplosive && !s.item.tags.includes('explosive')) return false
+      if (needsAntiTank && !s.item.tags.includes('anti-tank')) return false
       return true
     })
     const pick = weightedRandom(available, TOP_N)
