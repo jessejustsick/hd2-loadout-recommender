@@ -92,15 +92,20 @@ const SYNERGY_PASSIVE_MAP: Record<string, string[]> = {
   arc:  ['Electrical Conduit'],
 }
 
+const DIFFICULTY_WEIGHTS: [maxDiff: number, weights: Record<string, number>][] = [
+  [4,  {}],
+  [6,  { 'anti-armor': 1.1, 'anti-tank': 1.1, support: 1.1 }],
+  [8,  { 'anti-armor': 1.3, 'anti-tank': 1.3, support: 1.2, resupply: 1.2, 'crowd-control': 1.1 }],
+  [10, { 'anti-armor': 1.5, 'anti-tank': 1.5, support: 1.3, resupply: 1.3, 'crowd-control': 1.2, precision: 1.2 }],
+]
+
 function scoreItem(tags: string[], params: MissionParams, modifiers: Modifier[]): number {
   let score = 1.0
   const fw = FACTION_WEIGHTS[params.faction] ?? {}
   for (const tag of tags) score *= fw[tag] ?? 1.0
 
-  if (params.difficulty >= 7) {
-    if (tags.includes('anti-armor') || tags.includes('anti-tank')) score *= 1.3
-    if (tags.includes('resupply') || tags.includes('support')) score *= 1.2
-  }
+  const dw = DIFFICULTY_WEIGHTS.find(([max]) => params.difficulty <= max)?.[1] ?? {}
+  for (const tag of tags) score *= dw[tag] ?? 1.0
 
   for (const mod of modifiers.filter(m => m.constraintType === 'soft')) {
     for (const et of mod.effectTags) {
