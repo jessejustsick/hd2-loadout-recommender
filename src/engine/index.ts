@@ -64,7 +64,6 @@ const PASSIVE_FACTION_WEIGHTS: Record<string, Partial<Record<FactionId, number>>
 }
 
 // Operation modifier → item tag weights
-// Note: slower-eagle-rearm and orbital-fluctuations need eagle/orbital item tags to be effective — pending
 const MODIFIER_TAG_WEIGHTS: Record<string, Record<string, number>> = {
   'gunship-patrols':       { 'anti-armor': 1.5, 'anti-tank': 1.5, precision: 1.3 },
   'roving-shriekers':      { 'anti-swarm': 1.5, 'crowd-control': 1.5, 'area-denial': 1.3 },
@@ -74,6 +73,8 @@ const MODIFIER_TAG_WEIGHTS: Record<string, Record<string, number>> = {
   'poor-intel':            { scout: 1.4 },
   'extreme-heat':          { laser: 0.7 },
   'extreme-cold':          { laser: 1.3 },
+  'slower-eagle-rearm':    { eagle: 0.7, orbital: 1.2 },
+  'orbital-fluctuations':  { orbital: 0.7, eagle: 1.2 },
   'predator-strain':       { 'anti-swarm': 1.6, 'crowd-control': 1.5, mobility: 1.3 },
   'incineration-corps':    { fire: 0.7, survivability: 1.3, 'anti-armor': 1.3 },
   'jet-brigade':           { 'anti-armor': 1.5, 'anti-tank': 1.3, precision: 1.4 },
