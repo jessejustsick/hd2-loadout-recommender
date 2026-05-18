@@ -2640,12 +2640,11 @@
       "passive": "Servo-Assisted",
       "armorTier": "light",
       "tags": [
-        "versatile",
-        "mobility"
+        "versatile"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "sc-34-infiltrator",
@@ -2692,12 +2691,11 @@
       "passive": "Fortified",
       "armorTier": "light",
       "tags": [
-        "defensive",
-        "fortified"
+        "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "b-08-light-gunner",
@@ -2744,12 +2742,11 @@
       "passive": "Electrical Conduit",
       "armorTier": "light",
       "tags": [
-        "energy",
-        "anti-shield"
+        "energy"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "ce-07-demolition-specialist",
@@ -2821,12 +2818,11 @@
       "passive": "Advanced Filtration",
       "armorTier": "light",
       "tags": [
-        "utility",
         "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "uf-16-inspector",
@@ -2847,12 +2843,11 @@
       "passive": "Siege-Ready",
       "armorTier": "light",
       "tags": [
-        "resupply",
-        "support"
+        "resupply"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "ac-2-obedient",
@@ -2873,12 +2868,11 @@
       "passive": "Integrated Explosives",
       "armorTier": "light",
       "tags": [
-        "explosive",
         "engineering"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "gs-11-democracys-deputy",
@@ -2952,12 +2946,13 @@
       "passive": "Rock Solid",
       "armorTier": "light",
       "tags": [
+        "melee",
         "survivability",
         "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "rs-100-sanctioner",
@@ -2992,12 +2987,11 @@
       "armorTier": "light",
       "tags": [
         "survivability",
-        "defensive",
-        "utility"
+        "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "o-3-free-spirit",
@@ -3174,12 +3168,11 @@
       "passive": "Servo-Assisted",
       "armorTier": "medium",
       "tags": [
-        "versatile",
-        "mobility"
+        "versatile"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "sa-12-servo-assisted",
@@ -3187,12 +3180,11 @@
       "passive": "Servo-Assisted",
       "armorTier": "medium",
       "tags": [
-        "versatile",
-        "mobility"
+        "versatile"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "b-24-enforcer",
@@ -3200,12 +3192,11 @@
       "passive": "Fortified",
       "armorTier": "medium",
       "tags": [
-        "defensive",
-        "fortified"
+        "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "ce-81-juggernaut",
@@ -3226,12 +3217,11 @@
       "passive": "Fortified",
       "armorTier": "medium",
       "tags": [
-        "defensive",
-        "fortified"
+        "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "ex-03-prototype-3",
@@ -3239,12 +3229,11 @@
       "passive": "Electrical Conduit",
       "armorTier": "medium",
       "tags": [
-        "energy",
-        "anti-shield"
+        "energy"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "ex-16-prototype-16",
@@ -3252,12 +3241,11 @@
       "passive": "Electrical Conduit",
       "armorTier": "medium",
       "tags": [
-        "energy",
-        "anti-shield"
+        "energy"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "ce-27-ground-breaker",
@@ -3354,12 +3342,11 @@
       "passive": "Advanced Filtration",
       "armorTier": "medium",
       "tags": [
-        "utility",
         "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "af-02-haz-master",
@@ -3367,12 +3354,11 @@
       "passive": "Advanced Filtration",
       "armorTier": "medium",
       "tags": [
-        "utility",
         "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "dp-00-tactical",
@@ -3432,12 +3418,11 @@
       "passive": "Integrated Explosives",
       "armorTier": "medium",
       "tags": [
-        "explosive",
         "engineering"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "ie-12-righteous",
@@ -3445,12 +3430,11 @@
       "passive": "Integrated Explosives",
       "armorTier": "medium",
       "tags": [
-        "explosive",
         "engineering"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "b-22-model-citizen",
@@ -3510,12 +3494,11 @@
       "passive": "Adreno-Defibrillator",
       "armorTier": "medium",
       "tags": [
-        "survivability",
-        "support"
+        "survivability"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "a-9-helljumper",
@@ -3563,12 +3546,13 @@
       "passive": "Rock Solid",
       "armorTier": "medium",
       "tags": [
+        "melee",
         "survivability",
         "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "rs-67-null-cipher",
@@ -3602,12 +3586,11 @@
       "passive": "Siege-Ready",
       "armorTier": "medium",
       "tags": [
-        "resupply",
-        "support"
+        "resupply"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "cpg-48-sapper",
@@ -3616,12 +3599,11 @@
       "armorTier": "medium",
       "tags": [
         "survivability",
-        "defensive",
-        "explosive"
+        "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "o-44-bonded-pilot",
@@ -3642,12 +3624,11 @@
       "passive": "Fortified",
       "armorTier": "heavy",
       "tags": [
-        "defensive",
-        "fortified"
+        "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "tr-62-knight",
@@ -3655,12 +3636,11 @@
       "passive": "Servo-Assisted",
       "armorTier": "heavy",
       "tags": [
-        "versatile",
-        "mobility"
+        "versatile"
       ],
       "iconRef": "",
       "source": "base",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "fs-05-marksman",
@@ -3668,12 +3648,11 @@
       "passive": "Fortified",
       "armorTier": "heavy",
       "tags": [
-        "defensive",
-        "fortified"
+        "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "fs-23-battle-master",
@@ -3681,12 +3660,11 @@
       "passive": "Fortified",
       "armorTier": "heavy",
       "tags": [
-        "defensive",
-        "fortified"
+        "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "sa-32-dynamo",
@@ -3694,12 +3672,11 @@
       "passive": "Servo-Assisted",
       "armorTier": "heavy",
       "tags": [
-        "versatile",
-        "mobility"
+        "versatile"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "b-27-fortified-commando",
@@ -3720,12 +3697,11 @@
       "passive": "Servo-Assisted",
       "armorTier": "heavy",
       "tags": [
-        "versatile",
-        "mobility"
+        "versatile"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "fs-11-executioner",
@@ -3733,12 +3709,11 @@
       "passive": "Fortified",
       "armorTier": "heavy",
       "tags": [
-        "defensive",
-        "fortified"
+        "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "cm-17-butcher",
@@ -3759,12 +3734,11 @@
       "passive": "Fortified",
       "armorTier": "heavy",
       "tags": [
-        "defensive",
-        "fortified"
+        "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "ce-64-grenadier",
@@ -3785,12 +3759,11 @@
       "passive": "Servo-Assisted",
       "armorTier": "heavy",
       "tags": [
-        "versatile",
-        "mobility"
+        "versatile"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "ce-101-guerilla-gorilla",
@@ -3836,12 +3809,11 @@
       "passive": "Advanced Filtration",
       "armorTier": "heavy",
       "tags": [
-        "utility",
         "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "sr-64-cinderblock",
@@ -3849,12 +3821,11 @@
       "passive": "Siege-Ready",
       "armorTier": "heavy",
       "tags": [
-        "resupply",
-        "support"
+        "resupply"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "sr-18-roadblock",
@@ -3862,12 +3833,11 @@
       "passive": "Siege-Ready",
       "armorTier": "heavy",
       "tags": [
-        "resupply",
-        "support"
+        "resupply"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "gs-66-lawmaker",
@@ -3875,12 +3845,11 @@
       "passive": "Gunslinger",
       "armorTier": "heavy",
       "tags": [
-        "versatile",
-        "mobility"
+        "versatile"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "re-824-bearer-of-the-standard",
@@ -3914,12 +3883,11 @@
       "passive": "Adreno-Defibrillator",
       "armorTier": "heavy",
       "tags": [
-        "survivability",
-        "support"
+        "survivability"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "ds-42-federations-blade",
@@ -3927,13 +3895,12 @@
       "passive": "Desert Stormer",
       "armorTier": "heavy",
       "tags": [
-        "mobility",
         "versatile",
         "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "rs-40-beast-of-prey",
@@ -3941,12 +3908,13 @@
       "passive": "Rock Solid",
       "armorTier": "heavy",
       "tags": [
+        "melee",
         "survivability",
         "defensive"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "sa-8-ram",
@@ -3954,12 +3922,11 @@
       "passive": "Supplementary Adrenaline",
       "armorTier": "heavy",
       "tags": [
-        "mobility",
         "survivability"
       ],
       "iconRef": "",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-18"
     },
     {
       "id": "cpr-80-bulwark",
