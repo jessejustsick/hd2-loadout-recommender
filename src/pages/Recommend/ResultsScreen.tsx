@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate, Navigate } from 'react-router-dom'
 import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, ArrowLeftRight } from 'lucide-react'
-import { generateRecommendation, getAlternatives } from '@/engine'
+import { generateRecommendation, getAlternatives, getArmorAlternativesByTier } from '@/engine'
 import { loadoutService } from '@/services/loadouts'
 import type {
   MissionParams, LoadoutResult, Weapon, Stratagem, Armor, Booster, FactionId, Loadout,
@@ -257,7 +257,14 @@ function SwapSheet({ sheet, onPick, onClose }: SwapSheetProps) {
                 }
               </div>
               <div className={styles.sheetAltMain}>
-                <span className={styles.sheetAltName}>{alt.name}</span>
+                <span className={styles.sheetAltName}>
+                  {alt.name}
+                  {'armorTier' in alt && (
+                    <span className={`${styles.tierBadge} ${styles[`tier_${alt.armorTier}`]}`}>
+                      {alt.armorTier}
+                    </span>
+                  )}
+                </span>
                 <div className={styles.rowTags}>
                   {alt.tags.slice(0, 3).map(t => (
                     <span key={t} className={styles.tag}>{TAG_LABELS[t] ?? t}</span>
@@ -332,8 +339,14 @@ export default function ResultsScreen() {
       excludeIds.push(currentItem.id)
     }
 
+    if (slotKey === 'armor') {
+      const alternatives = getArmorAlternativesByTier(excludeIds, params)
+      setSwapSheet({ slotKey, label: SLOT_LABELS[slotKey], alternatives })
+      return
+    }
+
     const slot = slotKey.startsWith('stratagem') ? 'stratagem'
-      : slotKey as 'primary' | 'secondary' | 'grenade' | 'armor' | 'booster'
+      : slotKey as 'primary' | 'secondary' | 'grenade' | 'booster'
 
     const alternatives = getAlternatives(slot, excludeIds, params, 3)
     setSwapSheet({ slotKey, label: SLOT_LABELS[slotKey], alternatives })

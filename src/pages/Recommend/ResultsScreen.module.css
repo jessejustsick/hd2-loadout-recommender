@@ -436,3 +436,31 @@
   color: var(--color-text-primary);
   margin-bottom: 3px;
 }
+
+.tierBadge {
+  display: inline-block;
+  margin-left: var(--space-xs);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  padding: 2px 5px;
+  border-radius: 3px;
+  line-height: 1.3;
+}
+
+.tier_light {
+  color: var(--color-success);
+  background: rgba(63, 185, 80, 0.15);
+}
+
+.tier_medium {
+  color: var(--color-warning);
+  background: rgba(210, 153, 34, 0.15);
+}
+
+.tier_heavy {
+  color: var(--color-error);
+  background: rgba(248, 81, 73, 0.15);
+}
