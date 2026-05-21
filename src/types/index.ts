@@ -6,10 +6,19 @@ export type WeaponCategory = 'primary' | 'secondary' | 'grenade'
 
 export type StratagemCategory = 'offensive' | 'defensive' | 'support'
 export type StratagemSubType = 'eagle' | 'orbital' | 'support_weapon' | 'backpack' | 'other'
+// Fine-grained type used to offer same-family alternatives in the swap sheet
+// (the 'other' subType is too coarse — sentries, mines, exosuits all share it).
+export type StratagemFamily =
+  | 'eagle' | 'orbital' | 'support-weapon' | 'backpack'
+  | 'sentry' | 'mine' | 'exosuit' | 'emplacement' | 'vehicle' | 'utility'
 export type CooldownTier = 'short' | 'medium' | 'long'
 export type CallInType = 'single_use' | 'multi_use' | 'persistent'
 
 export type ArmorTier = 'light' | 'medium' | 'heavy'
+
+// Permanently unobtainable items (pre-order / event exclusives). Optional — its
+// absence means the item is normally obtainable. See UNOBTAINABLE_PENALTY in the engine.
+export type Availability = 'unobtainable'
 
 export type ConstraintType = 'hard' | 'soft'
 export type ModifierSeverity = 'low' | 'medium' | 'high'
@@ -20,6 +29,7 @@ export interface Weapon {
   category: WeaponCategory
   tags: string[]
   source: string
+  availability?: Availability
   iconRef: string
   lastUpdated: string
 }
@@ -29,11 +39,13 @@ export interface Stratagem {
   name: string
   category: StratagemCategory
   subType: StratagemSubType
+  family: StratagemFamily
   tags: string[]
   cooldownTier: CooldownTier
   callInType: CallInType
   iconRef: string
   source: string
+  availability?: Availability
   lastUpdated: string
 }
 
@@ -45,6 +57,7 @@ export interface Armor {
   tags: string[]
   iconRef: string
   source: string
+  availability?: Availability
   lastUpdated: string
 }
 
@@ -54,6 +67,7 @@ export interface Booster {
   effect: string
   tags: string[]
   source: string
+  availability?: Availability
   lastUpdated: string
 }
 

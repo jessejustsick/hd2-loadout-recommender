@@ -27,7 +27,7 @@
       "enemyProfile": {
         "primaryThreat": "mixed",
         "armorPenetration": "mixed",
-        "notes": "Shielded infantry and heavy units. Shield-bypass and energy weapons effective. Elevated and tripod units require precision or explosive solutions."
+        "notes": "Mixed faction. Voteless are unarmored melee hordes — anti-swarm, fire (instant-kill), gas, area-denial. Overseers are shielded medium elites — explosive damage bypasses the shield, headshots one-shot. Harvesters are heavy (AV4) with regenerating shields — anti-tank for the eye/hip joints. Warp Ships (spawners) and Lightning Spires are destroyed by explosives, especially grenades. Watchers call reinforcements — kill on sight (precision). Defensively the faction deals arc damage (Harvester, Watcher, instant-kill Lightning Spire), so arc-resist armor is valuable — but energy WEAPONS are not a counter."
       }
     }
   ],
@@ -146,7 +146,6 @@
       "category": "primary",
       "tags": [
         "energy",
-        "anti-shield",
         "stun",
         "crowd-control",
         "arc"
@@ -325,8 +324,7 @@
       "category": "primary",
       "tags": [
         "energy",
-        "explosive",
-        "anti-shield"
+        "explosive"
       ],
       "source": "warbond",
       "iconRef": "",
@@ -339,8 +337,7 @@
       "tags": [
         "energy",
         "explosive",
-        "anti-armor",
-        "anti-shield"
+        "anti-armor"
       ],
       "source": "warbond",
       "iconRef": "",
@@ -354,8 +351,7 @@
         "energy",
         "explosive",
         "anti-armor",
-        "precision",
-        "anti-shield"
+        "precision"
       ],
       "source": "warbond",
       "iconRef": "",
@@ -530,8 +526,7 @@
       "tags": [
         "explosive",
         "area-denial",
-        "energy",
-        "anti-shield"
+        "energy"
       ],
       "source": "warbond",
       "iconRef": "",
@@ -845,8 +840,7 @@
       "name": "P-35 Re-Educator",
       "category": "secondary",
       "tags": [
-        "crowd-control",
-        "gas"
+        "precision"
       ],
       "source": "warbond",
       "iconRef": "",
@@ -909,8 +903,7 @@
         "energy",
         "explosive",
         "anti-armor",
-        "crowd-control",
-        "anti-shield"
+        "crowd-control"
       ],
       "source": "warbond",
       "iconRef": "",
@@ -1175,6 +1168,7 @@
       "name": "Eagle Airstrike",
       "category": "offensive",
       "subType": "eagle",
+      "family": "eagle",
       "tags": [
         "anti-armor",
         "anti-tank",
@@ -1194,6 +1188,7 @@
       "name": "Eagle 500KG Bomb",
       "category": "offensive",
       "subType": "eagle",
+      "family": "eagle",
       "tags": [
         "anti-armor",
         "anti-tank",
@@ -1212,6 +1207,7 @@
       "name": "Eagle Cluster Bomb",
       "category": "offensive",
       "subType": "eagle",
+      "family": "eagle",
       "tags": [
         "anti-swarm",
         "anti-armor",
@@ -1230,6 +1226,7 @@
       "name": "Eagle Napalm Airstrike",
       "category": "offensive",
       "subType": "eagle",
+      "family": "eagle",
       "tags": [
         "area-denial",
         "crowd-control",
@@ -1249,6 +1246,7 @@
       "name": "Eagle Strafing Run",
       "category": "offensive",
       "subType": "eagle",
+      "family": "eagle",
       "tags": [
         "crowd-control",
         "anti-swarm",
@@ -1266,6 +1264,7 @@
       "name": "Eagle 110MM Rocket Pods",
       "category": "offensive",
       "subType": "eagle",
+      "family": "eagle",
       "tags": [
         "anti-armor",
         "anti-tank",
@@ -1284,6 +1283,7 @@
       "name": "Orbital 380MM HE Barrage",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "area-denial",
         "anti-armor",
@@ -1304,6 +1304,7 @@
       "name": "Orbital 120MM HE Barrage",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "area-denial",
         "anti-armor",
@@ -1324,6 +1325,7 @@
       "name": "Orbital Laser",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "anti-armor",
         "anti-tank",
@@ -1343,6 +1345,7 @@
       "name": "Orbital Railcannon Strike",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "anti-tank",
         "precision",
@@ -1359,6 +1362,7 @@
       "name": "Orbital Precision Strike",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "anti-armor",
         "anti-tank",
@@ -1377,6 +1381,7 @@
       "name": "Orbital Gatling Barrage",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "crowd-control",
         "anti-swarm",
@@ -1395,6 +1400,7 @@
       "name": "Orbital Walking Barrage",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "area-denial",
         "anti-armor",
@@ -1413,6 +1419,7 @@
       "name": "Orbital Napalm Barrage",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "area-denial",
         "crowd-control",
@@ -1431,6 +1438,7 @@
       "name": "Orbital Airburst Strike",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "crowd-control",
         "anti-swarm",
@@ -1449,6 +1457,7 @@
       "name": "Machine Gun",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-swarm",
         "anti-armor"
@@ -1464,6 +1473,7 @@
       "name": "Heavy Machine Gun",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-armor",
         "anti-swarm"
@@ -1479,6 +1489,7 @@
       "name": "Anti-Materiel Rifle",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-armor",
         "precision"
@@ -1494,6 +1505,7 @@
       "name": "Autocannon",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-armor",
         "needs-backpack"
@@ -1509,6 +1521,7 @@
       "name": "Railgun",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-tank",
         "precision",
@@ -1525,6 +1538,7 @@
       "name": "Quasar Cannon",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-tank",
         "precision",
@@ -1541,6 +1555,7 @@
       "name": "Spear",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-tank",
         "explosive",
@@ -1559,6 +1574,7 @@
       "name": "Expendable Anti-Tank",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-tank",
         "explosive",
@@ -1575,6 +1591,7 @@
       "name": "Recoilless Rifle",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-tank",
         "explosive",
@@ -1591,6 +1608,7 @@
       "name": "Stalwart",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-swarm",
         "mobility"
@@ -1606,6 +1624,7 @@
       "name": "Grenade Launcher",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "explosive",
         "anti-armor",
@@ -1623,6 +1642,7 @@
       "name": "Flamethrower",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "area-denial",
         "crowd-control",
@@ -1640,6 +1660,7 @@
       "name": "Arc Thrower",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "crowd-control",
         "anti-swarm",
@@ -1657,6 +1678,7 @@
       "name": "Laser Cannon",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-armor",
         "precision",
@@ -1673,6 +1695,7 @@
       "name": "Airburst Rocket Launcher",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "area-denial",
         "crowd-control",
@@ -1691,6 +1714,7 @@
       "name": "HMG Emplacement",
       "category": "defensive",
       "subType": "other",
+      "family": "emplacement",
       "tags": [
         "crowd-control",
         "anti-swarm",
@@ -1707,6 +1731,7 @@
       "name": "Machine Gun Sentry",
       "category": "defensive",
       "subType": "other",
+      "family": "sentry",
       "tags": [
         "crowd-control",
         "anti-swarm",
@@ -1723,6 +1748,7 @@
       "name": "Mortar Sentry",
       "category": "defensive",
       "subType": "other",
+      "family": "sentry",
       "tags": [
         "area-denial",
         "anti-swarm",
@@ -1740,6 +1766,7 @@
       "name": "Autocannon Sentry",
       "category": "defensive",
       "subType": "other",
+      "family": "sentry",
       "tags": [
         "anti-armor",
         "crowd-control",
@@ -1756,6 +1783,7 @@
       "name": "Rocket Sentry",
       "category": "defensive",
       "subType": "other",
+      "family": "sentry",
       "tags": [
         "anti-tank",
         "anti-armor",
@@ -1772,6 +1800,7 @@
       "name": "Gatling Sentry",
       "category": "defensive",
       "subType": "other",
+      "family": "sentry",
       "tags": [
         "crowd-control",
         "anti-swarm",
@@ -1788,6 +1817,7 @@
       "name": "Shield Generator Pack",
       "category": "defensive",
       "subType": "other",
+      "family": "backpack",
       "tags": [
         "defensive",
         "survivability"
@@ -1803,6 +1833,7 @@
       "name": "Shield Generator Relay",
       "category": "defensive",
       "subType": "other",
+      "family": "emplacement",
       "tags": [
         "defensive",
         "survivability",
@@ -1819,6 +1850,7 @@
       "name": "Guard Dog Rover",
       "category": "support",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "crowd-control",
         "precision",
@@ -1835,6 +1867,7 @@
       "name": "Guard Dog",
       "category": "support",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "crowd-control",
         "anti-swarm",
@@ -1851,6 +1884,7 @@
       "name": "Supply Pack",
       "category": "support",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "resupply",
         "support"
@@ -1866,6 +1900,7 @@
       "name": "Resupply",
       "category": "support",
       "subType": "other",
+      "family": "utility",
       "tags": [
         "resupply",
         "support"
@@ -1881,6 +1916,7 @@
       "name": "Jump Pack",
       "category": "support",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "mobility"
       ],
@@ -1895,6 +1931,7 @@
       "name": "Ballistic Shield Backpack",
       "category": "defensive",
       "subType": "other",
+      "family": "backpack",
       "tags": [
         "defensive",
         "survivability"
@@ -1910,12 +1947,14 @@
       "name": "Anti-Personnel Minefield",
       "category": "defensive",
       "subType": "other",
+      "family": "mine",
       "tags": [
         "area-denial",
         "anti-swarm",
         "crowd-control",
         "explosive",
-        "anti-armor"
+        "anti-armor",
+        "mine"
       ],
       "cooldownTier": "medium",
       "callInType": "persistent",
@@ -1928,6 +1967,7 @@
       "name": "Commando",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-tank",
         "anti-armor",
@@ -1946,6 +1986,7 @@
       "name": "Patriot Exosuit",
       "category": "support",
       "subType": "other",
+      "family": "exosuit",
       "tags": [
         "anti-armor",
         "anti-tank",
@@ -1963,6 +2004,7 @@
       "name": "Emancipator Exosuit",
       "category": "support",
       "subType": "other",
+      "family": "exosuit",
       "tags": [
         "anti-armor",
         "anti-tank",
@@ -1980,6 +2022,7 @@
       "name": "Tesla Tower",
       "category": "defensive",
       "subType": "other",
+      "family": "emplacement",
       "tags": [
         "crowd-control",
         "anti-swarm",
@@ -1998,6 +2041,7 @@
       "name": "EMS Mortar Sentry",
       "category": "defensive",
       "subType": "other",
+      "family": "sentry",
       "tags": [
         "crowd-control",
         "stun",
@@ -2014,6 +2058,7 @@
       "name": "Eagle Smoke Strike",
       "category": "support",
       "subType": "eagle",
+      "family": "eagle",
       "tags": [
         "smoke",
         "support",
@@ -2030,6 +2075,7 @@
       "name": "Orbital Gas Strike",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "crowd-control",
         "area-denial",
@@ -2047,6 +2093,7 @@
       "name": "Orbital Smoke Strike",
       "category": "support",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "smoke",
         "support",
@@ -2063,6 +2110,7 @@
       "name": "Orbital EMS Strike",
       "category": "offensive",
       "subType": "orbital",
+      "family": "orbital",
       "tags": [
         "crowd-control",
         "stun",
@@ -2080,6 +2128,7 @@
       "name": "StA-X3 W.A.S.P. Launcher",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-tank",
         "anti-armor",
@@ -2097,6 +2146,7 @@
       "name": "CQC-20 Breaching Hammer",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "melee",
         "anti-armor",
@@ -2114,6 +2164,7 @@
       "name": "PLAS-45 Epoch",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "energy",
         "explosive",
@@ -2132,6 +2183,7 @@
       "name": "MGX-42 Bullet Storm",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-swarm",
         "expendable"
@@ -2147,6 +2199,7 @@
       "name": "S-11 Speargun",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-tank",
         "precision",
@@ -2164,6 +2217,7 @@
       "name": "CQC-9 Defoliation Tool",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "melee",
         "anti-swarm",
@@ -2180,6 +2234,7 @@
       "name": "TX-41 Sterilizer",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "area-denial",
         "crowd-control",
@@ -2196,6 +2251,7 @@
       "name": "EAT-700 Expendable Napalm",
       "category": "offensive",
       "subType": "other",
+      "family": "support-weapon",
       "tags": [
         "area-denial",
         "anti-swarm",
@@ -2214,6 +2270,7 @@
       "name": "EAT-411 Leveller",
       "category": "offensive",
       "subType": "other",
+      "family": "support-weapon",
       "tags": [
         "anti-tank",
         "explosive",
@@ -2231,6 +2288,7 @@
       "name": "GL-52 De-Escalator",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "crowd-control",
         "stun",
@@ -2247,6 +2305,7 @@
       "name": "GL-28 Belt-Fed Grenade Launcher",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "explosive",
         "anti-armor",
@@ -2265,6 +2324,7 @@
       "name": "B/MD C4 Pack",
       "category": "support",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "explosive",
         "anti-armor",
@@ -2280,8 +2340,9 @@
     {
       "id": "ms-11-solo-silo",
       "name": "MS-11 Solo Silo",
-      "category": "offensive",
+      "category": "support",
       "subType": "other",
+      "family": "support-weapon",
       "tags": [
         "anti-tank",
         "explosive",
@@ -2300,6 +2361,7 @@
       "name": "B/FLAM-80 Cremator",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "area-denial",
         "crowd-control",
@@ -2318,6 +2380,7 @@
       "name": "M-1000 Maxigun",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "anti-swarm",
         "anti-armor",
@@ -2334,6 +2397,7 @@
       "name": "CQC-1 One True Flag",
       "category": "support",
       "subType": "support_weapon",
+      "family": "support-weapon",
       "tags": [
         "support",
         "melee"
@@ -2349,12 +2413,14 @@
       "name": "MD-I4 Incendiary Mines",
       "category": "defensive",
       "subType": "other",
+      "family": "mine",
       "tags": [
         "area-denial",
         "anti-swarm",
         "crowd-control",
         "explosive",
-        "fire"
+        "fire",
+        "mine"
       ],
       "cooldownTier": "medium",
       "callInType": "persistent",
@@ -2367,10 +2433,12 @@
       "name": "MD-17 Anti-Tank Mines",
       "category": "defensive",
       "subType": "other",
+      "family": "mine",
       "tags": [
         "anti-tank",
         "anti-armor",
-        "area-denial"
+        "area-denial",
+        "mine"
       ],
       "cooldownTier": "medium",
       "callInType": "persistent",
@@ -2383,6 +2451,7 @@
       "name": "E/GL-21 Grenadier Battlement",
       "category": "defensive",
       "subType": "other",
+      "family": "emplacement",
       "tags": [
         "explosive",
         "anti-armor",
@@ -2402,10 +2471,12 @@
       "name": "MD-8 Gas Mines",
       "category": "defensive",
       "subType": "other",
+      "family": "mine",
       "tags": [
         "crowd-control",
         "area-denial",
-        "gas"
+        "gas",
+        "mine"
       ],
       "cooldownTier": "medium",
       "callInType": "persistent",
@@ -2418,6 +2489,7 @@
       "name": "E/AT-12 Anti-Tank Emplacement",
       "category": "defensive",
       "subType": "other",
+      "family": "emplacement",
       "tags": [
         "anti-tank",
         "anti-armor",
@@ -2434,6 +2506,7 @@
       "name": "A/LAS-98 Laser Sentry",
       "category": "defensive",
       "subType": "other",
+      "family": "sentry",
       "tags": [
         "energy",
         "anti-armor"
@@ -2449,6 +2522,7 @@
       "name": "A/FLAM-40 Flame Sentry",
       "category": "defensive",
       "subType": "other",
+      "family": "sentry",
       "tags": [
         "area-denial",
         "anti-swarm",
@@ -2466,6 +2540,7 @@
       "name": "A/GM-17 Gas Mortar Sentry",
       "category": "defensive",
       "subType": "other",
+      "family": "sentry",
       "tags": [
         "crowd-control",
         "area-denial",
@@ -2482,6 +2557,7 @@
       "name": "SH-51 Directional Shield",
       "category": "defensive",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "defensive",
         "survivability"
@@ -2497,6 +2573,7 @@
       "name": "AX/FLAM-75 Hot Dog",
       "category": "support",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "area-denial",
         "crowd-control",
@@ -2514,6 +2591,7 @@
       "name": "B-100 Portable Hellbomb",
       "category": "offensive",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "explosive",
         "anti-armor",
@@ -2531,6 +2609,7 @@
       "name": "AX/ARC-3 K-9",
       "category": "support",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "crowd-control",
         "energy",
@@ -2547,6 +2626,7 @@
       "name": "LIFT-860 Hover Pack",
       "category": "support",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "mobility"
       ],
@@ -2561,6 +2641,7 @@
       "name": "AX/TX-13 Dog Breath",
       "category": "support",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "crowd-control",
         "area-denial",
@@ -2577,6 +2658,7 @@
       "name": "LIFT-182 Warp Pack",
       "category": "support",
       "subType": "backpack",
+      "family": "backpack",
       "tags": [
         "mobility"
       ],
@@ -2591,6 +2673,7 @@
       "name": "M-102 Fast Recon Vehicle",
       "category": "support",
       "subType": "other",
+      "family": "vehicle",
       "tags": [
         "mobility",
         "versatile",
@@ -2609,6 +2692,7 @@
       "name": "TD-220 Bastion MK XVI",
       "category": "support",
       "subType": "other",
+      "family": "vehicle",
       "tags": [
         "anti-armor",
         "anti-tank",
@@ -2627,6 +2711,7 @@
       "name": "EXO-55 Breakthrough Exosuit",
       "category": "support",
       "subType": "other",
+      "family": "exosuit",
       "tags": [
         "anti-armor",
         "crowd-control",
@@ -2643,6 +2728,7 @@
       "name": "EXO-51 Lumberer Exosuit",
       "category": "support",
       "subType": "other",
+      "family": "exosuit",
       "tags": [
         "anti-armor",
         "crowd-control",
@@ -3054,6 +3140,7 @@
       ],
       "iconRef": "",
       "source": "base",
+      "availability": "unobtainable",
       "lastUpdated": "2026-05-12"
     },
     {
@@ -3067,6 +3154,7 @@
       ],
       "iconRef": "",
       "source": "base",
+      "availability": "unobtainable",
       "lastUpdated": "2026-05-12"
     },
     {
@@ -3334,6 +3422,7 @@
       ],
       "iconRef": "",
       "source": "base",
+      "availability": "unobtainable",
       "lastUpdated": "2026-05-12"
     },
     {
@@ -3471,6 +3560,7 @@
       ],
       "iconRef": "",
       "source": "base",
+      "availability": "unobtainable",
       "lastUpdated": "2026-05-12"
     },
     {
@@ -3664,6 +3754,7 @@
       ],
       "iconRef": "",
       "source": "base",
+      "availability": "unobtainable",
       "lastUpdated": "2026-05-18"
     },
     {

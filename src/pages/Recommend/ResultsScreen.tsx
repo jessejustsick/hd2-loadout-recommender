@@ -4,7 +4,7 @@ import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, ArrowLeftRight } fro
 import { generateRecommendation, getAlternatives, getArmorAlternativesByTier } from '@/engine'
 import { loadoutService } from '@/services/loadouts'
 import type {
-  MissionParams, LoadoutResult, Weapon, Stratagem, Armor, Booster, FactionId, Loadout,
+  MissionParams, LoadoutResult, Weapon, Stratagem, Armor, Booster, FactionId, Loadout, StratagemFamily,
 } from '@/types'
 import { stratagemIconUrl } from '@/lib/stratagemIcons'
 import styles from './ResultsScreen.module.css'
@@ -21,6 +21,10 @@ type AnyItem = Weapon | Stratagem | Armor | Booster
 interface SwapSheetState {
   slotKey: SlotKey
   label: string
+  slot: 'primary' | 'secondary' | 'grenade' | 'stratagem' | 'armor' | 'booster'
+  family?: StratagemFamily
+  baseExcludeIds: string[] // original exclusions (current/equipped) — reset target when cycling
+  excludeIds: string[]     // base + everything shown so far, grows on "More options"
   alternatives: AnyItem[]
 }
 
@@ -231,10 +235,11 @@ function LoadoutRow({ slotKey, item, isNew, isOpen, params, onToggle, onSwap }: 
 interface SwapSheetProps {
   sheet: SwapSheetState
   onPick: (item: AnyItem) => void
+  onMore: () => void
   onClose: () => void
 }
 
-function SwapSheet({ sheet, onPick, onClose }: SwapSheetProps) {
+function SwapSheet({ sheet, onPick, onMore, onClose }: SwapSheetProps) {
   return (
     <>
       <div className={styles.overlay} onClick={onClose} />
@@ -274,6 +279,11 @@ function SwapSheet({ sheet, onPick, onClose }: SwapSheetProps) {
             </button>
           ))}
         </div>
+        {sheet.alternatives.length > 0 && (
+          <button className={styles.sheetMore} onClick={onMore} type="button">
+            ↻ More options
+          </button>
+        )}
       </div>
     </>
   )
@@ -325,31 +335,53 @@ export default function ResultsScreen() {
     setSaveState('idle')
   }
 
+  function fetchAlternatives(
+    slot: SwapSheetState['slot'],
+    excludeIds: string[],
+    family: StratagemFamily | undefined,
+  ): AnyItem[] {
+    if (slot === 'armor') return getArmorAlternativesByTier(excludeIds, params)
+    return getAlternatives(slot, excludeIds, params, 4, family)
+  }
+
   function handleOpenSwap(slotKey: SlotKey) {
     const currentItem = getSlotItem(loadout, slotKey)
-    const excludeIds: string[] = []
+    const baseExcludeIds: string[] = []
 
-    // For stratagems, exclude all 4 currently selected
+    // For stratagems, exclude all 4 currently selected (no duplicates allowed)
     if (slotKey.startsWith('stratagem')) {
       for (let i = 0; i < 4; i++) {
         const s = loadout.stratagems[i]
-        if (s) excludeIds.push(s.id)
+        if (s) baseExcludeIds.push(s.id)
       }
     } else if (currentItem) {
-      excludeIds.push(currentItem.id)
+      baseExcludeIds.push(currentItem.id)
     }
 
-    if (slotKey === 'armor') {
-      const alternatives = getArmorAlternativesByTier(excludeIds, params)
-      setSwapSheet({ slotKey, label: SLOT_LABELS[slotKey], alternatives })
-      return
-    }
-
-    const slot = slotKey.startsWith('stratagem') ? 'stratagem'
+    const slot = slotKey === 'armor' ? 'armor'
+      : slotKey.startsWith('stratagem') ? 'stratagem'
       : slotKey as 'primary' | 'secondary' | 'grenade' | 'booster'
 
-    const alternatives = getAlternatives(slot, excludeIds, params, 3)
-    setSwapSheet({ slotKey, label: SLOT_LABELS[slotKey], alternatives })
+    // When swapping a stratagem, surface same-family alternatives (e.g. another exosuit)
+    const family = slotKey.startsWith('stratagem') && currentItem && 'family' in currentItem
+      ? (currentItem as Stratagem).family
+      : undefined
+
+    const alternatives = fetchAlternatives(slot, baseExcludeIds, family)
+    setSwapSheet({ slotKey, label: SLOT_LABELS[slotKey], slot, family, baseExcludeIds, excludeIds: baseExcludeIds, alternatives })
+  }
+
+  function handleMoreOptions() {
+    if (!swapSheet) return
+    const shownIds = swapSheet.alternatives.map(a => a.id)
+    let excludeIds = [...swapSheet.excludeIds, ...shownIds]
+    let alternatives = fetchAlternatives(swapSheet.slot, excludeIds, swapSheet.family)
+    if (alternatives.length === 0) {
+      // cycled through the whole pool — start over from the best picks
+      excludeIds = swapSheet.baseExcludeIds
+      alternatives = fetchAlternatives(swapSheet.slot, excludeIds, swapSheet.family)
+    }
+    setSwapSheet({ ...swapSheet, excludeIds, alternatives })
   }
 
   function handlePickSwap(item: AnyItem) {
@@ -481,6 +513,7 @@ export default function ResultsScreen() {
         <SwapSheet
           sheet={swapSheet}
           onPick={handlePickSwap}
+          onMore={handleMoreOptions}
           onClose={() => setSwapSheet(null)}
         />
       )}

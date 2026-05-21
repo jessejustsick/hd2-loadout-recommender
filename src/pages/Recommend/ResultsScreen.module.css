@@ -393,6 +393,25 @@
   padding: var(--space-md) var(--space-lg);
 }
 
+.sheetMore {
+  margin: var(--space-md) var(--space-lg);
+  padding: var(--space-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
+}
+
+.sheetMore:hover {
+  color: var(--color-text-primary);
+  background: var(--color-bg-secondary);
+}
+
 .sheetAlt {
   display: flex;
   align-items: center;
