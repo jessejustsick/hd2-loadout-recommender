@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Trash2 } from 'lucide-react'
+import { Trash2, RefreshCw } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { loadoutService } from '@/services/loadouts'
 import { catalogService } from '@/services/catalog'
-import type { Loadout } from '@/types'
+import type { Loadout, MissionParams } from '@/types'
 import styles from './SavedLoadouts.module.css'
 
 // ---- Helpers ----
@@ -59,14 +59,17 @@ function contextLabel(loadout: Loadout): string {
 interface CardProps {
   loadout: Loadout
   onDelete: (id: string) => void
+  onReoptimize: (loadout: Loadout) => void
 }
 
-function LoadoutCard({ loadout, onDelete }: CardProps) {
+function LoadoutCard({ loadout, onDelete, onReoptimize }: CardProps) {
   const stale = checkStale(loadout)
   const weapons = [loadout.primaryWeapon, loadout.secondaryWeapon, loadout.grenade].map(resolveName)
   const stratagems = loadout.stratagems.map(resolveName)
   const gear = [loadout.armor, loadout.booster].map(resolveName)
   const modifiers = loadout.modifiers ? resolveModifierNames(loadout.modifiers) : []
+  // Only recommended loadouts carry the mission context needed to regenerate.
+  const canReoptimize = loadout.faction != null && loadout.difficulty != null
 
   return (
     <div className={`${styles.card} ${stale ? styles.cardStale : ''}`}>
@@ -109,6 +112,15 @@ function LoadoutCard({ loadout, onDelete }: CardProps) {
           <span className={styles.itemList}>{gear.join(' · ')}</span>
         </div>
       </div>
+
+      {canReoptimize && (
+        <div className={styles.cardFooter}>
+          <button className={styles.reoptimizeBtn} onClick={() => onReoptimize(loadout)}>
+            <RefreshCw size={14} />
+            Re-optimize
+          </button>
+        </div>
+      )}
     </div>
   )
 }
@@ -130,6 +142,21 @@ export default function SavedLoadouts() {
   async function handleDelete(id: string) {
     await loadoutService.delete(id)
     setLoadouts(prev => prev.filter(l => l.id !== id))
+  }
+
+  function handleReoptimize(loadout: Loadout) {
+    if (loadout.faction == null || loadout.difficulty == null) return
+    // Round-trip the saved mission context so the fresh recommendation uses the
+    // exact same scoring inputs as the original. Non-destructive: opens a new
+    // result the user can save separately; the saved loadout is untouched.
+    const params: MissionParams = {
+      faction: loadout.faction,
+      difficulty: loadout.difficulty,
+      planet: loadout.planet ?? '__manual',
+      missionType: loadout.missionType ?? '',
+      modifiers: loadout.modifiers ?? [],
+    }
+    navigate('/recommend/results', { state: { params } })
   }
 
   return (
@@ -165,7 +192,7 @@ export default function SavedLoadouts() {
       {!loading && loadouts.length > 0 && (
         <div className={styles.list}>
           {loadouts.map(l => (
-            <LoadoutCard key={l.id} loadout={l} onDelete={handleDelete} />
+            <LoadoutCard key={l.id} loadout={l} onDelete={handleDelete} onReoptimize={handleReoptimize} />
           ))}
         </div>
       )}
