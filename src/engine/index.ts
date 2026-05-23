@@ -379,13 +379,13 @@ function shuffle<T>(arr: T[]): T[] {
 export function generateConstrained(): LoadoutResult {
   const stratagems = shuffle(catalogService.getStratagems())
   const selected: Stratagem[] = []
-  const usedSubTypes = new Set<string>()
+  const usedFamilies = new Set<string>()
 
   for (const s of stratagems) {
     if (selected.length >= 4) break
-    if (!usedSubTypes.has(s.subType)) {
+    if (!usedFamilies.has(s.family)) {
       selected.push(s)
-      usedSubTypes.add(s.subType)
+      usedFamilies.add(s.family)
     }
   }
   for (const s of stratagems) {

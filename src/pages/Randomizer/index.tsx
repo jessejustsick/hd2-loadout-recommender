@@ -75,9 +75,9 @@ function describeItem(item: AnyItem): string {
   }
   if ('effect' in item) return item.effect
   if ('cooldownTier' in item) {
-    const sub = item.subType.replace(/_/g, ' ')
+    const fam = item.family.replace(/[-_]/g, ' ')
     const cd = { short: 'Short cooldown.', medium: 'Medium cooldown.', long: 'Long cooldown — use decisively.' }[item.cooldownTier]
-    return `${sub.charAt(0).toUpperCase() + sub.slice(1)}. ${cd}`
+    return `${fam.charAt(0).toUpperCase() + fam.slice(1)}. ${cd}`
   }
   return item.tags.map(t => TAG_LABELS[t] ?? t).join(', ') || '—'
 }

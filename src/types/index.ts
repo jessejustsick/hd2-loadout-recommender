@@ -5,9 +5,9 @@ export type GenerationMode = 'recommended' | 'constrained_random' | 'full_random
 export type WeaponCategory = 'primary' | 'secondary' | 'grenade'
 
 export type StratagemCategory = 'offensive' | 'defensive' | 'support'
-export type StratagemSubType = 'eagle' | 'orbital' | 'support_weapon' | 'backpack' | 'other'
-// Fine-grained type used to offer same-family alternatives in the swap sheet
-// (the 'other' subType is too coarse — sentries, mines, exosuits all share it).
+// Fine-grained classification driving slot constraints + same-family swap options.
+// (Replaced the old coarse `subType` 'other' bucket that lumped sentries, mines,
+// exosuits, vehicles, emplacements, etc. into one indistinct group.)
 export type StratagemFamily =
   | 'eagle' | 'orbital' | 'support-weapon' | 'backpack'
   | 'sentry' | 'mine' | 'exosuit' | 'emplacement' | 'vehicle' | 'utility'
@@ -38,7 +38,6 @@ export interface Stratagem {
   id: string
   name: string
   category: StratagemCategory
-  subType: StratagemSubType
   family: StratagemFamily
   tags: string[]
   cooldownTier: CooldownTier
