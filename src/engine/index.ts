@@ -20,6 +20,16 @@ function usesBackpackSlot(s: Stratagem): boolean {
   return s.family === 'backpack' || s.tags.includes('needs-backpack')
 }
 
+// A stratagem occupies your hands (the held support-weapon slot) if it's a carried
+// support weapon, or the C4 pack — family 'backpack', but you must keep its detonator
+// in hand, so it can't share your hands with a support weapon. Every needs-backpack
+// item is also wielded (the 8 support weapons + the C4 detonator), which catches it.
+// Expendables (EATs) are grab-fire-drop, not persistently held, so one may ride along.
+function usesWeaponSlot(s: Stratagem): boolean {
+  if (s.tags.includes('expendable')) return false
+  return s.family === 'support-weapon' || s.tags.includes('needs-backpack')
+}
+
 function applyHardConstraints(stratagems: Stratagem[], modifiers: Modifier[]): Stratagem[] {
   const hard = modifiers.filter(m => m.constraintType === 'hard')
   return stratagems.filter(s => {
@@ -302,13 +312,11 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
   const selected: Stratagem[] = []
 
   for (let i = 0; i < 4; i++) {
-    // Support weapons: allow at most one *carried* (slot-occupying) weapon plus at
-    // most one *expendable* (EAT-style call-down-and-discard) on top — a valid but
-    // uncommon playstyle. Keyed on `family`, the source of truth: `subType` mistags
-    // EAT-700/EAT-411/Solo Silo as 'other', so they'd otherwise slip the constraint.
-    const hasCarriedWeapon = selected.some(
-      s => s.family === 'support-weapon' && !s.tags.includes('expendable')
-    )
+    // One wielded (held) weapon: at most one carried support weapon OR the C4 pack,
+    // plus at most one *expendable* (EAT-style grab-fire-drop) on top — a valid but
+    // uncommon playstyle. Keyed on family/tags, not the legacy `subType` (which mistags
+    // EAT-700/EAT-411/Solo Silo as 'other' and would slip the constraint).
+    const hasWieldedWeapon = selected.some(usesWeaponSlot)
     const hasExpendableWeapon = selected.some(
       s => s.family === 'support-weapon' && s.tags.includes('expendable')
     )
@@ -336,11 +344,10 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
 
     const available = scored.filter(s => {
       if (selected.includes(s.item)) return false
-      const isSupportWeapon = s.item.family === 'support-weapon'
-      const isExpendable = isSupportWeapon && s.item.tags.includes('expendable')
-      if (isSupportWeapon && !isExpendable && hasCarriedWeapon) return false
+      const isExpendable = s.item.family === 'support-weapon' && s.item.tags.includes('expendable')
+      if (usesWeaponSlot(s.item) && hasWieldedWeapon) return false
       if (isExpendable && hasExpendableWeapon) return false
-      if (hasBackpackSlot && usesBackpackSlot(s.item)) return false
+      if (usesBackpackSlot(s.item) && hasBackpackSlot) return false
       if (needsExplosive && !s.item.tags.includes('explosive')) return false
       if (needsAntiTank && !s.item.tags.includes('anti-tank')) return false
       return true
