@@ -14,11 +14,17 @@ import { catalogService } from '@/services/catalog'
 
 // ---- Layer 1: Hard Constraints ----
 
+// A stratagem occupies the single backpack slot if it IS a backpack, or if it's a
+// support weapon that ships with one (needs-backpack). Only one such item can be worn.
+function usesBackpackSlot(s: Stratagem): boolean {
+  return s.family === 'backpack' || s.tags.includes('needs-backpack')
+}
+
 function applyHardConstraints(stratagems: Stratagem[], modifiers: Modifier[]): Stratagem[] {
   const hard = modifiers.filter(m => m.constraintType === 'hard')
   return stratagems.filter(s => {
     for (const mod of hard) {
-      if (mod.effectTags.includes('no_eagles') && s.subType === 'eagle') return false
+      if (mod.effectTags.includes('no_eagles') && s.family === 'eagle') return false
     }
     return true
   })
@@ -296,9 +302,19 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
   const selected: Stratagem[] = []
 
   for (let i = 0; i < 4; i++) {
-    const hasWeapon = selected.some(s => s.subType === 'support_weapon')
-    const hasBackpack = selected.some(s => s.subType === 'backpack')
-    const hasPackedWeapon = selected.some(s => s.tags.includes('needs-backpack'))
+    // Support weapons: allow at most one *carried* (slot-occupying) weapon plus at
+    // most one *expendable* (EAT-style call-down-and-discard) on top — a valid but
+    // uncommon playstyle. Keyed on `family`, the source of truth: `subType` mistags
+    // EAT-700/EAT-411/Solo Silo as 'other', so they'd otherwise slip the constraint.
+    const hasCarriedWeapon = selected.some(
+      s => s.family === 'support-weapon' && !s.tags.includes('expendable')
+    )
+    const hasExpendableWeapon = selected.some(
+      s => s.family === 'support-weapon' && s.tags.includes('expendable')
+    )
+    // Only one backpack slot: at most one standalone backpack OR backpack-using
+    // weapon. Keyed on family (Shield Gen / Ballistic Shield packs are subType 'other').
+    const hasBackpackSlot = selected.some(usesBackpackSlot)
 
     const fullLoadoutSoFar = [...selected, primaryWeapon, secondaryWeapon, grenade].filter(Boolean)
 
@@ -320,9 +336,11 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
 
     const available = scored.filter(s => {
       if (selected.includes(s.item)) return false
-      if (hasWeapon && s.item.subType === 'support_weapon') return false
-      if (hasPackedWeapon && s.item.subType === 'backpack') return false
-      if (hasBackpack && s.item.tags.includes('needs-backpack')) return false
+      const isSupportWeapon = s.item.family === 'support-weapon'
+      const isExpendable = isSupportWeapon && s.item.tags.includes('expendable')
+      if (isSupportWeapon && !isExpendable && hasCarriedWeapon) return false
+      if (isExpendable && hasExpendableWeapon) return false
+      if (hasBackpackSlot && usesBackpackSlot(s.item)) return false
       if (needsExplosive && !s.item.tags.includes('explosive')) return false
       if (needsAntiTank && !s.item.tags.includes('anti-tank')) return false
       return true
