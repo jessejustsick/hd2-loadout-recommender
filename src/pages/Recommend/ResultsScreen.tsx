@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Navigate } from 'react-router-dom'
 import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, ArrowLeftRight } from 'lucide-react'
 import { generateRecommendation, getAlternatives, getArmorAlternativesByTier } from '@/engine'
 import { loadoutService } from '@/services/loadouts'
+import { catalogService } from '@/services/catalog'
 import type {
   MissionParams, LoadoutResult, Weapon, Stratagem, Armor, Booster, FactionId, Loadout, StratagemFamily,
 } from '@/types'
@@ -316,6 +317,11 @@ export default function ResultsScreen() {
     params.missionType,
   ].join(' · ')
 
+  const allModifiers = catalogService.getModifiers()
+  const missionModifiers = params.modifiers
+    .map(id => allModifiers.find(m => m.id === id)?.name)
+    .filter((n): n is string => Boolean(n))
+
   // ---- Handlers ----
 
   function toggleAccordion(key: string) {
@@ -426,6 +432,7 @@ export default function ResultsScreen() {
       planet: params.planet,
       difficulty: params.difficulty,
       missionType: params.missionType,
+      modifiers: params.modifiers,
       generationMode: 'recommended',
       createdAt: new Date().toISOString(),
     }
@@ -474,7 +481,16 @@ export default function ResultsScreen() {
 
       <img src="/hd2-logo.svg" alt="Helldivers 2" className={styles.gameLogo} />
       <h1 className={styles.title}>Recommended Loadout</h1>
-      <p className={styles.summary}>{missionSummary}</p>
+      <div className={styles.missionInfo}>
+        <p className={styles.summary}>{missionSummary}</p>
+        {missionModifiers.length > 0 && (
+          <div className={styles.summaryModifiers}>
+            {missionModifiers.map(name => (
+              <span key={name} className={styles.summaryModifierChip}>{name}</span>
+            ))}
+          </div>
+        )}
+      </div>
 
       <div className={styles.section}>
         <p className={styles.sectionLabel}>Armor</p>

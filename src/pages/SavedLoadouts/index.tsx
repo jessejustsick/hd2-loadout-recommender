@@ -24,6 +24,13 @@ function resolveName(id: string): string {
   return catalogService.getItemById(id)?.name ?? id
 }
 
+function resolveModifierNames(ids: string[]): string[] {
+  const all = catalogService.getModifiers()
+  return ids
+    .map(id => all.find(m => m.id === id)?.name)
+    .filter((n): n is string => Boolean(n))
+}
+
 function checkStale(loadout: Loadout): boolean {
   return [
     loadout.primaryWeapon,
@@ -59,12 +66,20 @@ function LoadoutCard({ loadout, onDelete }: CardProps) {
   const weapons = [loadout.primaryWeapon, loadout.secondaryWeapon, loadout.grenade].map(resolveName)
   const stratagems = loadout.stratagems.map(resolveName)
   const gear = [loadout.armor, loadout.booster].map(resolveName)
+  const modifiers = loadout.modifiers ? resolveModifierNames(loadout.modifiers) : []
 
   return (
     <div className={`${styles.card} ${stale ? styles.cardStale : ''}`}>
       <div className={styles.cardHeader}>
         <div className={styles.cardMeta}>
           <span className={styles.cardContext}>{contextLabel(loadout)}</span>
+          {modifiers.length > 0 && (
+            <div className={styles.cardModifiers}>
+              {modifiers.map(name => (
+                <span key={name} className={styles.cardModifierChip}>{name}</span>
+              ))}
+            </div>
+          )}
           <span className={styles.cardTime}>{timeAgo(loadout.createdAt)}</span>
         </div>
         <button

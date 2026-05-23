@@ -133,6 +133,7 @@ export interface Loadout {
   planet?: string
   difficulty?: number
   missionType?: string
+  modifiers?: string[]
   generationMode: GenerationMode
   createdAt: string
 }

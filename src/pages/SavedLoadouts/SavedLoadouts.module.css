@@ -47,7 +47,7 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--color-text-primary);
-  margin-bottom: var(--space-lg);
+  margin-bottom: 50px;
 }
 
 .emptyCtas {
@@ -151,9 +151,23 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--color-text-primary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+}
+
+.cardModifiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.cardModifierChip {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
 }
 
 .cardTime {
