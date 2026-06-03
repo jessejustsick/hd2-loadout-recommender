@@ -138,7 +138,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "arc-12-blitzer",
@@ -176,7 +181,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "dbs-2-double-freedom",
@@ -209,8 +219,7 @@
       "name": "JAR-5 Dominator",
       "category": "primary",
       "tags": [
-        "anti-armor",
-        "explosive"
+        "anti-armor"
       ],
       "source": "warbond",
       "iconRef": "",
@@ -392,7 +401,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "r-6-deadeye",
@@ -723,7 +737,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "gp-31-grenade-pistol",
@@ -735,7 +754,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "las-58-talon",
@@ -833,7 +857,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "p-35-re-educator",
@@ -932,7 +961,12 @@
       ],
       "source": "base",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "g-109-urchin",
@@ -955,7 +989,12 @@
       ],
       "source": "base",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "g-123-thermite",
@@ -969,7 +1008,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "g-13-incendiary-impact",
@@ -983,7 +1027,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "g-16-impact",
@@ -995,7 +1044,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "g-23-stun",
@@ -1046,7 +1100,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "g-4-gas",
@@ -1059,7 +1118,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "g-50-seeker",
@@ -1085,7 +1149,12 @@
       ],
       "source": "base",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "g-89-smokescreen",
@@ -1111,7 +1180,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "g-sh-39-shield",
@@ -1146,7 +1220,12 @@
       ],
       "source": "warbond",
       "iconRef": "",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "tm-1-lure-mine",
@@ -1180,7 +1259,12 @@
       "callInType": "multi_use",
       "iconRef": "Eagle Airstrike",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "eagle-500kg-bomb",
@@ -1198,7 +1282,12 @@
       "callInType": "multi_use",
       "iconRef": "Eagle 500KG Bomb",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "eagle-cluster-bomb",
@@ -1252,7 +1341,12 @@
       "callInType": "multi_use",
       "iconRef": "Eagle Strafing Run",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "eagle-110mm-rocket-pods",
@@ -1290,7 +1384,12 @@
       "callInType": "single_use",
       "iconRef": "Orbital 380MM HE Barrage",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "orbital-120mm-he-barrage",
@@ -1310,7 +1409,12 @@
       "callInType": "single_use",
       "iconRef": "Orbital 120MM HE Barrage",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "orbital-laser",
@@ -1329,7 +1433,12 @@
       "callInType": "single_use",
       "iconRef": "Orbital Laser",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "orbital-railcannon-strike",
@@ -1363,7 +1472,12 @@
       "callInType": "single_use",
       "iconRef": "Orbital Precision Strike",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "orbital-gatling-barrage",
@@ -1381,7 +1495,12 @@
       "callInType": "single_use",
       "iconRef": "Orbital Gatling Barrage",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "orbital-walking-barrage",
@@ -1399,7 +1518,12 @@
       "callInType": "single_use",
       "iconRef": "Orbital Walking Barrage",
       "source": "warbond",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "orbital-napalm-barrage",
@@ -1495,7 +1619,12 @@
       "callInType": "persistent",
       "iconRef": "Autocannon",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "railgun",
@@ -1527,7 +1656,12 @@
       "callInType": "persistent",
       "iconRef": "Quasar Cannon",
       "source": "warbond",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "spear",
@@ -1545,7 +1679,11 @@
       "callInType": "persistent",
       "iconRef": "Spear",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons"
+      ]
     },
     {
       "id": "expendable-anti-tank",
@@ -1561,7 +1699,12 @@
       "callInType": "multi_use",
       "iconRef": "Expendable Anti-Tank",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "recoilless-rifle",
@@ -1577,7 +1720,12 @@
       "callInType": "persistent",
       "iconRef": "Recoilless Rifle",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "stalwart",
@@ -1609,7 +1757,12 @@
       "callInType": "persistent",
       "iconRef": "Grenade Launcher",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "flamethrower",
@@ -1933,7 +2086,12 @@
       "callInType": "persistent",
       "iconRef": "Commando",
       "source": "warbond",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "patriot-exosuit",
@@ -1950,7 +2108,12 @@
       "callInType": "single_use",
       "iconRef": "Patriot Exosuit",
       "source": "base",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "emancipator-exosuit",
@@ -1967,7 +2130,12 @@
       "callInType": "single_use",
       "iconRef": "Emancipator Exosuit",
       "source": "warbond",
-      "lastUpdated": "2025-01-01"
+      "lastUpdated": "2025-01-01",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "tesla-tower",
@@ -2084,7 +2252,11 @@
       "callInType": "persistent",
       "iconRef": "StA-X3 W.A.S.P. Launcher",
       "source": "base",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons"
+      ]
     },
     {
       "id": "cqc-20-breaching-hammer",
@@ -2101,7 +2273,11 @@
       "callInType": "persistent",
       "iconRef": "CQC-20",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "plas-45-epoch",
@@ -2119,7 +2295,10 @@
       "callInType": "persistent",
       "iconRef": "Epoch",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids"
+      ]
     },
     {
       "id": "mgx-42-bullet-storm",
@@ -2218,7 +2397,12 @@
       "callInType": "multi_use",
       "iconRef": "EAT-411",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "gl-52-de-escalator",
@@ -2252,7 +2436,12 @@
       "callInType": "persistent",
       "iconRef": "GL-28",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "b-md-c4-pack",
@@ -2269,7 +2458,12 @@
       "callInType": "persistent",
       "iconRef": "C4 Pack",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "ms-11-solo-silo",
@@ -2287,7 +2481,12 @@
       "callInType": "persistent",
       "iconRef": "Solo Silo",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "b-flam-80-cremator",
@@ -2424,7 +2623,12 @@
       "callInType": "persistent",
       "iconRef": "Anti-Tank Emplacement",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "a-las-98-laser-sentry",
@@ -2521,7 +2725,12 @@
       "callInType": "persistent",
       "iconRef": "Hellbomb Portable",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     },
     {
       "id": "ax-arc-3-k9",
@@ -2651,7 +2860,12 @@
       "callInType": "single_use",
       "iconRef": "Lumberer Exosuit",
       "source": "warbond",
-      "lastUpdated": "2026-05-12"
+      "lastUpdated": "2026-05-12",
+      "spawnerKill": [
+        "terminids",
+        "automatons",
+        "illuminate"
+      ]
     }
   ],
   "armor": [

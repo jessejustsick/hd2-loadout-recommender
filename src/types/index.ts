@@ -23,11 +23,23 @@ export type Availability = 'unobtainable'
 export type ConstraintType = 'hard' | 'soft'
 export type ModifierSeverity = 'low' | 'medium' | 'high'
 
+// Curated capability: which factions' spawners this item can reliably *close*
+// (Terminid bug holes, Automaton fabricators, Illuminate Warp Ships). Deliberately
+// NOT derived from the `explosive` tag — many explosive items can't close a spawner
+// (sentries, auto-targeters, area fire) and some non-explosive ones can (Gas grenade,
+// Autocannon). An omitted/absent value means it can't close any. We intentionally do
+// NOT distinguish heavy spawners (Bulk Fabricators / Bile Titan holes): standard
+// closers handle them too (just slower), Bulk Fabs are urban-only so the engine can't
+// reliably know to weight for them, and the `anti-tank` logic already favors the
+// efficient heavy closers.
+export type SpawnerKill = FactionId[]
+
 export interface Weapon {
   id: string
   name: string
   category: WeaponCategory
   tags: string[]
+  spawnerKill?: SpawnerKill
   source: string
   availability?: Availability
   iconRef: string
@@ -40,6 +52,7 @@ export interface Stratagem {
   category: StratagemCategory
   family: StratagemFamily
   tags: string[]
+  spawnerKill?: SpawnerKill
   cooldownTier: CooldownTier
   callInType: CallInType
   iconRef: string

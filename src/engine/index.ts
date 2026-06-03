@@ -9,10 +9,19 @@ import type {
   ArmorTier,
   Availability,
   StratagemFamily,
+  SpawnerKill,
 } from '@/types'
 import { catalogService } from '@/services/catalog'
 
 // ---- Layer 1: Hard Constraints ----
+
+// True if the item can close the given faction's spawners (at any tier). Keyed on
+// the curated `spawnerKill` capability, NOT the `explosive` tag: many explosive
+// items can't actually close a spawner (sentries, auto-targeters, area fire) and
+// some non-explosive ones can (Gas grenade, Autocannon). See SpawnerKill.
+function closesSpawner(item: { spawnerKill?: SpawnerKill }, faction: FactionId): boolean {
+  return item.spawnerKill?.includes(faction) ?? false
+}
 
 // A stratagem occupies the single backpack slot if it IS a backpack, or if it's a
 // support weapon that ships with one (needs-backpack). Only one such item can be worn.
@@ -326,12 +335,13 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
 
     const fullLoadoutSoFar = [...selected, primaryWeapon, secondaryWeapon, grenade].filter(Boolean)
 
-    // On the last pick, enforce at least one explosive item for factions with
-    // explosive-only spawners: Terminids (bug holes) and Illuminate (Warp Ships)
-    const needsExplosive =
-      (params.faction === 'terminids' || params.faction === 'illuminate') &&
+    // On the last pick, guarantee the loadout can close THIS faction's spawners —
+    // Terminid bug holes, Automaton fabricators, and Illuminate Warp Ships all have
+    // structures that must be destroyed. Keyed on the curated spawnerKill capability
+    // (not the `explosive` tag, which both over- and under-counts real closers).
+    const needsSpawnerKill =
       i === 3 &&
-      !fullLoadoutSoFar.some(item => item!.tags.includes('explosive'))
+      !fullLoadoutSoFar.some(item => closesSpawner(item!, params.faction))
 
     // At difficulty 4+, enforce at least one anti-tank item — super-heavies
     // (Bile Titan, Factory Strider, Harvester) first appear at L4
@@ -348,7 +358,7 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
       if (usesWeaponSlot(s.item) && hasWieldedWeapon) return false
       if (isExpendable && hasExpendableWeapon) return false
       if (usesBackpackSlot(s.item) && hasBackpackSlot) return false
-      if (needsExplosive && !s.item.tags.includes('explosive')) return false
+      if (needsSpawnerKill && !closesSpawner(s.item, params.faction)) return false
       if (needsAntiTank && !s.item.tags.includes('anti-tank')) return false
       return true
     })
