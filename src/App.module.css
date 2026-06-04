@@ -3,6 +3,7 @@
 }
 
 .main {
+  padding-top: calc(var(--chrome-height) + env(safe-area-inset-top));
   padding-bottom: var(--nav-height);
 }
 

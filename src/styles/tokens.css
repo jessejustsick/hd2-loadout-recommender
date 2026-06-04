@@ -45,6 +45,7 @@
   /* Layout */
   --nav-height: 60px;
   --nav-width: 220px;
+  --chrome-height: 48px;
 
   /* Animation */
   --duration-fast: 200ms;

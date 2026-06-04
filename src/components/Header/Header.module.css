@@ -1,0 +1,45 @@
+.chrome {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Grow past the chrome height to clear the notch; padding keeps content below it. */
+  height: calc(var(--chrome-height) + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+  background-color: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 100;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--space-xs);
+  margin-left: calc(-1 * var(--space-xs));
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--color-text-primary);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.wordmark:hover {
+  color: var(--color-accent);
+}
+
+@media (min-width: 768px) {
+  /* Sit to the right of the desktop sidebar rather than over it. */
+  .chrome {
+    left: var(--nav-width);
+  }
+}

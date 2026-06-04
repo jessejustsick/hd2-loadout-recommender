@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
+import Header from '@/components/Header'
 import Navigation from '@/components/Navigation'
 import Recommend from '@/pages/Recommend'
 import Randomizer from '@/pages/Randomizer'
@@ -13,6 +14,7 @@ export default function App() {
 
   return (
     <div className={styles.app}>
+      <Header />
       <main className={styles.main}>
         <Routes>
           <Route path="/" element={<Navigate to="/recommend" replace />} />
