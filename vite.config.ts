@@ -10,8 +10,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
-        name: 'HD2 Loadout',
-        short_name: 'HD2 Loadout',
+        name: 'Hellpod Companion',
+        short_name: 'Hellpod Companion',
         description: 'Mission-specific loadout recommendations for Helldivers 2',
         theme_color: '#0e1117',
         background_color: '#0e1117',
