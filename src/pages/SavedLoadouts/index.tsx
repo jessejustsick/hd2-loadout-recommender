@@ -161,7 +161,7 @@ export default function SavedLoadouts() {
 
   return (
     <div className={styles.page}>
-      <img src="/hd2-logo.svg" alt="Helldivers 2" className={styles.gameLogo} />
+      <img src="/hd2-logo.svg" alt="Hellpod Companion" className={styles.gameLogo} />
       <div className={styles.header}>
         <h1 className={styles.title}>Saved Loadouts</h1>
         {!loading && loadouts.length > 0 && (

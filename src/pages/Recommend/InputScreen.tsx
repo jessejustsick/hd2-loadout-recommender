@@ -188,7 +188,7 @@ export default function InputScreen({ initialState = INITIAL, onReset }: Props) 
   return (
     <div className={styles.screen}>
       <div className={styles.header}>
-        <img src="/hd2-logo.svg" alt="Helldivers 2" className={styles.gameLogo} />
+        <img src="/hd2-logo.svg" alt="Hellpod Companion" className={styles.gameLogo} />
         <h1 className={styles.title}>Build Your Loadout</h1>
         <ProgressStepper
           totalSteps={totalSteps}

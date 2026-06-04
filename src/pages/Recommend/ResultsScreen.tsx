@@ -479,7 +479,7 @@ export default function ResultsScreen() {
         </button>
       </div>
 
-      <img src="/hd2-logo.svg" alt="Helldivers 2" className={styles.gameLogo} />
+      <img src="/hd2-logo.svg" alt="Hellpod Companion" className={styles.gameLogo} />
       <h1 className={styles.title}>Recommended Loadout</h1>
       <div className={styles.missionInfo}>
         <p className={styles.summary}>{missionSummary}</p>
