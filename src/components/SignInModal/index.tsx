@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { X } from 'lucide-react'
 import { authService, type AuthErrorCode } from '@/services/auth'
+import PasswordInput from '@/components/PasswordInput'
 import styles from './SignInModal.module.css'
 
 type Mode = 'signin' | 'signup' | 'verify' | 'forgot' | 'forgot-sent'
@@ -290,10 +291,9 @@ export default function SignInModal({ open, onClose }: SignInModalProps) {
             {fieldError.email && <p className={styles.fieldError}>{fieldError.email}</p>}
 
             <label className={styles.label} htmlFor="password">Password</label>
-            <input
+            <PasswordInput
               id="password"
-              type="password"
-              className={styles.input}
+              inputClassName={styles.input}
               value={password}
               onChange={e => setPassword(e.target.value)}
               autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}

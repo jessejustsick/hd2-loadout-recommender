@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { authService } from '@/services/auth'
 import { useAuth } from '@/context/AuthContext'
+import PasswordInput from '@/components/PasswordInput'
 import styles from './SetPasswordModal.module.css'
 
 const MIN_PASSWORD = 6
@@ -55,10 +56,9 @@ export default function SetPasswordModal() {
             <p className={styles.lead}>Enter a new password for your account.</p>
             {error && <p className={styles.error}>{error}</p>}
             <label className={styles.label} htmlFor="new-password">New password</label>
-            <input
+            <PasswordInput
               id="new-password"
-              type="password"
-              className={styles.input}
+              inputClassName={styles.input}
               value={password}
               onChange={e => setPassword(e.target.value)}
               autoComplete="new-password"
