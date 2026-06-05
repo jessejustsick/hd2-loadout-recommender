@@ -29,6 +29,13 @@ const SYNC_DEFAULTS: SyncMeta = { unsynced: false, deleted: false, lastSyncedAt:
 // once-per-device first-sign-in merge in Phase 4 (PRD §13.7).
 export type MetaKey = 'firstSignInMerged'
 
+// Outcome of the first sign-in merge, for the confirmation toast (PRD §6.3).
+export interface FirstSignInMergeResult {
+  merged: number // local loadouts successfully written to the account
+  total: number // local loadouts found to migrate
+  capExceeded: boolean // some didn't fit under the 50-loadout cap
+}
+
 let _db: IDBPDatabase | null = null
 
 async function getDb(): Promise<IDBPDatabase> {
@@ -178,6 +185,19 @@ function loadoutToRow(loadout: Loadout, userId: string): Record<string, unknown>
 // session pulls from the server exactly once. Reset on sign-out / account change.
 let hydratedUserId: string | null = null
 
+// Lightweight change notifier so views can re-read after background mutations
+// (the first-sign-in merge and the reconnect sync processor) complete, rather
+// than racing them. Subscribers re-fetch via getAll(); see SavedLoadouts.
+type ChangeListener = () => void
+const changeListeners = new Set<ChangeListener>()
+export function onLoadoutsChanged(listener: ChangeListener): () => void {
+  changeListeners.add(listener)
+  return () => changeListeners.delete(listener)
+}
+function emitLoadoutsChanged(): void {
+  changeListeners.forEach(listener => listener())
+}
+
 // A cached row is part of the signed-in user's view when it's either a synced
 // mirror row (`lastSyncedAt` set) or a pending local write (`unsynced`) — and not
 // a tombstone. Pre-sign-in local-only rows (never synced, not pending) are hidden
@@ -269,6 +289,7 @@ async function pushPending(userId: string): Promise<void> {
     .filter(row => row.unsynced && !row.deleted)
     .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
 
+  let changed = false
   for (const row of pendingSaves) {
     try {
       const { error } = await supabase
@@ -288,6 +309,7 @@ async function pushPending(userId: string): Promise<void> {
       lastSyncedAt: new Date().toISOString(),
     }
     await db.put(STORE, cleared)
+    changed = true
   }
 
   // Propagate offline deletes (PRD §13.5): DELETE the server row, then remove the
@@ -301,7 +323,10 @@ async function pushPending(userId: string): Promise<void> {
       continue
     }
     await db.delete(STORE, row.id)
+    changed = true
   }
+
+  if (changed) emitLoadoutsChanged()
 }
 
 // Coalesce concurrent sync runs (focus + online event can fire together) so the
@@ -332,6 +357,66 @@ export const loadoutService = {
   async syncPending(): Promise<void> {
     const userId = await currentUserId()
     if (userId) await pushPendingGuarded(userId)
+  },
+
+  // First sign-in merge (PRD §6.3/§13.6). Migrates loadouts saved while signed
+  // out (local-only rows: never synced, not tombstoned) into the account. Runs
+  // once per device/account, gated by `meta.firstSignInMerged`. Inserts go in as
+  // ordinary writes so the 50-cap produces the same partial-sync outcome as any
+  // other queued write: rows that fit become synced, the rest stay flagged
+  // unsynced and surface via the Saved Loadouts banner (Step 5). Returns null
+  // when there's nothing to do (already merged, signed out, or offline → retry).
+  async firstSignInMerge(): Promise<FirstSignInMergeResult | null> {
+    const userId = await currentUserId()
+    if (!userId) return null
+    if (await metaService.get<boolean>('firstSignInMerged')) return null
+    if (!isOnline()) return null
+
+    const db = await getDb()
+    const all = (await db.getAll(STORE)) as StoredLoadout[]
+    const localOnly = all
+      .filter(row => !row.deleted && row.lastSyncedAt == null)
+      .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+
+    if (localOnly.length === 0) {
+      await metaService.set('firstSignInMerged', true)
+      return { merged: 0, total: 0, capExceeded: false }
+    }
+
+    let merged = 0
+    let capExceeded = false
+    for (const row of localOnly) {
+      try {
+        const { error } = await supabase
+          .from('saved_loadouts')
+          .insert(loadoutToRow(toLoadout(row), userId))
+        if (error) {
+          if (error.code === CAP_VIOLATION_CODE) {
+            // Doesn't fit under the cap: keep it as a flagged local write.
+            capExceeded = true
+            await db.put(STORE, { ...row, unsynced: true })
+            continue
+          }
+          if (error.code !== CONFLICT_CODE) {
+            // Transient: keep as a queued write; the reconnect processor retries.
+            await db.put(STORE, { ...row, unsynced: true })
+            continue
+          }
+          // CONFLICT_CODE: already on the server — count it as merged.
+        }
+      } catch {
+        await db.put(STORE, { ...row, unsynced: true })
+        continue
+      }
+      merged++
+      await db.put(STORE, { ...row, unsynced: false, deleted: false, lastSyncedAt: new Date().toISOString() })
+    }
+
+    await metaService.set('firstSignInMerged', true)
+    // §13.6 steps 6–7: re-pull so the cache reflects server truth post-merge.
+    await pullFromServer(userId)
+    emitLoadoutsChanged()
+    return { merged, total: localOnly.length, capExceeded }
   },
 
   async getAll(): Promise<Loadout[]> {
@@ -477,6 +562,17 @@ export const loadoutService = {
 
     const db = await getDb()
     return (await activeStored(db)).length
+  },
+
+  // Ids of loadouts written locally but not yet acknowledged by the server, for
+  // the Saved Loadouts "Local" pill + cap banner (PRD §6.5). Empty when signed
+  // out (local-only rows have no sync state to surface).
+  async unsyncedIds(): Promise<string[]> {
+    const userId = await currentUserId()
+    if (!userId) return []
+    const db = await getDb()
+    const all = (await db.getAll(STORE)) as StoredLoadout[]
+    return all.filter(row => row.unsynced && !row.deleted).map(row => row.id)
   },
 }
 

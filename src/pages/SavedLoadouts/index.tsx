@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Trash2, RefreshCw } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { loadoutService } from '@/services/loadouts'
-import { onConnectivityChange } from '@/services/connectivity'
+import { loadoutService, onLoadoutsChanged } from '@/services/loadouts'
+import { isOnline, onConnectivityChange } from '@/services/connectivity'
 import { catalogService } from '@/services/catalog'
+import { useAuth } from '@/context/AuthContext'
 import type { Loadout, MissionParams } from '@/types'
 import styles from './SavedLoadouts.module.css'
 
@@ -59,11 +60,12 @@ function contextLabel(loadout: Loadout): string {
 
 interface CardProps {
   loadout: Loadout
+  unsynced: boolean
   onDelete: (id: string) => void
   onReoptimize: (loadout: Loadout) => void
 }
 
-function LoadoutCard({ loadout, onDelete, onReoptimize }: CardProps) {
+function LoadoutCard({ loadout, unsynced, onDelete, onReoptimize }: CardProps) {
   const stale = checkStale(loadout)
   const weapons = [loadout.primaryWeapon, loadout.secondaryWeapon, loadout.grenade].map(resolveName)
   const stratagems = loadout.stratagems.map(resolveName)
@@ -76,7 +78,10 @@ function LoadoutCard({ loadout, onDelete, onReoptimize }: CardProps) {
     <div className={`${styles.card} ${stale ? styles.cardStale : ''}`}>
       <div className={styles.cardHeader}>
         <div className={styles.cardMeta}>
-          <span className={styles.cardContext}>{contextLabel(loadout)}</span>
+          <span className={styles.cardContext}>
+            {contextLabel(loadout)}
+            {unsynced && <span className={styles.localPill}>Local</span>}
+          </span>
           {modifiers.length > 0 && (
             <div className={styles.cardModifiers}>
               {modifiers.map(name => (
@@ -130,7 +135,10 @@ function LoadoutCard({ loadout, onDelete, onReoptimize }: CardProps) {
 
 export default function SavedLoadouts() {
   const navigate = useNavigate()
+  const { isSignedIn } = useAuth()
   const [loadouts, setLoadouts] = useState<Loadout[]>([])
+  const [unsyncedIds, setUnsyncedIds] = useState<Set<string>>(new Set())
+  const [online, setOnline] = useState(() => isOnline())
   const [loading, setLoading] = useState(true)
 
   // `silent` refreshes update the list in place without flashing the skeleton —
@@ -140,16 +148,21 @@ export default function SavedLoadouts() {
   const refresh = useCallback(async (silent = false) => {
     if (!silent) setLoading(true)
     await loadoutService.refresh()
-    const data = await loadoutService.getAll()
+    const [data, unsynced] = await Promise.all([
+      loadoutService.getAll(),
+      loadoutService.unsyncedIds(),
+    ])
     setLoadouts(data)
+    setUnsyncedIds(new Set(unsynced))
     setLoading(false)
   }, [])
 
-  // Initial load (skeleton). Mounting already covers "tab opened from app launch
-  // or navigated to" per PRD §13.2.
+  // Initial load (skeleton), and re-load when auth state flips. Signing in here
+  // triggers the first-sign-in merge (App.tsx); re-reading surfaces the merged
+  // loadouts. Signing out switches the view back to the local store.
   useEffect(() => {
     refresh()
-  }, [refresh])
+  }, [refresh, isSignedIn])
 
   // Fetch-on-focus (PRD §13.2): re-fetch from the source of truth when the tab
   // regains focus after being backgrounded, so a loadout saved on another device
@@ -166,13 +179,19 @@ export default function SavedLoadouts() {
     }
   }, [refresh])
 
-  // When connectivity returns while this screen is open, refresh so queued
-  // writes that just synced (and any server-side changes) show up (PRD §13.4).
+  // Track connectivity for the offline banner (PRD §6.4), and on reconnect
+  // refresh so queued writes that just synced show up (PRD §13.4).
   useEffect(() => {
-    return onConnectivityChange(online => {
-      if (online) refresh(true)
+    setOnline(isOnline())
+    return onConnectivityChange(nowOnline => {
+      setOnline(nowOnline)
+      if (nowOnline) refresh(true)
     })
   }, [refresh])
+
+  // Re-read after background mutations finish (first-sign-in merge, reconnect
+  // sync) so freshly-synced loadouts appear without waiting for a focus event.
+  useEffect(() => onLoadoutsChanged(() => refresh(true)), [refresh])
 
   async function handleDelete(id: string) {
     await loadoutService.delete(id)
@@ -204,6 +223,19 @@ export default function SavedLoadouts() {
         )}
       </div>
 
+      {!loading && isSignedIn && !online && (
+        <div className={styles.offlineBanner}>
+          You're offline — loadouts are saved locally and will sync when you reconnect.
+        </div>
+      )}
+
+      {!loading && isSignedIn && online && unsyncedIds.size > 0 && (
+        <div className={styles.capBanner}>
+          {unsyncedIds.size} loadout{unsyncedIds.size === 1 ? '' : 's'} couldn't sync — your account
+          is at the 50-loadout limit. Delete others to free space.
+        </div>
+      )}
+
       {loading && (
         <div className={styles.skeletonList}>
           {[0, 1, 2].map(i => <div key={i} className={styles.skeletonCard} />)}
@@ -227,7 +259,13 @@ export default function SavedLoadouts() {
       {!loading && loadouts.length > 0 && (
         <div className={styles.list}>
           {loadouts.map(l => (
-            <LoadoutCard key={l.id} loadout={l} onDelete={handleDelete} onReoptimize={handleReoptimize} />
+            <LoadoutCard
+              key={l.id}
+              loadout={l}
+              unsynced={unsyncedIds.has(l.id)}
+              onDelete={handleDelete}
+              onReoptimize={handleReoptimize}
+            />
           ))}
         </div>
       )}
