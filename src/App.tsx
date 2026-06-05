@@ -9,10 +9,20 @@ import SavedLoadouts from '@/pages/SavedLoadouts'
 import Settings from '@/pages/Settings'
 import Account from '@/pages/Account'
 import { planetService } from '@/services/planets'
+import { loadoutService } from '@/services/loadouts'
+import { onConnectivityChange } from '@/services/connectivity'
 import styles from './App.module.css'
 
 export default function App() {
   useEffect(() => { planetService.prefetch() }, [])
+
+  // Drain the offline write queue whenever connectivity returns, regardless of
+  // which screen is open (PRD §13.4). syncPending is a no-op when signed out.
+  useEffect(() => {
+    return onConnectivityChange(online => {
+      if (online) void loadoutService.syncPending()
+    })
+  }, [])
 
   return (
     <div className={styles.app}>

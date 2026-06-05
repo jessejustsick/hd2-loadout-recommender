@@ -1,6 +1,7 @@
 import { openDB, type IDBPDatabase } from 'idb'
 import type { FactionId, GenerationMode, Loadout } from '@/types'
 import { supabase } from './supabase'
+import { isOnline } from './connectivity'
 
 const DB_NAME = 'hd2-loadout'
 const DB_VERSION = 2
@@ -70,14 +71,19 @@ async function activeStored(db: IDBPDatabase): Promise<StoredLoadout[]> {
 }
 
 // ---------------------------------------------------------------------------
-// Supabase backing (Phase 4). When a user is signed in, the cloud table is the
-// source of truth and these helpers map between it and the v1 `Loadout` shape.
-// Signed-out users continue to use the IndexedDB path above unchanged.
+// Supabase backing (Phase 4). When a user is signed in, Supabase is the source
+// of truth and IndexedDB acts as a local read CACHE (PRD §13.2/§13.3):
 //
-// Merge 1 (this code) covers the online happy path: signed-in reads/writes go
-// straight to Supabase. Merge 2 will add the IndexedDB mirror that backs
-// offline use — unsynced writes, tombstone deletes, the reconnect processor,
-// and the first-sign-in merge. Those seams already exist on StoredLoadout.
+//   - Reads come from the cache. A pull from Supabase (on first read of a
+//     session and on every focus event) overwrites the cached mirror.
+//   - Online writes go to Supabase first, then mirror into the cache on success.
+//   - The cache lets a signed-in user still SEE their loadouts while offline.
+//
+// Signed-out users use the plain IndexedDB path above, unchanged.
+//
+// Merge 2 layers offline behavior on top of this cache: unsynced writes,
+// tombstone deletes, the reconnect processor, and the first-sign-in merge. Those
+// seams (the SyncMeta flags) already exist on StoredLoadout.
 // ---------------------------------------------------------------------------
 
 const SB_COLUMNS =
@@ -108,6 +114,9 @@ interface LoadoutRow {
 
 // Postgres SQLSTATE for the check_violation our 50-row cap trigger raises.
 const CAP_VIOLATION_CODE = '23514'
+// unique_violation — a queued insert whose id is already on the server (a prior
+// attempt that succeeded server-side but didn't get its local flag cleared).
+const CONFLICT_CODE = '23505'
 
 async function currentUserId(): Promise<string | null> {
   const { data } = await supabase.auth.getSession()
@@ -165,17 +174,176 @@ function loadoutToRow(loadout: Loadout, userId: string): Record<string, unknown>
   }
 }
 
+// Tracks which account's data the cache currently holds, so the first read of a
+// session pulls from the server exactly once. Reset on sign-out / account change.
+let hydratedUserId: string | null = null
+
+// A cached row is part of the signed-in user's view when it's either a synced
+// mirror row (`lastSyncedAt` set) or a pending local write (`unsynced`) — and not
+// a tombstone. Pre-sign-in local-only rows (never synced, not pending) are hidden
+// from the signed-in view; they await the first-sign-in merge (Step 4) and are
+// only visible again signed-out.
+function isSignedInVisible(row: StoredLoadout): boolean {
+  return !row.deleted && (row.lastSyncedAt != null || row.unsynced)
+}
+
+// Pull the authoritative server list and overwrite the cached mirror. Bails
+// without touching the cache if offline or the fetch fails, so a transient drop
+// leaves the last-known-good cache in place rather than wiping it. Pending local
+// writes (`unsynced`) and tombstones are preserved across the reconcile.
+async function pullFromServer(userId: string): Promise<boolean> {
+  if (!isOnline()) return false
+  const { data, error } = await supabase
+    .from('saved_loadouts')
+    .select(SB_COLUMNS)
+    .order('created_at', { ascending: false })
+  if (error || !data) return false
+
+  const serverRows = data as unknown as LoadoutRow[]
+  const tombstonedIds = new Set<string>()
+  const db = await getDb()
+  const tx = db.transaction(STORE, 'readwrite')
+
+  // Drop the previous clean mirror (synced, not pending, not a tombstone); keep
+  // unsynced writes and tombstones so Steps 2–3's pending state survives a pull.
+  let cursor = await tx.store.openCursor()
+  while (cursor) {
+    const row = cursor.value as StoredLoadout
+    if (row.deleted) tombstonedIds.add(row.id)
+    if (row.lastSyncedAt != null && !row.unsynced && !row.deleted) {
+      await cursor.delete()
+    }
+    cursor = await cursor.continue()
+  }
+
+  // Write the fresh server rows as clean mirror entries, skipping any the user
+  // has locally tombstoned (their DELETE just hasn't propagated yet).
+  const syncedAt = new Date().toISOString()
+  for (const row of serverRows) {
+    if (tombstonedIds.has(row.id)) continue
+    const stored: StoredLoadout = {
+      ...rowToLoadout(row),
+      unsynced: false,
+      deleted: false,
+      lastSyncedAt: syncedAt,
+    }
+    await tx.store.put(stored)
+  }
+
+  await tx.done
+  hydratedUserId = userId
+  return true
+}
+
+// Ensure the cache has been populated from the server at least once this session
+// for this account. Subsequent reads serve from the cache until a focus-driven
+// pull refreshes it (PRD §13.2).
+async function ensureHydrated(userId: string): Promise<void> {
+  if (hydratedUserId === userId) return
+  await pullFromServer(userId)
+}
+
+// Mirror a single server-confirmed row into the cache as a clean synced entry.
+async function mirrorToCache(loadout: Loadout): Promise<void> {
+  const db = await getDb()
+  const stored: StoredLoadout = {
+    ...loadout,
+    unsynced: false,
+    deleted: false,
+    lastSyncedAt: new Date().toISOString(),
+  }
+  await db.put(STORE, stored)
+}
+
+// Reconnect sync processor (PRD §13.4). Pushes locally-queued writes to Supabase
+// in chronological order, clearing each row's `unsynced` flag on success. A
+// failure leaves the flag set and moves on: the 50-cap (23514) is the expected
+// case and surfaces to the user via the Saved Loadouts banner (Step 5); other
+// failures retry on the next focus/online event. Tombstone deletes are added in
+// Step 3.
+async function pushPending(userId: string): Promise<void> {
+  if (!isOnline()) return
+  const db = await getDb()
+  const all = (await db.getAll(STORE)) as StoredLoadout[]
+  const pendingSaves = all
+    .filter(row => row.unsynced && !row.deleted)
+    .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+
+  for (const row of pendingSaves) {
+    try {
+      const { error } = await supabase
+        .from('saved_loadouts')
+        .insert(loadoutToRow(toLoadout(row), userId))
+      // Leave the flag set on cap or transient failure so it retries / surfaces.
+      if (error && error.code !== CONFLICT_CODE) continue
+    } catch {
+      // Network threw mid-sync: leave flagged, the next trigger retries.
+      continue
+    }
+    // Success (or already present server-side): promote to a clean synced row.
+    const cleared: StoredLoadout = {
+      ...row,
+      unsynced: false,
+      deleted: false,
+      lastSyncedAt: new Date().toISOString(),
+    }
+    await db.put(STORE, cleared)
+  }
+
+  // Propagate offline deletes (PRD §13.5): DELETE the server row, then remove the
+  // local tombstone once confirmed. A failure leaves the tombstone for next time.
+  const pendingDeletes = all.filter(row => row.unsynced && row.deleted)
+  for (const row of pendingDeletes) {
+    try {
+      const { error } = await supabase.from('saved_loadouts').delete().eq('id', row.id)
+      if (error) continue
+    } catch {
+      continue
+    }
+    await db.delete(STORE, row.id)
+  }
+}
+
+// Coalesce concurrent sync runs (focus + online event can fire together) so the
+// queue is only drained by one in-flight pass at a time.
+let syncInFlight: Promise<void> | null = null
+function pushPendingGuarded(userId: string): Promise<void> {
+  if (!syncInFlight) {
+    syncInFlight = pushPending(userId).finally(() => {
+      syncInFlight = null
+    })
+  }
+  return syncInFlight
+}
+
 export const loadoutService = {
+  // Fetch-on-focus entry point (PRD §13.2/§13.4): drain any queued local writes
+  // first, then pull the server list into the cache. No-op signed out; offline,
+  // both halves bail safely. The caller then reads the cache via getAll().
+  async refresh(): Promise<void> {
+    const userId = await currentUserId()
+    if (!userId) return
+    await pushPendingGuarded(userId)
+    await pullFromServer(userId)
+  },
+
+  // Drain the offline write queue without re-pulling — used by the connectivity
+  // (`online` event) trigger so pending writes sync the moment we reconnect.
+  async syncPending(): Promise<void> {
+    const userId = await currentUserId()
+    if (userId) await pushPendingGuarded(userId)
+  },
+
   async getAll(): Promise<Loadout[]> {
     const userId = await currentUserId()
     if (userId) {
-      // RLS scopes the select to the caller's rows; the index backs this order.
-      const { data, error } = await supabase
-        .from('saved_loadouts')
-        .select(SB_COLUMNS)
-        .order('created_at', { ascending: false })
-      if (error || !data) return []
-      return (data as unknown as LoadoutRow[]).map(rowToLoadout)
+      await ensureHydrated(userId)
+      const db = await getDb()
+      const all = (await db.getAll(STORE)) as StoredLoadout[]
+      return all
+        .filter(isSignedInVisible)
+        .map(toLoadout)
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     }
 
     const db = await getDb()
@@ -187,45 +355,61 @@ export const loadoutService = {
 
   async get(id: string): Promise<Loadout | undefined> {
     const userId = await currentUserId()
-    if (userId) {
-      const { data, error } = await supabase
-        .from('saved_loadouts')
-        .select(SB_COLUMNS)
-        .eq('id', id)
-        .maybeSingle()
-      if (error || !data) return undefined
-      return rowToLoadout(data as unknown as LoadoutRow)
-    }
+    if (userId) await ensureHydrated(userId)
 
     const db = await getDb()
     const stored = (await db.get(STORE, id)) as StoredLoadout | undefined
-    if (!stored || stored.deleted) return undefined
+    if (!stored) return undefined
+    // Signed in, apply the cache visibility rule; signed out, just hide tombstones.
+    if (userId ? !isSignedInVisible(stored) : stored.deleted) return undefined
     return toLoadout(stored)
   },
 
   async save(loadout: Loadout): Promise<{ saved: boolean; nearLimit: boolean }> {
     const userId = await currentUserId()
     if (userId) {
-      const { error } = await supabase
-        .from('saved_loadouts')
-        .insert(loadoutToRow(loadout, userId))
-      // Server-side 50-row cap rejects the insert; surface as "not saved" so the
-      // UI shows its storage-full state (same as the local cap path below).
-      if (error?.code === CAP_VIOLATION_CODE) return { saved: false, nearLimit: false }
-      // Merge 2 will treat other failures (offline) as a queued unsynced write.
-      // For the merge-1 online path, any other error is a failed save.
-      if (error) return { saved: false, nearLimit: false }
-      const { count } = await supabase
-        .from('saved_loadouts')
-        .select('id', { count: 'exact', head: true })
-      return { saved: true, nearLimit: (count ?? 0) >= WARN_AT }
+      // Online write: Supabase first, then mirror into the cache on success
+      // (PRD §13.3).
+      if (isOnline()) {
+        try {
+          const { error } = await supabase
+            .from('saved_loadouts')
+            .insert(loadoutToRow(loadout, userId))
+          // Server-side 50-row cap rejects the insert; surface as "not saved" so
+          // the UI shows its storage-full state (same as the local cap below).
+          if (error?.code === CAP_VIOLATION_CODE) return { saved: false, nearLimit: false }
+          if (!error) {
+            await mirrorToCache(loadout)
+            const { count } = await supabase
+              .from('saved_loadouts')
+              .select('id', { count: 'exact', head: true })
+            return { saved: true, nearLimit: (count ?? 0) >= WARN_AT }
+          }
+          // Non-cap failure while nominally online: `navigator.onLine` isn't
+          // authoritative, so rather than mislabel this as "storage full" we fall
+          // through and queue it locally for the reconnect processor to retry.
+        } catch {
+          // Network threw (offline despite navigator.onLine): fall through to queue.
+        }
+      }
+
+      // Offline (or an online insert that failed for a non-cap reason): queue
+      // the write in IndexedDB flagged unsynced (PRD §13.3). The UI still
+      // confirms the save; the reconnect processor pushes it later.
+      const db = await getDb()
+      const all = (await db.getAll(STORE)) as StoredLoadout[]
+      // Client-side hard cap on local count, synced + unsynced (PRD §6.6).
+      const localCount = all.filter(isSignedInVisible).length
+      if (localCount >= MAX_LOADOUTS) return { saved: false, nearLimit: false }
+      const queued: StoredLoadout = { ...loadout, unsynced: true, deleted: false, lastSyncedAt: null }
+      await db.put(STORE, queued)
+      return { saved: true, nearLimit: localCount + 1 >= WARN_AT }
     }
 
     const db = await getDb()
     const count = (await activeStored(db)).length
     if (count >= MAX_LOADOUTS) return { saved: false, nearLimit: false }
-    // Signed-out / local writes carry the default sync metadata. Phase 4 sets
-    // `unsynced: true` here when a signed-in user is offline.
+    // Signed-out / local writes carry the default sync metadata.
     const stored: StoredLoadout = { ...SYNC_DEFAULTS, ...loadout }
     await db.put(STORE, stored)
     return { saved: true, nearLimit: count + 1 >= WARN_AT }
@@ -234,8 +418,31 @@ export const loadoutService = {
   async delete(id: string): Promise<void> {
     const userId = await currentUserId()
     if (userId) {
-      // Merge 2 adds offline tombstoning (PRD §13.5); merge 1 deletes directly.
-      await supabase.from('saved_loadouts').delete().eq('id', id)
+      const db = await getDb()
+      // Online delete: Supabase first, then drop from the cache.
+      if (isOnline()) {
+        try {
+          const { error } = await supabase.from('saved_loadouts').delete().eq('id', id)
+          if (!error) {
+            await db.delete(STORE, id)
+            return
+          }
+          // Non-network error: fall through and tombstone so it retries.
+        } catch {
+          // Network threw: fall through to the offline tombstone path.
+        }
+      }
+
+      // Offline (or a failed online delete): tombstone for deferred propagation
+      // (PRD §13.5). A row that never reached the server (a queued offline create,
+      // lastSyncedAt null) has nothing to propagate, so just drop it locally.
+      const row = (await db.get(STORE, id)) as StoredLoadout | undefined
+      if (!row) return
+      if (row.lastSyncedAt == null) {
+        await db.delete(STORE, id)
+      } else {
+        await db.put(STORE, { ...row, unsynced: true, deleted: true })
+      }
       return
     }
 
@@ -250,6 +457,8 @@ export const loadoutService = {
     if (userId) {
       // Delete requires a filter; user_id matches every row RLS would expose.
       await supabase.from('saved_loadouts').delete().eq('user_id', userId)
+      // Force a re-pull on the next read now that the mirror is gone.
+      hydratedUserId = null
     }
 
     // Always clear the local store too, so signing out leaves nothing behind.
@@ -260,10 +469,10 @@ export const loadoutService = {
   async count(): Promise<number> {
     const userId = await currentUserId()
     if (userId) {
-      const { count } = await supabase
-        .from('saved_loadouts')
-        .select('id', { count: 'exact', head: true })
-      return count ?? 0
+      await ensureHydrated(userId)
+      const db = await getDb()
+      const all = (await db.getAll(STORE)) as StoredLoadout[]
+      return all.filter(isSignedInVisible).length
     }
 
     const db = await getDb()

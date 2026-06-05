@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Trash2, RefreshCw } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { loadoutService } from '@/services/loadouts'
+import { onConnectivityChange } from '@/services/connectivity'
 import { catalogService } from '@/services/catalog'
 import type { Loadout, MissionParams } from '@/types'
 import styles from './SavedLoadouts.module.css'
@@ -134,8 +135,11 @@ export default function SavedLoadouts() {
 
   // `silent` refreshes update the list in place without flashing the skeleton —
   // used by the fetch-on-focus path so a background sync isn't visually jarring.
+  // Pull from the server (no-op when signed out/offline) before reading, so the
+  // cache reflects other devices' changes per PRD §13.2.
   const refresh = useCallback(async (silent = false) => {
     if (!silent) setLoading(true)
+    await loadoutService.refresh()
     const data = await loadoutService.getAll()
     setLoadouts(data)
     setLoading(false)
@@ -160,6 +164,14 @@ export default function SavedLoadouts() {
       window.removeEventListener('focus', onVisible)
       document.removeEventListener('visibilitychange', onVisible)
     }
+  }, [refresh])
+
+  // When connectivity returns while this screen is open, refresh so queued
+  // writes that just synced (and any server-side changes) show up (PRD §13.4).
+  useEffect(() => {
+    return onConnectivityChange(online => {
+      if (online) refresh(true)
+    })
   }, [refresh])
 
   async function handleDelete(id: string) {
