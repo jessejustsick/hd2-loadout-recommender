@@ -9,6 +9,7 @@ import {
 import type { Session, User } from '@supabase/supabase-js'
 import { authService } from '@/services/auth'
 import { profileService, type UserProfile } from '@/services/profile'
+import { loadoutService } from '@/services/loadouts'
 
 interface AuthContextValue {
   session: Session | null
@@ -53,6 +54,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false)
       // A recovery link lands the user in a session purely to set a new password.
       if (event === 'PASSWORD_RECOVERY') setRecoveryMode(true)
+      // Safety net for any sign-out path (token expiry, revoked session, etc.):
+      // wipe local user data even when it didn't go through the Account button
+      // (PRD §13.8/§4.6). Idempotent with the explicit clear in handleSignOut.
+      if (event === 'SIGNED_OUT') void loadoutService.clearLocalData()
     })
 
     return () => {

@@ -551,6 +551,18 @@ export const loadoutService = {
     await db.clear(STORE)
   },
 
+  // Wipe the local cache + sync state WITHOUT touching the server (PRD §13.8/§4.6).
+  // Used on sign-out: the account keeps its loadouts server-side, while this
+  // device starts clean (no stale rows visible to the next user) and the
+  // first-sign-in merge becomes eligible again for the next sign-in. Pending
+  // unsynced writes are discarded per assumption A-V2-9.
+  async clearLocalData(): Promise<void> {
+    const db = await getDb()
+    await db.clear(STORE)
+    await db.delete(META_STORE, 'firstSignInMerged')
+    hydratedUserId = null
+  },
+
   async count(): Promise<number> {
     const userId = await currentUserId()
     if (userId) {

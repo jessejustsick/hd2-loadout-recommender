@@ -4,6 +4,7 @@ import { ArrowLeft, ChevronDown } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 import { authService } from '@/services/auth'
 import { profileService } from '@/services/profile'
+import { loadoutService } from '@/services/loadouts'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import styles from './Account.module.css'
 
@@ -59,9 +60,11 @@ export default function Account() {
 
   async function handleSignOut() {
     setSigningOut(true)
+    // Clear the local cache before the session ends so this account's loadouts
+    // can't linger for the next (signed-out or different) user (PRD §13.8/§4.6).
+    // The loadouts remain on the server; pending unsynced writes are discarded.
+    await loadoutService.clearLocalData()
     await authService.signOut()
-    // Phase 2/3: clear the session only. Clearing local user data (PRD §4.6)
-    // lands in Phase 4 once the server is the source of truth.
     setSigningOut(false)
     setSignOutOpen(false)
     navigate('/recommend')
