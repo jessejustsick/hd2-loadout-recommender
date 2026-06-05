@@ -37,6 +37,90 @@
   color: var(--color-accent);
 }
 
+/* ---- Right-side auth controls (HeaderAuth) ---- */
+.authSlot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.signInBtn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--space-sm);
+  margin-right: calc(-1 * var(--space-xs));
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent);
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.signInBtn:hover {
+  opacity: 0.85;
+}
+
+.accountBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-right: calc(-1 * var(--space-sm));
+  color: var(--color-text-secondary);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.accountBtn:hover {
+  color: var(--color-text-primary);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + var(--space-xs));
+  right: 0;
+  min-width: 200px;
+  max-width: 80vw;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding: var(--space-xs);
+  z-index: 110;
+  animation: menuIn var(--duration-fast) var(--ease-out);
+}
+
+.menuEmail {
+  padding: var(--space-sm) var(--space-sm) var(--space-xs);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  word-break: break-all;
+}
+
+.menuItem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--space-sm);
+  min-height: 40px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: var(--color-text-primary);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.menuItem:hover {
+  background: var(--color-bg-tertiary);
+}
+
+@keyframes menuIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @media (min-width: 768px) {
   /* Sit to the right of the desktop sidebar rather than over it. */
   .chrome {

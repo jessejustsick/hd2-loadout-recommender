@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
+import HeaderAuth from './HeaderAuth'
 import styles from './Header.module.css'
 
-// Persistent chrome bar shown above every screen (PRD §9.1). Phase 1 ships the
-// left-side wordmark only; the right-side auth indicator is added in Phase 2.
+// Persistent chrome bar shown above every screen (PRD §9.1): wordmark on the
+// left, auth indicator on the right.
 export default function Header() {
   const navigate = useNavigate()
 
@@ -16,7 +17,7 @@ export default function Header() {
       >
         Hellpod Companion
       </button>
-      {/* Right side (auth indicator) ships in Phase 2 — intentionally empty for now. */}
+      <HeaderAuth />
     </header>
   )
 }

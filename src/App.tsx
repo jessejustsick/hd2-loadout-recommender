@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Header from '@/components/Header'
 import Navigation from '@/components/Navigation'
+import SetPasswordModal from '@/components/SetPasswordModal'
 import Recommend from '@/pages/Recommend'
 import Randomizer from '@/pages/Randomizer'
 import SavedLoadouts from '@/pages/SavedLoadouts'
@@ -25,6 +26,7 @@ export default function App() {
         </Routes>
       </main>
       <Navigation />
+      <SetPasswordModal />
     </div>
   )
 }
