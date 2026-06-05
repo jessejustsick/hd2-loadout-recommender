@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ChevronRight } from 'lucide-react'
 import { loadoutService } from '@/services/loadouts'
+import { useAuth } from '@/context/AuthContext'
+import SignInModal from '@/components/SignInModal'
 import styles from './Settings.module.css'
 
 const APP_VERSION = '0.1.0'
 
 export default function Settings() {
+  const { isSignedIn } = useAuth()
+  const navigate = useNavigate()
   const [count, setCount] = useState<number | null>(null)
   const [clearState, setClearState] = useState<'idle' | 'confirm' | 'clearing' | 'done'>('idle')
+  const [signInOpen, setSignInOpen] = useState(false)
 
   useEffect(() => {
     loadoutService.count().then(setCount)
@@ -40,6 +47,24 @@ export default function Settings() {
     <div className={styles.page}>
       <img src="/hd2-logo.svg" alt="Hellpod Companion" className={styles.gameLogo} />
       <h1 className={styles.title}>Settings</h1>
+
+      {/* Account section */}
+      <div className={styles.section}>
+        <p className={styles.sectionLabel}>Account</p>
+        <div className={styles.card}>
+          {isSignedIn ? (
+            <button className={styles.navRow} onClick={() => navigate('/account')}>
+              <span className={styles.rowLabel}>Account</span>
+              <ChevronRight size={18} className={styles.chevron} aria-hidden="true" />
+            </button>
+          ) : (
+            <button className={styles.navRow} onClick={() => setSignInOpen(true)}>
+              <span className={styles.rowLabel}>Sign in</span>
+              <ChevronRight size={18} className={styles.chevron} aria-hidden="true" />
+            </button>
+          )}
+        </div>
+      </div>
 
       {/* Data section */}
       <div className={styles.section}>
@@ -95,6 +120,8 @@ export default function Settings() {
         Unofficial fan-made tool. Not affiliated with Arrowhead Game Studios or PlayStation.
         Helldivers 2 and all related content are property of their respective owners.
       </p>
+
+      <SignInModal open={signInOpen} onClose={() => setSignInOpen(false)} />
     </div>
   )
 }

@@ -7,6 +7,7 @@ import Recommend from '@/pages/Recommend'
 import Randomizer from '@/pages/Randomizer'
 import SavedLoadouts from '@/pages/SavedLoadouts'
 import Settings from '@/pages/Settings'
+import Account from '@/pages/Account'
 import { planetService } from '@/services/planets'
 import styles from './App.module.css'
 
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/randomizer/*" element={<Randomizer />} />
           <Route path="/saved" element={<SavedLoadouts />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </main>
       <Navigation />

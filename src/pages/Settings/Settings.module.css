@@ -69,6 +69,28 @@
   color: var(--color-text-primary);
 }
 
+/* Tappable navigation row (Account / Sign in) */
+.navRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-md);
+  min-height: 52px;
+  background: transparent;
+  font-family: var(--font-family);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.navRow:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.chevron {
+  color: var(--color-text-disabled);
+  flex-shrink: 0;
+}
+
 .rowValue {
   font-size: 14px;
   color: var(--color-text-secondary);
