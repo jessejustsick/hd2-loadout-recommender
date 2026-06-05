@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Trash2, RefreshCw } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { loadoutService } from '@/services/loadouts'
@@ -132,12 +132,35 @@ export default function SavedLoadouts() {
   const [loadouts, setLoadouts] = useState<Loadout[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    loadoutService.getAll().then(data => {
-      setLoadouts(data)
-      setLoading(false)
-    })
+  // `silent` refreshes update the list in place without flashing the skeleton —
+  // used by the fetch-on-focus path so a background sync isn't visually jarring.
+  const refresh = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true)
+    const data = await loadoutService.getAll()
+    setLoadouts(data)
+    setLoading(false)
   }, [])
+
+  // Initial load (skeleton). Mounting already covers "tab opened from app launch
+  // or navigated to" per PRD §13.2.
+  useEffect(() => {
+    refresh()
+  }, [refresh])
+
+  // Fetch-on-focus (PRD §13.2): re-fetch from the source of truth when the tab
+  // regains focus after being backgrounded, so a loadout saved on another device
+  // appears without a manual reload. Silent so it doesn't flash the skeleton.
+  useEffect(() => {
+    function onVisible() {
+      if (document.visibilityState === 'visible') refresh(true)
+    }
+    window.addEventListener('focus', onVisible)
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      window.removeEventListener('focus', onVisible)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+  }, [refresh])
 
   async function handleDelete(id: string) {
     await loadoutService.delete(id)

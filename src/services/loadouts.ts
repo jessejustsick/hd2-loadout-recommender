@@ -1,5 +1,6 @@
 import { openDB, type IDBPDatabase } from 'idb'
-import type { Loadout } from '@/types'
+import type { FactionId, GenerationMode, Loadout } from '@/types'
+import { supabase } from './supabase'
 
 const DB_NAME = 'hd2-loadout'
 const DB_VERSION = 2
@@ -68,8 +69,115 @@ async function activeStored(db: IDBPDatabase): Promise<StoredLoadout[]> {
   return all.filter(row => !row.deleted)
 }
 
+// ---------------------------------------------------------------------------
+// Supabase backing (Phase 4). When a user is signed in, the cloud table is the
+// source of truth and these helpers map between it and the v1 `Loadout` shape.
+// Signed-out users continue to use the IndexedDB path above unchanged.
+//
+// Merge 1 (this code) covers the online happy path: signed-in reads/writes go
+// straight to Supabase. Merge 2 will add the IndexedDB mirror that backs
+// offline use — unsynced writes, tombstone deletes, the reconnect processor,
+// and the first-sign-in merge. Those seams already exist on StoredLoadout.
+// ---------------------------------------------------------------------------
+
+const SB_COLUMNS =
+  'id, primary_weapon_id, secondary_weapon_id, grenade_id, ' +
+  'stratagem_1_id, stratagem_2_id, stratagem_3_id, stratagem_4_id, ' +
+  'armor_id, booster_id, faction, planet, difficulty, mission_type, ' +
+  'modifiers, generation_mode, created_at'
+
+interface LoadoutRow {
+  id: string
+  primary_weapon_id: string
+  secondary_weapon_id: string
+  grenade_id: string
+  stratagem_1_id: string | null
+  stratagem_2_id: string | null
+  stratagem_3_id: string | null
+  stratagem_4_id: string | null
+  armor_id: string
+  booster_id: string
+  faction: string | null
+  planet: string | null
+  difficulty: number | null
+  mission_type: string | null
+  modifiers: string[] | null
+  generation_mode: string
+  created_at: string
+}
+
+// Postgres SQLSTATE for the check_violation our 50-row cap trigger raises.
+const CAP_VIOLATION_CODE = '23514'
+
+async function currentUserId(): Promise<string | null> {
+  const { data } = await supabase.auth.getSession()
+  return data.session?.user.id ?? null
+}
+
+function rowToLoadout(row: LoadoutRow): Loadout {
+  const stratagems = [
+    row.stratagem_1_id,
+    row.stratagem_2_id,
+    row.stratagem_3_id,
+    row.stratagem_4_id,
+  ].filter((s): s is string => !!s)
+
+  return {
+    id: row.id,
+    primaryWeapon: row.primary_weapon_id,
+    secondaryWeapon: row.secondary_weapon_id,
+    grenade: row.grenade_id,
+    stratagems,
+    armor: row.armor_id,
+    booster: row.booster_id,
+    faction: (row.faction as FactionId) ?? undefined,
+    planet: row.planet ?? undefined,
+    difficulty: row.difficulty ?? undefined,
+    missionType: row.mission_type ?? undefined,
+    modifiers: row.modifiers ?? undefined,
+    generationMode: row.generation_mode as GenerationMode,
+    createdAt: row.created_at,
+  }
+}
+
+function loadoutToRow(loadout: Loadout, userId: string): Record<string, unknown> {
+  return {
+    id: loadout.id,
+    user_id: userId,
+    primary_weapon_id: loadout.primaryWeapon,
+    secondary_weapon_id: loadout.secondaryWeapon,
+    grenade_id: loadout.grenade,
+    stratagem_1_id: loadout.stratagems[0] ?? null,
+    stratagem_2_id: loadout.stratagems[1] ?? null,
+    stratagem_3_id: loadout.stratagems[2] ?? null,
+    stratagem_4_id: loadout.stratagems[3] ?? null,
+    armor_id: loadout.armor,
+    booster_id: loadout.booster,
+    faction: loadout.faction ?? null,
+    planet: loadout.planet ?? null,
+    difficulty: loadout.difficulty ?? null,
+    mission_type: loadout.missionType ?? null,
+    modifiers: loadout.modifiers ?? null,
+    generation_mode: loadout.generationMode,
+    // Preserve the client timestamp so cross-device ordering matches what the
+    // user saw locally rather than drifting to server insert time.
+    created_at: loadout.createdAt,
+  }
+}
+
 export const loadoutService = {
   async getAll(): Promise<Loadout[]> {
+    const userId = await currentUserId()
+    if (userId) {
+      // RLS scopes the select to the caller's rows; the index backs this order.
+      const { data, error } = await supabase
+        .from('saved_loadouts')
+        .select(SB_COLUMNS)
+        .order('created_at', { ascending: false })
+      if (error || !data) return []
+      return (data as unknown as LoadoutRow[]).map(rowToLoadout)
+    }
+
     const db = await getDb()
     const active = await activeStored(db)
     return active
@@ -78,6 +186,17 @@ export const loadoutService = {
   },
 
   async get(id: string): Promise<Loadout | undefined> {
+    const userId = await currentUserId()
+    if (userId) {
+      const { data, error } = await supabase
+        .from('saved_loadouts')
+        .select(SB_COLUMNS)
+        .eq('id', id)
+        .maybeSingle()
+      if (error || !data) return undefined
+      return rowToLoadout(data as unknown as LoadoutRow)
+    }
+
     const db = await getDb()
     const stored = (await db.get(STORE, id)) as StoredLoadout | undefined
     if (!stored || stored.deleted) return undefined
@@ -85,6 +204,23 @@ export const loadoutService = {
   },
 
   async save(loadout: Loadout): Promise<{ saved: boolean; nearLimit: boolean }> {
+    const userId = await currentUserId()
+    if (userId) {
+      const { error } = await supabase
+        .from('saved_loadouts')
+        .insert(loadoutToRow(loadout, userId))
+      // Server-side 50-row cap rejects the insert; surface as "not saved" so the
+      // UI shows its storage-full state (same as the local cap path below).
+      if (error?.code === CAP_VIOLATION_CODE) return { saved: false, nearLimit: false }
+      // Merge 2 will treat other failures (offline) as a queued unsynced write.
+      // For the merge-1 online path, any other error is a failed save.
+      if (error) return { saved: false, nearLimit: false }
+      const { count } = await supabase
+        .from('saved_loadouts')
+        .select('id', { count: 'exact', head: true })
+      return { saved: true, nearLimit: (count ?? 0) >= WARN_AT }
+    }
+
     const db = await getDb()
     const count = (await activeStored(db)).length
     if (count >= MAX_LOADOUTS) return { saved: false, nearLimit: false }
@@ -96,6 +232,13 @@ export const loadoutService = {
   },
 
   async delete(id: string): Promise<void> {
+    const userId = await currentUserId()
+    if (userId) {
+      // Merge 2 adds offline tombstoning (PRD §13.5); merge 1 deletes directly.
+      await supabase.from('saved_loadouts').delete().eq('id', id)
+      return
+    }
+
     const db = await getDb()
     // Phase 0 keeps v1 behavior: a hard delete. Phase 4 introduces tombstoning
     // (`deleted: true`) for offline signed-in deletes per PRD §13.5.
@@ -103,11 +246,26 @@ export const loadoutService = {
   },
 
   async deleteAll(): Promise<void> {
+    const userId = await currentUserId()
+    if (userId) {
+      // Delete requires a filter; user_id matches every row RLS would expose.
+      await supabase.from('saved_loadouts').delete().eq('user_id', userId)
+    }
+
+    // Always clear the local store too, so signing out leaves nothing behind.
     const db = await getDb()
     await db.clear(STORE)
   },
 
   async count(): Promise<number> {
+    const userId = await currentUserId()
+    if (userId) {
+      const { count } = await supabase
+        .from('saved_loadouts')
+        .select('id', { count: 'exact', head: true })
+      return count ?? 0
+    }
+
     const db = await getDb()
     return (await activeStored(db)).length
   },
