@@ -41,6 +41,7 @@ export interface Weapon {
   tags: string[]
   spawnerKill?: SpawnerKill
   source: string
+  is_paid: boolean
   availability?: Availability
   iconRef: string
   lastUpdated: string
@@ -57,6 +58,7 @@ export interface Stratagem {
   callInType: CallInType
   iconRef: string
   source: string
+  is_paid: boolean
   availability?: Availability
   lastUpdated: string
 }
@@ -69,6 +71,7 @@ export interface Armor {
   tags: string[]
   iconRef: string
   source: string
+  is_paid: boolean
   availability?: Availability
   lastUpdated: string
 }
@@ -79,6 +82,7 @@ export interface Booster {
   effect: string
   tags: string[]
   source: string
+  is_paid: boolean
   availability?: Availability
   lastUpdated: string
 }
