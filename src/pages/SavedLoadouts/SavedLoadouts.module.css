@@ -75,6 +75,22 @@
   padding: 1px 6px;
 }
 
+/* "No paid items" provenance pill (Phase 5) — neutral/informational, not a
+   warning: this loadout was generated with the paid-items filter on. */
+.noPaidPill {
+  display: inline-block;
+  margin-left: var(--space-sm);
+  vertical-align: middle;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-success);
+  background: rgba(63, 185, 80, 0.12);
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+}
+
 /* Empty state */
 .empty {
   padding: var(--space-xl) 0;

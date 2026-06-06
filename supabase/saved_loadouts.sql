@@ -24,6 +24,7 @@ create table if not exists public.saved_loadouts (
   modifiers text[],    -- nullable: mission modifier ids; rendered as chips on saved cards
   generation_mode text not null
     check (generation_mode in ('recommended', 'constrained_random', 'full_random')),
+  no_paid_items boolean not null default false, -- Phase 5: generated with the paid-items filter on; tags the card "No paid items"
   created_at timestamptz not null default now()
 );
 
@@ -32,6 +33,11 @@ create table if not exists public.saved_loadouts (
 --     (Harmless no-op when the create above already included it.)
 alter table public.saved_loadouts
   add column if not exists modifiers text[];
+
+-- 1b. Phase 5: paid-items provenance flag, added idempotently for already-
+--     provisioned databases. Existing rows default to false (untagged).
+alter table public.saved_loadouts
+  add column if not exists no_paid_items boolean not null default false;
 
 -- 2. Index for the "most recent first" list query that drives the Saved
 --    Loadouts screen and fetch-on-focus reads.

@@ -81,6 +81,7 @@ function LoadoutCard({ loadout, unsynced, onDelete, onReoptimize }: CardProps) {
           <span className={styles.cardContext}>
             {contextLabel(loadout)}
             {unsynced && <span className={styles.localPill}>Local</span>}
+            {loadout.noPaidItems && <span className={styles.noPaidPill}>No paid items</span>}
           </span>
           {modifiers.length > 0 && (
             <div className={styles.cardModifiers}>

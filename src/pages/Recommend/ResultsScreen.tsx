@@ -4,6 +4,7 @@ import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, ArrowLeftRight } fro
 import { generateRecommendation, getAlternatives, getArmorAlternativesByTier } from '@/engine'
 import { loadoutService } from '@/services/loadouts'
 import { catalogService } from '@/services/catalog'
+import { useSettings } from '@/context/SettingsContext'
 import type {
   MissionParams, LoadoutResult, Weapon, Stratagem, Armor, Booster, FactionId, Loadout, StratagemFamily,
 } from '@/types'
@@ -295,10 +296,11 @@ function SwapSheet({ sheet, onPick, onMore, onClose }: SwapSheetProps) {
 export default function ResultsScreen() {
   const location = useLocation()
   const navigate = useNavigate()
+  const { hidePaidItems } = useSettings()
   const maybeParams = (location.state as LocationState | null)?.params ?? null
 
   const [loadout, setLoadout] = useState<LoadoutResult>(() =>
-    maybeParams ? generateRecommendation(maybeParams) : EMPTY_LOADOUT
+    maybeParams ? generateRecommendation(maybeParams, { hidePaidItems }) : EMPTY_LOADOUT
   )
   const [newItemIds, setNewItemIds] = useState<Set<string>>(new Set())
   const [openAccordions, setOpenAccordions] = useState<Set<string>>(new Set())
@@ -334,7 +336,7 @@ export default function ResultsScreen() {
   }
 
   function handleReroll() {
-    const next = generateRecommendation(params)
+    const next = generateRecommendation(params, { hidePaidItems })
     setNewItemIds(diffLoadouts(loadout, next))
     setLoadout(next)
     setOpenAccordions(new Set())
@@ -346,8 +348,8 @@ export default function ResultsScreen() {
     excludeIds: string[],
     family: StratagemFamily | undefined,
   ): AnyItem[] {
-    if (slot === 'armor') return getArmorAlternativesByTier(excludeIds, params)
-    return getAlternatives(slot, excludeIds, params, 4, family)
+    if (slot === 'armor') return getArmorAlternativesByTier(excludeIds, params, { hidePaidItems })
+    return getAlternatives(slot, excludeIds, params, 4, family, { hidePaidItems })
   }
 
   function handleOpenSwap(slotKey: SlotKey) {
@@ -434,6 +436,7 @@ export default function ResultsScreen() {
       missionType: params.missionType,
       modifiers: params.modifiers,
       generationMode: 'recommended',
+      noPaidItems: hidePaidItems,
       createdAt: new Date().toISOString(),
     }
 
@@ -491,6 +494,15 @@ export default function ResultsScreen() {
           </div>
         )}
       </div>
+
+      {hidePaidItems && (
+        <div className={styles.paidBanner}>
+          Paid items hidden ·{' '}
+          <button type="button" className={styles.paidBannerLink} onClick={() => navigate('/settings')}>
+            Change in Settings
+          </button>
+        </div>
+      )}
 
       <div className={styles.section}>
         <p className={styles.sectionLabel}>Armor</p>

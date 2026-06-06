@@ -71,6 +71,28 @@
   padding: 2px 8px;
 }
 
+/* Paid-items filter banner (PRD §7.5). Same subtle treatment as sync banners. */
+.paidBanner {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.paidBannerLink {
+  font: inherit;
+  color: var(--color-accent);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .gameLogo {
   width: 250px;
   height: auto;

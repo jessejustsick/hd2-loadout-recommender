@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, RefreshCw } from 'lucide-react'
 import { generateConstrained, generateFullRandom } from '@/engine'
 import { catalogService } from '@/services/catalog'
 import { loadoutService } from '@/services/loadouts'
+import { useSettings } from '@/context/SettingsContext'
 import type { LoadoutResult, Weapon, Stratagem, Armor, Booster, Loadout } from '@/types'
 import { stratagemIconUrl } from '@/lib/stratagemIcons'
 import styles from './Randomizer.module.css'
@@ -82,7 +84,7 @@ function describeItem(item: AnyItem): string {
   return item.tags.map(t => TAG_LABELS[t] ?? t).join(', ') || '—'
 }
 
-function getRandomAlts(slotKey: SlotKey, excludeIds: string[], count = 3): AnyItem[] {
+function getRandomAlts(slotKey: SlotKey, excludeIds: string[], count = 3, hidePaid = false): AnyItem[] {
   let pool: AnyItem[]
   if (slotKey === 'primary' || slotKey === 'secondary' || slotKey === 'grenade') {
     pool = catalogService.getWeapons(slotKey)
@@ -95,12 +97,15 @@ function getRandomAlts(slotKey: SlotKey, excludeIds: string[], count = 3): AnyIt
   }
   return pool
     .filter(item => !excludeIds.includes(item.id))
+    .filter(item => !hidePaid || !item.is_paid)
     .sort(() => Math.random() - 0.5)
     .slice(0, count)
 }
 
-function generateLoadout(safety: SafetyMode): LoadoutResult {
-  return safety === 'on' ? generateConstrained() : generateFullRandom()
+// Both modes honor the paid filter (PRD §7.1 deviation — Safety Off would be
+// pointless for a player who opted out of paid items; see engine EngineOptions).
+function generateLoadout(safety: SafetyMode, hidePaidItems: boolean): LoadoutResult {
+  return safety === 'on' ? generateConstrained({ hidePaidItems }) : generateFullRandom({ hidePaidItems })
 }
 
 // ---- Icon sub-components ----
@@ -237,8 +242,10 @@ function SwapSheet({ sheet, onPick, onClose }: SwapSheetProps) {
 // ---- Main Component ----
 
 export default function Randomizer() {
+  const navigate = useNavigate()
+  const { hidePaidItems } = useSettings()
   const [safety, setSafety] = useState<SafetyMode>('on')
-  const [loadout, setLoadout] = useState<LoadoutResult>(() => generateConstrained())
+  const [loadout, setLoadout] = useState<LoadoutResult>(() => generateConstrained({ hidePaidItems }))
   const [openAccordions, setOpenAccordions] = useState<Set<string>>(new Set())
   const [swapSheet, setSwapSheet] = useState<SwapSheetState | null>(null)
   const [saveState, setSaveState] = useState<'idle' | 'saved' | 'full'>('idle')
@@ -246,14 +253,14 @@ export default function Randomizer() {
   function handleSafetyChange(mode: SafetyMode) {
     if (mode === safety) return
     setSafety(mode)
-    setLoadout(generateLoadout(mode))
+    setLoadout(generateLoadout(mode, hidePaidItems))
     setOpenAccordions(new Set())
     setSaveState('idle')
     setSwapSheet(null)
   }
 
   function handleReroll() {
-    setLoadout(generateLoadout(safety))
+    setLoadout(generateLoadout(safety, hidePaidItems))
     setOpenAccordions(new Set())
     setSaveState('idle')
   }
@@ -278,7 +285,7 @@ export default function Randomizer() {
     } else if (currentItem) {
       excludeIds.push(currentItem.id)
     }
-    const alternatives = getRandomAlts(slotKey, excludeIds, 3)
+    const alternatives = getRandomAlts(slotKey, excludeIds, 3, hidePaidItems)
     setSwapSheet({ slotKey, label: SLOT_LABELS[slotKey], alternatives })
   }
 
@@ -318,6 +325,7 @@ export default function Randomizer() {
       armor: armor.id,
       booster: booster.id,
       generationMode: safety === 'on' ? 'constrained_random' : 'full_random',
+      noPaidItems: hidePaidItems,
       createdAt: new Date().toISOString(),
     }
 
@@ -372,6 +380,15 @@ export default function Randomizer() {
       <p className={styles.modeDesc}>
         {safety === 'on' ? 'Balanced — avoids duplicate stratagem roles.' : 'True random — anything goes.'}
       </p>
+
+      {hidePaidItems && (
+        <div className={styles.paidBanner}>
+          Paid items hidden ·{' '}
+          <button type="button" className={styles.paidBannerLink} onClick={() => navigate('/settings')}>
+            Change in Settings
+          </button>
+        </div>
+      )}
 
       <div className={styles.section}>
         <p className={styles.sectionLabel}>Armor</p>

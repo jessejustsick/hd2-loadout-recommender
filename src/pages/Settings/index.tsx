@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 import { loadoutService } from '@/services/loadouts'
 import { useAuth } from '@/context/AuthContext'
+import { useSettings } from '@/context/SettingsContext'
 import SignInModal from '@/components/SignInModal'
 import styles from './Settings.module.css'
 
@@ -10,6 +11,7 @@ const APP_VERSION = '0.1.0'
 
 export default function Settings() {
   const { isSignedIn } = useAuth()
+  const { hidePaidItems, setHidePaidItems } = useSettings()
   const navigate = useNavigate()
   const [count, setCount] = useState<number | null>(null)
   const [clearState, setClearState] = useState<'idle' | 'confirm' | 'clearing' | 'done'>('idle')
@@ -63,6 +65,31 @@ export default function Settings() {
               <ChevronRight size={18} className={styles.chevron} aria-hidden="true" />
             </button>
           )}
+        </div>
+      </div>
+
+      {/* Recommendations section */}
+      <div className={styles.section}>
+        <p className={styles.sectionLabel}>Recommendations</p>
+        <div className={styles.card}>
+          <div className={styles.toggleRow}>
+            <span className={styles.toggleText}>
+              <span className={styles.rowLabel}>Hide paid items</span>
+              <span className={styles.toggleSubLabel}>
+                Recommendations will only use items available to all players.
+              </span>
+            </span>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={hidePaidItems}
+              aria-label="Hide paid items"
+              className={`${styles.switch} ${hidePaidItems ? styles.switchOn : ''}`}
+              onClick={() => void setHidePaidItems(!hidePaidItems)}
+            >
+              <span className={styles.switchKnob} />
+            </button>
+          </div>
         </div>
       </div>
 

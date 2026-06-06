@@ -26,8 +26,10 @@ export type StoredLoadout = Loadout & SyncMeta
 const SYNC_DEFAULTS: SyncMeta = { unsynced: false, deleted: false, lastSyncedAt: null }
 
 // Keys for the small key/value `meta` store. `firstSignInMerged` gates the
-// once-per-device first-sign-in merge in Phase 4 (PRD §13.7).
-export type MetaKey = 'firstSignInMerged'
+// once-per-device first-sign-in merge in Phase 4 (PRD §13.7). `hidePaidItems`
+// persists the paid-items filter for signed-out users (PRD §7.4; signed-in
+// users store it in `user_profiles.hide_paid_items`).
+export type MetaKey = 'firstSignInMerged' | 'hidePaidItems'
 
 // Outcome of the first sign-in merge, for the confirmation toast (PRD §6.3).
 export interface FirstSignInMergeResult {
@@ -97,7 +99,7 @@ const SB_COLUMNS =
   'id, primary_weapon_id, secondary_weapon_id, grenade_id, ' +
   'stratagem_1_id, stratagem_2_id, stratagem_3_id, stratagem_4_id, ' +
   'armor_id, booster_id, faction, planet, difficulty, mission_type, ' +
-  'modifiers, generation_mode, created_at'
+  'modifiers, generation_mode, no_paid_items, created_at'
 
 interface LoadoutRow {
   id: string
@@ -116,6 +118,7 @@ interface LoadoutRow {
   mission_type: string | null
   modifiers: string[] | null
   generation_mode: string
+  no_paid_items: boolean | null
   created_at: string
 }
 
@@ -152,6 +155,7 @@ function rowToLoadout(row: LoadoutRow): Loadout {
     missionType: row.mission_type ?? undefined,
     modifiers: row.modifiers ?? undefined,
     generationMode: row.generation_mode as GenerationMode,
+    noPaidItems: row.no_paid_items ?? undefined,
     createdAt: row.created_at,
   }
 }
@@ -175,6 +179,7 @@ function loadoutToRow(loadout: Loadout, userId: string): Record<string, unknown>
     mission_type: loadout.missionType ?? null,
     modifiers: loadout.modifiers ?? null,
     generation_mode: loadout.generationMode,
+    no_paid_items: loadout.noPaidItems ?? false,
     // Preserve the client timestamp so cross-device ordering matches what the
     // user saw locally rather than drifting to server insert time.
     created_at: loadout.createdAt,
@@ -560,6 +565,7 @@ export const loadoutService = {
     const db = await getDb()
     await db.clear(STORE)
     await db.delete(META_STORE, 'firstSignInMerged')
+    await db.delete(META_STORE, 'hidePaidItems') // signed-out paid-items pref (PRD §7.4)
     hydratedUserId = null
   },
 

@@ -49,6 +49,22 @@ function applyHardConstraints(stratagems: Stratagem[], modifiers: Modifier[]): S
   })
 }
 
+// Options threaded into every generation path (PRD §7, §14.4).
+export interface EngineOptions {
+  // When true, items with `is_paid === true` are removed at Layer 1 (before
+  // scoring) — they never reach any generated loadout. DEVIATION from PRD §7.1,
+  // which exempted Full Random ("chaos"): per Jesse (2026-06-06) the filter also
+  // applies to Full Random, since Safety Off is pointless for a player who has
+  // opted out of paid items. Reduced randomness is an accepted trade-off.
+  hidePaidItems?: boolean
+}
+
+// Paid-items hard constraint (PRD §7.6): drop paid items entirely when the
+// filter is on. A no-op when off, so callers can pass the flag unconditionally.
+function paidFilter<T extends { is_paid: boolean }>(items: T[], hide?: boolean): T[] {
+  return hide ? items.filter(i => !i.is_paid) : items
+}
+
 // ---- Layer 2: Weighted Scoring ----
 
 const FACTION_WEIGHTS: Record<FactionId, Record<string, number>> = {
@@ -308,16 +324,17 @@ function resolveMissionTags(params: MissionParams): string[] {
   return catalogService.getMissionTypes().find(m => m.id === params.missionType)?.tags ?? []
 }
 
-export function generateRecommendation(params: MissionParams): LoadoutResult {
+export function generateRecommendation(params: MissionParams, opts: EngineOptions = {}): LoadoutResult {
   const modifiers = resolveModifiers(params)
   const missionTags = resolveMissionTags(params)
+  const hide = opts.hidePaidItems
 
-  const primaryWeapon = weightedRandom(scoreAll(catalogService.getWeapons('primary'), params, modifiers, missionTags))
-  const secondaryWeapon = weightedRandom(scoreAll(catalogService.getWeapons('secondary'), params, modifiers, missionTags))
-  const grenade = weightedRandom(scoreAll(catalogService.getWeapons('grenade'), params, modifiers, missionTags))
-  const booster = weightedRandom(scoreAll(catalogService.getBoosters(), params, modifiers, missionTags))
+  const primaryWeapon = weightedRandom(scoreAll(paidFilter(catalogService.getWeapons('primary'), hide), params, modifiers, missionTags))
+  const secondaryWeapon = weightedRandom(scoreAll(paidFilter(catalogService.getWeapons('secondary'), hide), params, modifiers, missionTags))
+  const grenade = weightedRandom(scoreAll(paidFilter(catalogService.getWeapons('grenade'), hide), params, modifiers, missionTags))
+  const booster = weightedRandom(scoreAll(paidFilter(catalogService.getBoosters(), hide), params, modifiers, missionTags))
 
-  const eligible = applyHardConstraints(catalogService.getStratagems(), modifiers)
+  const eligible = applyHardConstraints(paidFilter(catalogService.getStratagems(), hide), modifiers)
   const selected: Stratagem[] = []
 
   for (let i = 0; i < 4; i++) {
@@ -370,7 +387,7 @@ export function generateRecommendation(params: MissionParams): LoadoutResult {
   const loadoutTags = [...selected, primaryWeapon, secondaryWeapon, grenade]
     .filter(Boolean)
     .flatMap(item => item!.tags)
-  const armor = weightedRandom(scoreAllArmor(catalogService.getArmor(), params, modifiers, loadoutTags, missionTags))
+  const armor = weightedRandom(scoreAllArmor(paidFilter(catalogService.getArmor(), hide), params, modifiers, loadoutTags, missionTags))
 
   return {
     primaryWeapon,
@@ -386,8 +403,9 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5)
 }
 
-export function generateConstrained(): LoadoutResult {
-  const stratagems = shuffle(catalogService.getStratagems())
+export function generateConstrained(opts: EngineOptions = {}): LoadoutResult {
+  const hide = opts.hidePaidItems
+  const stratagems = shuffle(paidFilter(catalogService.getStratagems(), hide))
   const selected: Stratagem[] = []
   const usedFamilies = new Set<string>()
 
@@ -404,24 +422,26 @@ export function generateConstrained(): LoadoutResult {
   }
 
   return {
-    primaryWeapon: shuffle(catalogService.getWeapons('primary'))[0] ?? null,
-    secondaryWeapon: shuffle(catalogService.getWeapons('secondary'))[0] ?? null,
-    grenade: shuffle(catalogService.getWeapons('grenade'))[0] ?? null,
+    primaryWeapon: shuffle(paidFilter(catalogService.getWeapons('primary'), hide))[0] ?? null,
+    secondaryWeapon: shuffle(paidFilter(catalogService.getWeapons('secondary'), hide))[0] ?? null,
+    grenade: shuffle(paidFilter(catalogService.getWeapons('grenade'), hide))[0] ?? null,
     stratagems: [selected[0] ?? null, selected[1] ?? null, selected[2] ?? null, selected[3] ?? null],
-    armor: shuffle(catalogService.getArmor())[0] ?? null,
-    booster: shuffle(catalogService.getBoosters())[0] ?? null,
+    armor: shuffle(paidFilter(catalogService.getArmor(), hide))[0] ?? null,
+    booster: shuffle(paidFilter(catalogService.getBoosters(), hide))[0] ?? null,
   }
 }
 
-export function generateFullRandom(): LoadoutResult {
-  const stratagems = shuffle(catalogService.getStratagems())
+// Safety Off. Still honors hidePaidItems (PRD §7.1 deviation — see EngineOptions).
+export function generateFullRandom(opts: EngineOptions = {}): LoadoutResult {
+  const hide = opts.hidePaidItems
+  const stratagems = shuffle(paidFilter(catalogService.getStratagems(), hide))
   return {
-    primaryWeapon: shuffle(catalogService.getWeapons('primary'))[0] ?? null,
-    secondaryWeapon: shuffle(catalogService.getWeapons('secondary'))[0] ?? null,
-    grenade: shuffle(catalogService.getWeapons('grenade'))[0] ?? null,
+    primaryWeapon: shuffle(paidFilter(catalogService.getWeapons('primary'), hide))[0] ?? null,
+    secondaryWeapon: shuffle(paidFilter(catalogService.getWeapons('secondary'), hide))[0] ?? null,
+    grenade: shuffle(paidFilter(catalogService.getWeapons('grenade'), hide))[0] ?? null,
     stratagems: [stratagems[0] ?? null, stratagems[1] ?? null, stratagems[2] ?? null, stratagems[3] ?? null],
-    armor: shuffle(catalogService.getArmor())[0] ?? null,
-    booster: shuffle(catalogService.getBoosters())[0] ?? null,
+    armor: shuffle(paidFilter(catalogService.getArmor(), hide))[0] ?? null,
+    booster: shuffle(paidFilter(catalogService.getBoosters(), hide))[0] ?? null,
   }
 }
 
@@ -431,18 +451,20 @@ export function getAlternatives(
   params: MissionParams,
   count = 4,
   sameFamily?: StratagemFamily,
+  opts: EngineOptions = {},
 ): (import('@/types').Weapon | Stratagem | import('@/types').Armor | import('@/types').Booster)[] {
   const modifiers = resolveModifiers(params)
   const missionTags = resolveMissionTags(params)
+  const hide = opts.hidePaidItems
 
   if (slot === 'primary' || slot === 'secondary' || slot === 'grenade') {
-    return scoreAll(catalogService.getWeapons(slot), params, modifiers, missionTags)
+    return scoreAll(paidFilter(catalogService.getWeapons(slot), hide), params, modifiers, missionTags)
       .filter(s => !excludeIds.includes(s.item.id))
       .slice(0, count)
       .map(s => s.item)
   }
   if (slot === 'stratagem') {
-    const ranked = scoreAll(applyHardConstraints(catalogService.getStratagems(), modifiers), params, modifiers, missionTags)
+    const ranked = scoreAll(applyHardConstraints(paidFilter(catalogService.getStratagems(), hide), modifiers), params, modifiers, missionTags)
       .filter(s => !excludeIds.includes(s.item.id))
     if (sameFamily) {
       // Guarantee a couple of same-family options up front (e.g. another exosuit),
@@ -454,12 +476,12 @@ export function getAlternatives(
     return ranked.slice(0, count).map(s => s.item)
   }
   if (slot === 'armor') {
-    return scoreAllArmor(catalogService.getArmor(), params, modifiers, [], missionTags)
+    return scoreAllArmor(paidFilter(catalogService.getArmor(), hide), params, modifiers, [], missionTags)
       .filter(s => !excludeIds.includes(s.item.id))
       .slice(0, count)
       .map(s => s.item)
   }
-  return scoreAll(catalogService.getBoosters(), params, modifiers, missionTags)
+  return scoreAll(paidFilter(catalogService.getBoosters(), hide), params, modifiers, missionTags)
     .filter(s => !excludeIds.includes(s.item.id))
     .slice(0, count)
     .map(s => s.item)
@@ -468,10 +490,10 @@ export function getAlternatives(
 // Armor swap offers the best-scoring set from each weight class so the player
 // picks their own mobility/protection tradeoff rather than a tier the engine
 // happened to pick. Returns at most one per tier, ordered light → heavy.
-export function getArmorAlternativesByTier(excludeIds: string[], params: MissionParams): Armor[] {
+export function getArmorAlternativesByTier(excludeIds: string[], params: MissionParams, opts: EngineOptions = {}): Armor[] {
   const modifiers = resolveModifiers(params)
   const missionTags = resolveMissionTags(params)
-  const scored = scoreAllArmor(catalogService.getArmor(), params, modifiers, [], missionTags)
+  const scored = scoreAllArmor(paidFilter(catalogService.getArmor(), opts.hidePaidItems), params, modifiers, [], missionTags)
   const tiers: ArmorTier[] = ['light', 'medium', 'heavy']
   return tiers
     .map(tier => scored.find(s => s.item.armorTier === tier && !excludeIds.includes(s.item.id))?.item)

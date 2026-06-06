@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { planetService } from '@/services/planets'
 import { AuthProvider } from '@/context/AuthContext'
+import { SettingsProvider } from '@/context/SettingsContext'
 import { ToastProvider } from '@/context/ToastContext'
 import App from './App'
 import './styles/tokens.css'
@@ -15,7 +16,9 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <ToastProvider>
         <AuthProvider>
-          <App />
+          <SettingsProvider>
+            <App />
+          </SettingsProvider>
         </AuthProvider>
       </ToastProvider>
     </BrowserRouter>

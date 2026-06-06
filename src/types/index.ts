@@ -151,6 +151,10 @@ export interface Loadout {
   missionType?: string
   modifiers?: string[]
   generationMode: GenerationMode
+  // True when the loadout was generated with the "hide paid items" filter on, so
+  // it contains no paid items by construction. Stamped at save time; stable even
+  // if the setting later changes. Absent on loadouts saved before this existed.
+  noPaidItems?: boolean
   createdAt: string
 }
 
