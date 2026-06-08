@@ -1,4 +1,4 @@
-import type { LoadoutResult } from '@/types'
+import type { LoadoutResult, FactionId } from '@/types'
 import styles from './ExportCard.module.css'
 
 // Off-screen share card (PRD §8), styled to mirror the Saved Loadouts card
@@ -8,6 +8,7 @@ import styles from './ExportCard.module.css'
 
 export interface ExportCardInput {
   context: string // "Automatons · D8 · Heeth · elimination" or "Random Loadout — Safety On"
+  faction?: FactionId // faction glyph next to the context (recommended/faction loadouts only)
   modifiers?: string[] // operation modifier names (chips)
   displayName?: string | null
   shipName?: string | null
@@ -20,7 +21,7 @@ function names(items: (LoadoutResult['armor'] | LoadoutResult['stratagems'][numb
   return items.filter(Boolean).map(i => i!.name).join(' · ') || '—'
 }
 
-export default function ExportCard({ input }: { input: ExportCardInput }) {
+export default function ExportCard({ input, factionIconSrc }: { input: ExportCardInput; factionIconSrc?: string | null }) {
   const { loadout } = input
   const date = new Date(input.timestamp).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
   const hasIdentity = Boolean(input.displayName || input.shipName || input.playerTitle)
@@ -45,10 +46,17 @@ export default function ExportCard({ input }: { input: ExportCardInput }) {
       {/* Saved-card-style body */}
       <div className={styles.card}>
         <div className={styles.cardHeader}>
-          <span className={styles.cardContext}>{input.context}</span>
+          <span className={styles.cardContext}>
+            {factionIconSrc && <img src={factionIconSrc} alt="" className={styles.factionIcon} />}
+            {input.context}
+          </span>
           {input.modifiers && input.modifiers.length > 0 && (
             <div className={styles.cardModifiers}>
-              {input.modifiers.map(m => <span key={m} className={styles.cardModifierChip}>{m}</span>)}
+              {input.modifiers.map(m => (
+                <span key={m} className={styles.cardModifierChip}>
+                  <span className={styles.chipText}>{m}</span>
+                </span>
+              ))}
             </div>
           )}
         </div>

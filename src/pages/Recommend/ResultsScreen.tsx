@@ -5,6 +5,7 @@ import { generateRecommendation, getAlternatives, getArmorAlternativesByTier } f
 import { loadoutService } from '@/services/loadouts'
 import { catalogService } from '@/services/catalog'
 import { exportLoadout } from '@/lib/exportLoadout'
+import { factionIconUrl } from '@/lib/factionIcons'
 import { useSettings } from '@/context/SettingsContext'
 import { useAuth } from '@/context/AuthContext'
 import { useToast } from '@/context/ToastContext'
@@ -466,6 +467,7 @@ export default function ResultsScreen() {
     setExporting(true)
     const result = await exportLoadout({
       context: missionSummary,
+      faction: params.faction,
       modifiers: missionModifiers,
       displayName: profile?.displayName,
       shipName: profile?.shipName,
@@ -509,7 +511,10 @@ export default function ResultsScreen() {
       <img src="/hd2-logo.svg" alt="Hellpod Companion" className={styles.gameLogo} />
       <h1 className={styles.title}>Recommended Loadout</h1>
       <div className={styles.missionInfo}>
-        <p className={styles.summary}>{missionSummary}</p>
+        <p className={styles.summary}>
+          <img src={factionIconUrl[params.faction]} alt="" className={styles.factionIcon} />
+          <span className={styles.summaryText}>{missionSummary}</span>
+        </p>
         {missionModifiers.length > 0 && (
           <div className={styles.summaryModifiers}>
             {missionModifiers.map(name => (

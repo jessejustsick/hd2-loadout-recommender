@@ -1,6 +1,7 @@
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import ExportCard, { type ExportCardInput } from '@/components/ExportCard/ExportCard'
+import { factionIconPng } from '@/lib/factionIcons'
 
 export type { ExportCardInput }
 
@@ -38,6 +39,10 @@ export async function exportLoadout(input: ExportCardInput): Promise<ExportResul
   // only fetched the first time someone exports.
   const { default: html2canvas } = await import('html2canvas')
 
+  // Pre-rasterize the faction glyph to a PNG (html2canvas can't reliably draw the
+  // inline SVG); null on failure → card omits the icon.
+  const factionIconSrc = input.faction ? await factionIconPng(input.faction) : null
+
   const host = document.createElement('div')
   host.style.position = 'fixed'
   host.style.left = '-10000px'
@@ -49,7 +54,7 @@ export async function exportLoadout(input: ExportCardInput): Promise<ExportResul
   try {
     // Render, then wait two frames so layout settles before capture.
     await new Promise<void>(resolve => {
-      root.render(createElement(ExportCard, { input }))
+      root.render(createElement(ExportCard, { input, factionIconSrc }))
       requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
     })
 

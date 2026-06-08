@@ -7,7 +7,11 @@
 
 .segment {
   flex: 1;
-  padding: var(--space-md) var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-sm) var(--space-sm);
   font-size: 14px;
   font-weight: 500;
   font-family: var(--font-family);
@@ -22,6 +26,12 @@
   min-height: 44px;
 }
 
+.icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
 .segment:last-child {
   border-right: none;
 }
@@ -33,19 +43,19 @@
 
 /* Faction-specific selected states */
 .segment.terminids.selected {
-  background-color: rgba(224, 123, 57, 0.15);
-  color: var(--color-faction-terminid);
+  background-color: rgba(255, 185, 1, 0.15);
+  color: #ffb901; /* matches the Terminid glyph */
   font-weight: 600;
 }
 
 .segment.automatons.selected {
-  background-color: rgba(204, 34, 34, 0.15);
-  color: var(--color-faction-automaton);
+  background-color: rgba(255, 97, 97, 0.15);
+  color: #ff6161; /* matches the Automaton glyph */
   font-weight: 600;
 }
 
 .segment.illuminate.selected {
-  background-color: rgba(155, 114, 207, 0.15);
-  color: var(--color-faction-illuminate);
+  background-color: rgba(205, 138, 234, 0.15);
+  color: #cd8aea; /* matches the Illuminate glyph */
   font-weight: 600;
 }

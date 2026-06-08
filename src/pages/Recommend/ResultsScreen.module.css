@@ -50,8 +50,22 @@
 }
 
 .summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 13px;
   color: var(--color-text-secondary);
+}
+
+.summaryText {
+  min-width: 0;
+}
+
+.factionIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .summaryModifiers {

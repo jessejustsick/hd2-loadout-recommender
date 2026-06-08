@@ -5,6 +5,7 @@ import { loadoutService, onLoadoutsChanged } from '@/services/loadouts'
 import { isOnline, onConnectivityChange } from '@/services/connectivity'
 import { catalogService } from '@/services/catalog'
 import { exportLoadout } from '@/lib/exportLoadout'
+import { factionIconUrl } from '@/lib/factionIcons'
 import { useAuth } from '@/context/AuthContext'
 import { useToast } from '@/context/ToastContext'
 import type { Loadout, MissionParams, LoadoutResult, Weapon, Stratagem, Armor, Booster } from '@/types'
@@ -98,7 +99,8 @@ function LoadoutCard({ loadout, unsynced, exporting, onDelete, onReoptimize, onE
       <div className={styles.cardHeader}>
         <div className={styles.cardMeta}>
           <span className={styles.cardContext}>
-            {contextLabel(loadout)}
+            {loadout.faction && <img src={factionIconUrl[loadout.faction]} alt="" className={styles.factionIcon} />}
+            <span className={styles.contextText}>{contextLabel(loadout)}</span>
             {unsynced && <span className={styles.localPill}>Local</span>}
             {loadout.noPaidItems && <span className={styles.noPaidPill}>No paid items</span>}
           </span>
@@ -238,6 +240,7 @@ export default function SavedLoadouts() {
     setExportingId(loadout.id)
     const result = await exportLoadout({
       context: contextLabel(loadout),
+      faction: loadout.faction,
       modifiers: loadout.modifiers ? resolveModifierNames(loadout.modifiers) : undefined,
       displayName: profile?.displayName,
       shipName: profile?.shipName,

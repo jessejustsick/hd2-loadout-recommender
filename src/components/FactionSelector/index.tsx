@@ -1,4 +1,5 @@
 import type { FactionId } from '@/types'
+import { factionIconUrl } from '@/lib/factionIcons'
 import styles from './FactionSelector.module.css'
 
 const FACTIONS: { id: FactionId; label: string }[] = [
@@ -22,6 +23,7 @@ export default function FactionSelector({ value, onChange }: Props) {
           onClick={() => onChange(id)}
           aria-pressed={value === id}
         >
+          <img src={factionIconUrl[id]} alt="" className={styles.icon} />
           {label}
         </button>
       ))}
