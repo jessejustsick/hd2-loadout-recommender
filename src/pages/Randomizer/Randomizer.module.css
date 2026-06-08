@@ -285,6 +285,33 @@
   background: var(--color-success);
 }
 
+.exportBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-family);
+  min-height: 48px;
+  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+
+.exportBtn:hover:not(:disabled) {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-secondary);
+}
+
+.exportBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 .rerollBtn {
   font-size: 15px;
   color: var(--color-text-secondary);

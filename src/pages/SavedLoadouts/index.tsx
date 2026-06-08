@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Trash2, RefreshCw } from 'lucide-react'
+import { Trash2, RefreshCw, Download } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { loadoutService, onLoadoutsChanged } from '@/services/loadouts'
 import { isOnline, onConnectivityChange } from '@/services/connectivity'
 import { catalogService } from '@/services/catalog'
+import { exportLoadout } from '@/lib/exportLoadout'
 import { useAuth } from '@/context/AuthContext'
-import type { Loadout, MissionParams } from '@/types'
+import { useToast } from '@/context/ToastContext'
+import type { Loadout, MissionParams, LoadoutResult, Weapon, Stratagem, Armor, Booster } from '@/types'
 import styles from './SavedLoadouts.module.css'
 
 // ---- Helpers ----
@@ -44,6 +46,20 @@ function checkStale(loadout: Loadout): boolean {
   ].some(id => catalogService.getItemById(id) === null)
 }
 
+// Resolve a saved loadout's stored ids into catalog items for the export card.
+// Missing items (stale ids) resolve to null and render as "—" in the card.
+function resolveLoadoutResult(loadout: Loadout): LoadoutResult {
+  const get = (id: string) => catalogService.getItemById(id)
+  return {
+    primaryWeapon: get(loadout.primaryWeapon) as Weapon | null,
+    secondaryWeapon: get(loadout.secondaryWeapon) as Weapon | null,
+    grenade: get(loadout.grenade) as Weapon | null,
+    stratagems: loadout.stratagems.map(id => get(id) as Stratagem | null),
+    armor: get(loadout.armor) as Armor | null,
+    booster: get(loadout.booster) as Booster | null,
+  }
+}
+
 function contextLabel(loadout: Loadout): string {
   if (loadout.faction) {
     return [
@@ -61,15 +77,18 @@ function contextLabel(loadout: Loadout): string {
 interface CardProps {
   loadout: Loadout
   unsynced: boolean
+  exporting: boolean
   onDelete: (id: string) => void
   onReoptimize: (loadout: Loadout) => void
+  onExport: (loadout: Loadout) => void
 }
 
-function LoadoutCard({ loadout, unsynced, onDelete, onReoptimize }: CardProps) {
+function LoadoutCard({ loadout, unsynced, exporting, onDelete, onReoptimize, onExport }: CardProps) {
   const stale = checkStale(loadout)
+  const armorName = resolveName(loadout.armor)
   const weapons = [loadout.primaryWeapon, loadout.secondaryWeapon, loadout.grenade].map(resolveName)
   const stratagems = loadout.stratagems.map(resolveName)
-  const gear = [loadout.armor, loadout.booster].map(resolveName)
+  const boosterName = resolveName(loadout.booster)
   const modifiers = loadout.modifiers ? resolveModifierNames(loadout.modifiers) : []
   // Only recommended loadouts carry the mission context needed to regenerate.
   const canReoptimize = loadout.faction != null && loadout.difficulty != null
@@ -107,6 +126,10 @@ function LoadoutCard({ loadout, unsynced, onDelete, onReoptimize }: CardProps) {
 
       <div className={styles.cardBody}>
         <div className={styles.itemGroup}>
+          <span className={styles.groupLabel}>Armor</span>
+          <span className={styles.itemList}>{armorName}</span>
+        </div>
+        <div className={styles.itemGroup}>
           <span className={styles.groupLabel}>Weapons</span>
           <span className={styles.itemList}>{weapons.join(' · ')}</span>
         </div>
@@ -115,19 +138,28 @@ function LoadoutCard({ loadout, unsynced, onDelete, onReoptimize }: CardProps) {
           <span className={styles.itemList}>{stratagems.join(' · ')}</span>
         </div>
         <div className={styles.itemGroup}>
-          <span className={styles.groupLabel}>Gear</span>
-          <span className={styles.itemList}>{gear.join(' · ')}</span>
+          <span className={styles.groupLabel}>Booster</span>
+          <span className={styles.itemList}>{boosterName}</span>
         </div>
       </div>
 
-      {canReoptimize && (
-        <div className={styles.cardFooter}>
+      <div className={styles.cardFooter}>
+        <button
+          className={styles.exportBtn}
+          onClick={() => onExport(loadout)}
+          disabled={exporting}
+          aria-label="Export loadout as image"
+        >
+          <Download size={14} />
+          {exporting ? 'Exporting…' : 'Export'}
+        </button>
+        {canReoptimize && (
           <button className={styles.reoptimizeBtn} onClick={() => onReoptimize(loadout)}>
             <RefreshCw size={14} />
             Re-optimize
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }
@@ -136,11 +168,13 @@ function LoadoutCard({ loadout, unsynced, onDelete, onReoptimize }: CardProps) {
 
 export default function SavedLoadouts() {
   const navigate = useNavigate()
-  const { isSignedIn } = useAuth()
+  const { isSignedIn, profile } = useAuth()
+  const { showToast } = useToast()
   const [loadouts, setLoadouts] = useState<Loadout[]>([])
   const [unsyncedIds, setUnsyncedIds] = useState<Set<string>>(new Set())
   const [online, setOnline] = useState(() => isOnline())
   const [loading, setLoading] = useState(true)
+  const [exportingId, setExportingId] = useState<string | null>(null)
 
   // `silent` refreshes update the list in place without flashing the skeleton —
   // used by the fetch-on-focus path so a background sync isn't visually jarring.
@@ -197,6 +231,22 @@ export default function SavedLoadouts() {
   async function handleDelete(id: string) {
     await loadoutService.delete(id)
     setLoadouts(prev => prev.filter(l => l.id !== id))
+  }
+
+  async function handleExport(loadout: Loadout) {
+    if (exportingId) return
+    setExportingId(loadout.id)
+    const result = await exportLoadout({
+      context: contextLabel(loadout),
+      modifiers: loadout.modifiers ? resolveModifierNames(loadout.modifiers) : undefined,
+      displayName: profile?.displayName,
+      shipName: profile?.shipName,
+      playerTitle: profile?.playerTitle,
+      timestamp: loadout.createdAt,
+      loadout: resolveLoadoutResult(loadout),
+    })
+    setExportingId(null)
+    if (result === 'error') showToast("Couldn't create the image — please try again.")
   }
 
   function handleReoptimize(loadout: Loadout) {
@@ -264,8 +314,10 @@ export default function SavedLoadouts() {
               key={l.id}
               loadout={l}
               unsynced={unsyncedIds.has(l.id)}
+              exporting={exportingId === l.id}
               onDelete={handleDelete}
               onReoptimize={handleReoptimize}
+              onExport={handleExport}
             />
           ))}
         </div>

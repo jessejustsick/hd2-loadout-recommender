@@ -139,6 +139,11 @@ export default function Settings() {
             <span className={styles.rowLabel}>Stratagem Icons</span>
             <span className={styles.rowValue}>nvigneux on GitHub</span>
           </div>
+          <div className={styles.divider} />
+          <div className={styles.row}>
+            <span className={styles.rowLabel}>Image Export</span>
+            <span className={styles.rowValue}>html2canvas</span>
+          </div>
         </div>
       </div>
 

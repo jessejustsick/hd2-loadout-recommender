@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, RefreshCw } from 'lucide-react'
+import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, RefreshCw, Download } from 'lucide-react'
 import { generateConstrained, generateFullRandom } from '@/engine'
 import { catalogService } from '@/services/catalog'
 import { loadoutService } from '@/services/loadouts'
+import { exportLoadout } from '@/lib/exportLoadout'
 import { useSettings } from '@/context/SettingsContext'
+import { useAuth } from '@/context/AuthContext'
+import { useToast } from '@/context/ToastContext'
 import type { LoadoutResult, Weapon, Stratagem, Armor, Booster, Loadout } from '@/types'
 import { stratagemIconUrl } from '@/lib/stratagemIcons'
 import styles from './Randomizer.module.css'
@@ -244,11 +247,14 @@ function SwapSheet({ sheet, onPick, onClose }: SwapSheetProps) {
 export default function Randomizer() {
   const navigate = useNavigate()
   const { hidePaidItems } = useSettings()
+  const { profile } = useAuth()
+  const { showToast } = useToast()
   const [safety, setSafety] = useState<SafetyMode>('on')
   const [loadout, setLoadout] = useState<LoadoutResult>(() => generateConstrained({ hidePaidItems }))
   const [openAccordions, setOpenAccordions] = useState<Set<string>>(new Set())
   const [swapSheet, setSwapSheet] = useState<SwapSheetState | null>(null)
   const [saveState, setSaveState] = useState<'idle' | 'saved' | 'full'>('idle')
+  const [exporting, setExporting] = useState(false)
 
   function handleSafetyChange(mode: SafetyMode) {
     if (mode === safety) return
@@ -342,6 +348,23 @@ export default function Randomizer() {
     }
   }
 
+  async function handleExport() {
+    if (exporting) return
+    const { primaryWeapon, secondaryWeapon, grenade, armor, booster } = loadout
+    if (!primaryWeapon || !secondaryWeapon || !grenade || !armor || !booster) return
+    setExporting(true)
+    const result = await exportLoadout({
+      context: safety === 'on' ? 'Random — Safety On' : 'Random — Safety Off',
+      displayName: profile?.displayName,
+      shipName: profile?.shipName,
+      playerTitle: profile?.playerTitle,
+      timestamp: new Date().toISOString(),
+      loadout,
+    })
+    setExporting(false)
+    if (result === 'error') showToast("Couldn't create the image — please try again.")
+  }
+
   const weaponSlots: SlotKey[] = ['primary', 'secondary', 'grenade']
   const stratagemSlots: SlotKey[] = ['stratagem-0', 'stratagem-1', 'stratagem-2', 'stratagem-3']
 
@@ -417,6 +440,15 @@ export default function Randomizer() {
           disabled={saveState !== 'idle'}
         >
           {saveState === 'saved' ? 'Saved!' : saveState === 'full' ? 'Limit reached (50)' : 'Save Loadout'}
+        </button>
+        <button
+          className={styles.exportBtn}
+          onClick={handleExport}
+          disabled={exporting}
+          aria-label="Export loadout as image"
+        >
+          <Download size={16} />
+          {exporting ? 'Exporting…' : 'Export'}
         </button>
         <button className={styles.rerollBtn} onClick={handleReroll}>
           Re-roll

@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate, Navigate } from 'react-router-dom'
-import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, ArrowLeftRight } from 'lucide-react'
+import { Crosshair, Target, Bomb, Shield, Zap, ChevronDown, ArrowLeftRight, Download } from 'lucide-react'
 import { generateRecommendation, getAlternatives, getArmorAlternativesByTier } from '@/engine'
 import { loadoutService } from '@/services/loadouts'
 import { catalogService } from '@/services/catalog'
+import { exportLoadout } from '@/lib/exportLoadout'
 import { useSettings } from '@/context/SettingsContext'
+import { useAuth } from '@/context/AuthContext'
+import { useToast } from '@/context/ToastContext'
 import type {
   MissionParams, LoadoutResult, Weapon, Stratagem, Armor, Booster, FactionId, Loadout, StratagemFamily,
 } from '@/types'
@@ -297,6 +300,8 @@ export default function ResultsScreen() {
   const location = useLocation()
   const navigate = useNavigate()
   const { hidePaidItems } = useSettings()
+  const { profile } = useAuth()
+  const { showToast } = useToast()
   const maybeParams = (location.state as LocationState | null)?.params ?? null
 
   const [loadout, setLoadout] = useState<LoadoutResult>(() =>
@@ -306,6 +311,7 @@ export default function ResultsScreen() {
   const [openAccordions, setOpenAccordions] = useState<Set<string>>(new Set())
   const [swapSheet, setSwapSheet] = useState<SwapSheetState | null>(null)
   const [saveState, setSaveState] = useState<'idle' | 'saved' | 'full'>('idle')
+  const [exporting, setExporting] = useState(false)
 
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
@@ -453,6 +459,24 @@ export default function ResultsScreen() {
     }
   }
 
+  async function handleExport() {
+    if (exporting) return
+    const { primaryWeapon, secondaryWeapon, grenade, armor, booster } = loadout
+    if (!primaryWeapon || !secondaryWeapon || !grenade || !armor || !booster) return
+    setExporting(true)
+    const result = await exportLoadout({
+      context: missionSummary,
+      modifiers: missionModifiers,
+      displayName: profile?.displayName,
+      shipName: profile?.shipName,
+      playerTitle: profile?.playerTitle,
+      timestamp: new Date().toISOString(),
+      loadout,
+    })
+    setExporting(false)
+    if (result === 'error') showToast("Couldn't create the image — please try again.")
+  }
+
   // ---- Render ----
 
   const weaponSlots: SlotKey[] = ['primary', 'secondary', 'grenade']
@@ -531,6 +555,15 @@ export default function ResultsScreen() {
           disabled={saveState !== 'idle'}
         >
           {saveState === 'saved' ? 'Saved!' : saveState === 'full' ? 'Limit reached (50)' : 'Save Loadout'}
+        </button>
+        <button
+          className={styles.exportBtn}
+          onClick={handleExport}
+          disabled={exporting}
+          aria-label="Export loadout as image"
+        >
+          <Download size={16} />
+          {exporting ? 'Exporting…' : 'Export'}
         </button>
         <button className={styles.rerollBtn} onClick={handleReroll}>
           Re-roll
