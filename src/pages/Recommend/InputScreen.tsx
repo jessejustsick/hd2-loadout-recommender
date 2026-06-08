@@ -221,11 +221,9 @@ export default function InputScreen({ initialState = INITIAL, onReset }: Props) 
             <p className={styles.errorText}>Couldn't load planet data.</p>
             <div className={styles.errorActions}>
               <button className={styles.retryBtn} onClick={retryPlanets}>Try again</button>
-              {planetState.status === 'error-second' && (
-                <button className={styles.fallbackBtn} onClick={handleUseFallback}>
-                  Continue without planet data
-                </button>
-              )}
+              <button className={styles.fallbackBtn} onClick={handleUseFallback}>
+                Continue without planet data
+              </button>
             </div>
           </div>
         )}

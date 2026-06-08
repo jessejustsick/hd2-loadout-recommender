@@ -2,6 +2,21 @@ import type { Planet, FactionId, CampaignMode } from '@/types'
 
 const API_BASE = 'https://api.helldivers2.dev'
 const CACHE_TTL = 10 * 60 * 1000
+// Hard ceiling on each request. Bare fetch() never times out, so a stalled API
+// (connects but never responds) would hang the planet step forever — the skeleton
+// spins and the error/fallback UI is never reached. Abort after this so a stall
+// surfaces as a normal rejection. Tunable.
+const REQUEST_TIMEOUT = 8_000
+
+async function fetchWithTimeout(url: string, init: RequestInit = {}): Promise<Response> {
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT)
+  try {
+    return await fetch(url, { ...init, signal: controller.signal })
+  } finally {
+    clearTimeout(timer)
+  }
+}
 
 interface ApiPlanet {
   name: string
@@ -55,7 +70,7 @@ const HAZARD_TO_MODIFIER_ID: Record<string, string> = {
 }
 
 async function fetchCampaigns(): Promise<Map<string, CampaignMode>> {
-  const res = await fetch(`${API_BASE}/api/v1/campaigns`, {
+  const res = await fetchWithTimeout(`${API_BASE}/api/v1/campaigns`, {
     headers: {
       'X-Super-Client': 'hd2-loadout-recommender',
       'X-Super-Contact': 'jessejusek@gmail.com',
@@ -72,7 +87,7 @@ async function fetchCampaigns(): Promise<Map<string, CampaignMode>> {
 }
 
 async function fetchFromApi(): Promise<Planet[]> {
-  const res = await fetch(`${API_BASE}/api/v1/planets`, {
+  const res = await fetchWithTimeout(`${API_BASE}/api/v1/planets`, {
     headers: {
       'X-Super-Client': 'hd2-loadout-recommender',
       'X-Super-Contact': 'jessejusek@gmail.com',
