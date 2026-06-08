@@ -5,6 +5,7 @@ import { useAuth } from '@/context/AuthContext'
 import { authService } from '@/services/auth'
 import { profileService } from '@/services/profile'
 import { loadoutService } from '@/services/loadouts'
+import { useToast } from '@/context/ToastContext'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import styles from './Account.module.css'
 
@@ -18,6 +19,7 @@ function normalize(value: string): string | null {
 
 export default function Account() {
   const { isSignedIn, loading, user, profile, refreshProfile } = useAuth()
+  const { showToast } = useToast()
   const navigate = useNavigate()
 
   const [displayName, setDisplayName] = useState('')
@@ -28,6 +30,9 @@ export default function Account() {
   const [signOutOpen, setSignOutOpen] = useState(false)
   const [signingOut, setSigningOut] = useState(false)
   const [dangerOpen, setDangerOpen] = useState(false)
+  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const [loadoutCount, setLoadoutCount] = useState<number | null>(null)
 
   // Hydrate inputs from the loaded profile.
   useEffect(() => {
@@ -37,6 +42,11 @@ export default function Account() {
       setPlayerTitle(profile.playerTitle ?? '')
     }
   }, [profile])
+
+  // Load the saved-loadout count so the delete confirmation can name it (§4.7).
+  useEffect(() => {
+    loadoutService.count().then(setLoadoutCount).catch(() => setLoadoutCount(null))
+  }, [])
 
   // Direct nav while signed out → bounce home (the entry points only show when
   // signed in, but guard the route anyway).
@@ -69,6 +79,30 @@ export default function Account() {
     setSignOutOpen(false)
     navigate('/recommend')
   }
+
+  async function handleDeleteAccount() {
+    setDeleting(true)
+    const { error } = await authService.deleteAccount()
+    if (error) {
+      setDeleting(false)
+      setDeleteOpen(false)
+      showToast("Couldn't delete your account. Please try again.")
+      return
+    }
+    // Server data is gone (auth user + cascaded rows). Clear the local cache and
+    // end the now-invalid session, then drop the user on Recommend signed-out.
+    await loadoutService.clearLocalData()
+    await authService.signOut()
+    setDeleting(false)
+    setDeleteOpen(false)
+    showToast('Your account has been deleted.')
+    navigate('/recommend')
+  }
+
+  const deleteMessage =
+    loadoutCount && loadoutCount > 0
+      ? `Your account and all ${loadoutCount} saved loadout${loadoutCount === 1 ? '' : 's'} will be permanently deleted. This can't be undone. You can still use Hellpod Companion without an account.`
+      : "Your account will be permanently deleted. This can't be undone. You can still use Hellpod Companion without an account."
 
   const profileLoading = loading || profile === null
 
@@ -157,10 +191,10 @@ export default function Account() {
       </button>
       {dangerOpen && (
         <div className={styles.dangerBody}>
-          <button className={styles.deleteBtn} disabled>
+          <button className={styles.deleteBtn} onClick={() => setDeleteOpen(true)}>
             Delete account
           </button>
-          <p className={styles.comingSoon}>Coming soon.</p>
+          <p className={styles.comingSoon}>Permanently deletes your account and all saved loadouts.</p>
         </div>
       )}
 
@@ -172,6 +206,17 @@ export default function Account() {
         busy={signingOut}
         onConfirm={handleSignOut}
         onCancel={() => setSignOutOpen(false)}
+      />
+
+      <ConfirmDialog
+        open={deleteOpen}
+        title="Delete your account?"
+        message={deleteMessage}
+        confirmLabel="Delete account"
+        destructive
+        busy={deleting}
+        onConfirm={handleDeleteAccount}
+        onCancel={() => setDeleteOpen(false)}
       />
     </div>
   )

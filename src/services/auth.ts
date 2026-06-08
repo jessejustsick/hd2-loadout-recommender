@@ -101,6 +101,20 @@ export const authService = {
     await supabase.auth.signOut()
   },
 
+  // Delete the signed-in user's account (PRD §4.7). The browser SDK can't delete
+  // auth users — that needs elevated privileges — so this calls the
+  // `delete-account` Edge Function, which deletes the auth user with the service
+  // role; FK cascades remove user_profiles + saved_loadouts. The caller then
+  // clears local data and signs out. Returns error=true on any failure.
+  async deleteAccount(): Promise<{ error: boolean }> {
+    try {
+      const { error } = await supabase.functions.invoke('delete-account')
+      return { error: !!error }
+    } catch {
+      return { error: true }
+    }
+  },
+
   async resendVerificationEmail(email: string): Promise<AuthResult> {
     try {
       const { error } = await supabase.auth.resend({
