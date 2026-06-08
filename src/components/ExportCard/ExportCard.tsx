@@ -17,7 +17,9 @@ export interface ExportCardInput {
   loadout: LoadoutResult
 }
 
-function names(items: (LoadoutResult['armor'] | LoadoutResult['stratagems'][number])[]): string {
+// Accepts any loadout slot (weapon/stratagem/armor/booster) or null — only the
+// shared `name` is used. (Previously typed too narrowly, which broke `tsc -b`.)
+function names(items: ({ name: string } | null)[]): string {
   return items.filter(Boolean).map(i => i!.name).join(' · ') || '—'
 }
 
