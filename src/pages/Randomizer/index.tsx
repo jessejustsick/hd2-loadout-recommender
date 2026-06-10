@@ -448,7 +448,7 @@ export default function Randomizer() {
           aria-label="Export loadout as image"
         >
           <Download size={16} />
-          {exporting ? 'Exporting…' : 'Export'}
+          <span className={styles.exportLabel}>{exporting ? 'Exporting…' : 'Export'}</span>
         </button>
         <button className={styles.rerollBtn} onClick={handleReroll}>
           Re-roll

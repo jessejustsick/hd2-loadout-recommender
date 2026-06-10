@@ -91,6 +91,17 @@
   border-color: var(--color-accent);
 }
 
+/* Keep autofilled fields (email especially) on the dark theme instead of the
+   browser's light-blue repaint, matching the PasswordInput toggle fix. */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text-primary);
+  -webkit-box-shadow: 0 0 0 1000px var(--color-bg-primary) inset;
+  box-shadow: 0 0 0 1000px var(--color-bg-primary) inset;
+  caret-color: var(--color-text-primary);
+}
+
 .input[aria-invalid='true'] {
   border-color: var(--color-error);
 }

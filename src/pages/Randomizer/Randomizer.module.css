@@ -312,6 +312,20 @@
   cursor: default;
 }
 
+/* On mobile, collapse Export to an icon-only button so the action bar has room
+   for the Save Loadout button. */
+@media (max-width: 767px) {
+  .exportBtn .exportLabel {
+    display: none;
+  }
+
+  .exportBtn {
+    min-width: 48px;
+    justify-content: center;
+    padding: var(--space-sm);
+  }
+}
+
 .rerollBtn {
   font-size: 15px;
   color: var(--color-text-secondary);

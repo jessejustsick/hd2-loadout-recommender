@@ -153,7 +153,7 @@ function LoadoutCard({ loadout, unsynced, exporting, onDelete, onReoptimize, onE
           aria-label="Export loadout as image"
         >
           <Download size={14} />
-          {exporting ? 'Exporting…' : 'Export'}
+          <span className={styles.exportLabel}>{exporting ? 'Exporting…' : 'Export'}</span>
         </button>
         {canReoptimize && (
           <button className={styles.reoptimizeBtn} onClick={() => onReoptimize(loadout)}>
