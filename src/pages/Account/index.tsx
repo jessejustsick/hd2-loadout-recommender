@@ -9,7 +9,7 @@ import { useToast } from '@/context/ToastContext'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import styles from './Account.module.css'
 
-type SaveState = 'idle' | 'saving' | 'saved' | 'error'
+type SaveState = 'idle' | 'saved' | 'error'
 
 // Trim, and treat an empty string as "not set" (null) per PRD §10.3 validation.
 function normalize(value: string): string | null {
@@ -53,7 +53,8 @@ export default function Account() {
   if (!loading && !isSignedIn) return <Navigate to="/recommend" replace />
 
   async function handleSave() {
-    setSaveState('saving')
+    if (saveState === 'saved') return
+    setSaveState('idle') // clear any prior error while the save is in flight
     const { error } = await profileService.updateProfile({
       displayName: normalize(displayName),
       shipName: normalize(shipName),
@@ -163,8 +164,12 @@ export default function Account() {
           </label>
           <p className={styles.hint}>Ship name and title appear on exported loadout images.</p>
 
-          <button className={styles.save} onClick={handleSave} disabled={saveState === 'saving'}>
-            {saveState === 'saving' ? 'Saving…' : saveState === 'saved' ? 'Saved' : 'Save'}
+          <button
+            className={`${styles.save} ${saveState === 'saved' ? styles.saveSaved : ''}`}
+            onClick={handleSave}
+            disabled={saveState === 'saved'}
+          >
+            {saveState === 'saved' ? 'Saved!' : 'Save'}
           </button>
           {saveState === 'error' && <p className={styles.error}>Couldn't save. Try again.</p>}
         </>

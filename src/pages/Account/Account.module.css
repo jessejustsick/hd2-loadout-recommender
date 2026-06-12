@@ -108,7 +108,9 @@
   font-size: 15px;
   font-weight: 700;
   font-family: var(--font-family);
-  transition: opacity var(--duration-fast) var(--ease-out);
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
 }
 
 .save:hover:not(:disabled) {
@@ -118,6 +120,13 @@
 .save:disabled {
   opacity: 0.6;
   cursor: default;
+}
+
+/* Green confirmation state, matching the loadout results Save button. */
+.saveSaved,
+.saveSaved:disabled {
+  background: var(--color-success);
+  opacity: 1;
 }
 
 .error {
